@@ -21,14 +21,13 @@ class Choose extends React.Component {
 
   toLogin = () => {
 
-    console.log(this)
     this.props.navigation.navigate('Login')
 
-  }
+  };
 
-  toRegister = () => { 
+  toRegister = () => {
     this.props.navigation.navigate('Register')
-  }
+  };
 
   render() {
     return (

@@ -12,29 +12,65 @@ import {
 
 import config from '../config/config'
 
+import {
+  Provider,
+  Toast
+} from '@ant-design/react-native'
+
 class Login extends React.Component { 
 
   constructor() { 
     super();
     this.state = {
-
+      uname: '',
+      password: '',
+      _password:''
     }
   }
 
   login = () => {
 
+    Net('/login', {
+      uname: this.state.uname,
+      password:this.state.password
+    }).then(res => { 
+      if (res.success) {
+
+      } else { 
+        Toast.fail(res.info)
+      }
+    }).catch(err => { 
+      
+      Toast.fail('网络错误')
+
+    })
+
   };
+
+  passwordChange = (val) => {
+
+    this.setState({
+      password: val,
+    })
+
+  };
+
 
   render() {
   
     return (
-      <View style={[styles.viewContainer]}>
-        <TextInput style={ styles.input } placeholder="用户名或手机号" />
-        <TextInput style={ styles.input }  placeholder="密码" />
-        <TouchableOpacity onPress={this.login} style={styles.regBtn}>
+      <Provider>
+        <View style={[styles.viewContainer]}>
+        <TextInput onChangeText={ (uname) => { this.setState({uname}) } } value={this.state.uname} style={ styles.input } placeholder="用户名或手机号" />
+        <TextInput  onChangeText={this.passwordChange}  value={this.state.password} style={ styles.input }  placeholder="密码" />
+        
+           <TouchableOpacity onPress={this.login} style={styles.regBtn}>
             <Text style={{color:config.whiteFont}}>登录</Text>
-        </TouchableOpacity>
-      </View>
+          </TouchableOpacity>
+        
+       
+        </View>
+      </Provider>
     )
 
   }

@@ -1,35 +1,79 @@
 import React from 'react'
+
 import {
   StyleSheet,
   View,
   Text,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  Alert
 } from 'react-native';
 import config from '../config/config';
+
+
+import {
+   Provider,
+   Toast
+} from '@ant-design/react-native'
+
+
 
 
 class Register extends React.Component { 
   constructor() { 
     super();
-    this.state = {}
+    this.state = {
+      uname: '',
+      phone:'',
+      password:'',
+    }
   }
 
+  unameChange = (uname) => {
+    this.setState({ uname });
+  };
+  phoneChange = (phone) => {
+    this.setState({ phone });
+  };
+  passwordChange = (password) => {
+    this.setState({ password });
+  };
+
   register = () => { 
-    console.log(config.screenWidth)
+    
+    Net('/register', {
+      uname: this.state.uname,
+      phone: this.state.phone,
+      password:this.state.password
+    }).then(res => { 
+
+      if (res.success) {
+        this.props.navigation.navigate('Login')
+      } else { 
+
+        Toast.fail(res.info)
+
+      }
+    }).catch(err => { 
+
+    })
+
   };
 
 
   render() { 
     return (
-      <View style={[styles.viewContainer]}>
-        < TextInput style={ styles.input } placeholder="用户名" />
-        < TextInput style={ styles.input } placeholder="手机号" />
-        < TextInput style={ styles.input } placeholder="密码" />
-        <TouchableOpacity onPress={this.register} style={styles.regBtn}>
-          <Text style={{color:config.whiteFont}}>注册</Text>
-        </TouchableOpacity>
-      </View>
+      <Provider >
+        <View style={[styles.viewContainer]}>
+          < TextInput onChangeText={this.unameChange} value={this.state.uname} style={ styles.input } placeholder="用户名" />
+          < TextInput onChangeText={this.phoneChange} value={this.state.phone} style={ styles.input } placeholder="手机号" />
+          < TextInput onChangeText={this.passwordChange} value={this.state.password} style={ styles.input } placeholder="密码" />
+        
+            <TouchableOpacity onPress={this.register} style={styles.regBtn}>
+            <Text style={{color:config.whiteFont}}>注册</Text>
+          </TouchableOpacity>
+        </View>
+      </Provider>
 
     )
   }

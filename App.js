@@ -15,8 +15,11 @@ import {
   Text,
   StatusBar,
 } from 'react-native';
+import {
+  Net
+} from './src/config/request'
 
-
+global.Net = Net;
 
 import Login from './src/pages/login'
 import Register from './src/pages/register'
