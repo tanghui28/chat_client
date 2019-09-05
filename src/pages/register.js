@@ -6,7 +6,6 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  Alert
 } from 'react-native';
 import config from '../config/config';
 
