@@ -20,7 +20,9 @@ import {
 } from './src/config/request'
 
 // 引入iconfont
-// import { Iconfont } from './font/index'
+import {
+  Iconfont
+} from './font/index'
 
 global.Net = Net;
 
@@ -29,26 +31,58 @@ import Register from './src/pages/register'
 import Choose from './src/pages/choose'
 import ChatList from './src/pages/chatList'
 import FriendsList from './src/pages/friendsList'
+import Mine from './src/pages/mine'
 
 import {  createAppContainer} from 'react-navigation'
 import {  createStackNavigator} from 'react-navigation-stack';
 import {  createBottomTabNavigator} from 'react-navigation-tabs'
+import config from './src/config/config';
 
 
-const bottomTabNavigator = createBottomTabNavigator({
-  chat: {
-    screen: ChatList,
-    navigationOptions: {
-      tabBarLabel: '消息'
+const bottomTabNavigator = createBottomTabNavigator(
+  {
+    chat: {
+      screen: ChatList,
+      navigationOptions: {
+        tabBarLabel: '消息',
+        tabBarIcon: ({focused,tintColor}) => { 
+          return (
+            <Iconfont name="icon-xiaoxi" size={30} color={tintColor} ></Iconfont>
+          )
+        }
+      }
+    },
+    friends: {
+      screen: FriendsList,
+      navigationOptions: {
+        tabBarLabel: '通讯录',
+        tabBarIcon: ({focused,tintColor}) => { 
+          return (
+            <Iconfont name="icon-tongxunlu" size={30} color={tintColor} ></Iconfont>
+          )
+        }
+      }
+    },
+    mine: {
+      screen: Mine,
+      navigationOptions: {
+        tabBarLabel: '我的',
+        tabBarIcon: ({focused,tintColor}) => { 
+          return (
+            <Iconfont name="icon-wode" size={30} color={tintColor} ></Iconfont>
+          )
+        }
+      }
     }
   },
-  friends: {
-    screen: FriendsList,
-    navigationOptions: {
-      tabBarLabel:'通讯录'
+  {
+    tabBarOptions: {
+      activeTintColor: config.primaryColor,
+      inactiveTintColor: config.darkGray
     }
+
   }
-})
+)
 
 
 const RootNavigator = createStackNavigator(
