@@ -6,7 +6,7 @@ import {
   Text,
   TouchableOpacity,
   ImageBackground,
-  FlatList,
+  ScrollView,
   Image
 } from 'react-native';
 
@@ -22,6 +22,8 @@ import {
 } from '../../font/index'
 
 import config from '../config/config'
+
+import Header from '../components/header'
 
 
 class ChatList extends React.Component { 
@@ -89,6 +91,30 @@ class ChatList extends React.Component {
           replyTime: '2019-09-06',
           lastMsg:'where you from and wher you going'
         },
+        {
+          uname: '尼古拉斯赵四',
+          avatar: '20.jpeg',
+          replyTime: '2019-09-06',
+          lastMsg:'where you from and wher you going'
+        },
+        {
+          uname: '尼古拉斯赵四',
+          avatar: '20.jpeg',
+          replyTime: '2019-09-06',
+          lastMsg:'where you from and wher you going'
+        },
+        {
+          uname: '尼古拉斯赵四',
+          avatar: '20.jpeg',
+          replyTime: '2019-09-06',
+          lastMsg:'where you from and wher you going'
+        },
+        {
+          uname: '尼古拉斯赵四',
+          avatar: '20.jpeg',
+          replyTime: '2019-09-06',
+          lastMsg:'where you from and wher you going'
+        },
       ]
     };
   }
@@ -113,7 +139,7 @@ class ChatList extends React.Component {
       {
         text: '置顶',
          style: {
-           backgroundColor: config.primaryColor,
+           backgroundColor: "#00CC99",
            color: config.whiteFont
         },
          onPress: () => {
@@ -134,8 +160,8 @@ class ChatList extends React.Component {
 
     return (
       < Provider >
-        <View>
-          <Text>chatList</Text>
+        <Header style={{backgroundColor:config.lightGray}} showIcon={true} title="消息"></Header>
+        <ScrollView showsVerticalScrollIndicator={false} styl={ {flex:1} }>
           <List>
               {
 
@@ -144,17 +170,19 @@ class ChatList extends React.Component {
                   return (
                     <SwipeAction  autoClose key={key} right={right} left={left} >
                       <List.Item >     
+                      <TouchableOpacity TouchableOpacity={0.9}>
                         <View style={styles.item} >
-                          < Image style={ styles.avatar } source={ require('../assets/img/male.png') }></ Image>
+                          < Image style={ styles.avatar } source={ require('../assets/img/20.jpeg') }></ Image>
                           <View style={styles.itemRight}>
                             <View style={styles.title} >
-                              <Text>name</Text>
-                              <Text>time</Text>
+                              <Text numberOfLines={1} ellipsizeMode="tail">{item.uname}</Text>
+                              <Text>{item.replyTime}</Text>
                             </View>
-                            <Text numberOfLines={1} ellipsizeMode="tail">1111111111111111111111111111111111111111111</Text>
+                            <Text style={styles.lastMsg} numberOfLines={1} ellipsizeMode="tail">{item.lastMsg}</Text>
                           </View>
                          
                         </View>
+                        </TouchableOpacity>
                       </List.Item>
                     </SwipeAction>
                   )
@@ -164,7 +192,7 @@ class ChatList extends React.Component {
               }
                 
           </List>
-        </View>
+        </ScrollView>
       </ Provider>
     )
 
@@ -176,10 +204,11 @@ class ChatList extends React.Component {
 const styles = StyleSheet.create({
   avatar: {
     width: 50,
-    height:50
+    height:50,
+    borderRadius:6
   },
   item: {
-    height: 70,
+    height: 60,
     flexDirection:'row'
   },
   itemRight: {
@@ -193,7 +222,7 @@ const styles = StyleSheet.create({
     height:'50%'
   },
   lastMsg: {
-
+    paddingRight:24
   }
 
 })

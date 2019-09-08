@@ -16,7 +16,7 @@ export default {
     pageBgColor: '#efefef',
     primaryColor: '#2f9833',
     defaultColor: '#ddd',
-    dangerColor: '#DC143C',
+    dangerColor: '#CC3333',
     lightGray: '#e5e5e5',
     darkGray: '#999',
     lightBlack: '#333333',

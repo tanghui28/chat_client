@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "react-native start",
-    "build:iconfont":"iconfonttojson ./font/iconfont.css",
+    "build:iconfont": "iconfonttojson ./font/iconfont.css",
     "test": "jest",
     "lint": "eslint ."
   },
