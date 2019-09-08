@@ -124,7 +124,7 @@ class FriendsList extends React.Component {
       < Provider >
         <View style={styles.container}>
         <Header style={{backgroundColor:config.lightGray}} showIcon={true} title="通讯录"></Header>
-          <SectionList sections={this.state.list} 
+          <SectionList initialNumToRender={12} sections={this.state.list} 
             renderSectionHeader={
               ({section})=>{
                 return (
@@ -136,7 +136,7 @@ class FriendsList extends React.Component {
             renderItem={
               ({item,index,section})=>{
                 return (
-                  <TouchableOpacity TouchableOpacity={0.6}>
+                  <TouchableOpacity TouchableOpacity={0.9}>
                   <View style={styles.item} >
                     <Image style={styles.avatar} source={require('../assets/img/20.jpeg')}></Image>
                     <View style={styles.uname}>
