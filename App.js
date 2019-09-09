@@ -8,12 +8,9 @@
 
 import React, {Fragment} from 'react';
 import {
-  SafeAreaView,
   StyleSheet,
-  ScrollView,
   View,
   Text,
-  StatusBar,
 } from 'react-native';
 import {
   Net
@@ -33,6 +30,7 @@ import ChatList from './src/pages/chatList'
 import FriendsList from './src/pages/friendsList'
 import Mine from './src/pages/mine'
 import UserDetail from './src/pages/userDetail'
+import ModifyRemark from './src/pages/modifyRemark'
 
 import {  createAppContainer} from 'react-navigation'
 import {  createStackNavigator} from 'react-navigation-stack';
@@ -121,6 +119,13 @@ const RootNavigator = createStackNavigator(
     },
     UserDetail: {
       screen: UserDetail,
+      navigationOptions: {
+        gesturesEnabled: true,
+        header: null
+      }
+    },
+    ModifyRemark:{
+      screen:ModifyRemark,
       navigationOptions: {
         gesturesEnabled: true,
         header: null

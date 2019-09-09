@@ -47,7 +47,7 @@ class Header extends React.Component{
                     </Popover.Item>
                   </View>
                 }>
-                <Icon color={config.lightBlack} name="plus-circle"></Icon>
+                <Icon style={{padding:10}} color={config.lightBlack} name="plus-circle"></Icon>
                 
               </Popover>
             

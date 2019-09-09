@@ -27,6 +27,11 @@ class UserDetail extends React.Component {
     this.props.navigation.goBack();
   };
 
+  toModify = ()=>{
+    console.log(this.props.navigation)
+    this.props.navigation.navigate('ModifyRemark')
+  };
+
   componentWillMount() { 
     this.setState({
       userInfo:this.props.navigation.state.params
@@ -49,7 +54,7 @@ class UserDetail extends React.Component {
           </View>
         </View>
 
-        <TouchableOpacity style={{marginTop:10}} activeOpacity={0.6}>
+        <TouchableOpacity onPress={this.toModify} style={{marginTop:10}} activeOpacity={0.6}>
           <View style={styles.set}>
       
             <Text style={{fontSize:config.fontSizeLarge}}>设置备注和标签</Text>
