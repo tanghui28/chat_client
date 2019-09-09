@@ -13,13 +13,20 @@ class Header extends React.Component{
     this.state = {};
   }
 
+  goBack = () => { 
+
+    if (this.props.backFun) { 
+      this.props.backFun();
+    }
+    
+  };
 
   render(){
 
     return (
       <View style={[this.props.style,styles.container]}>
         {
-          this.props.showBack ? (<Icon name="left"></Icon>) :null
+          this.props.showBack ? (<TouchableOpacity onPress={this.goBack} activeOpacity={0.6}><Icon style={styles.back}  name="left"></Icon></TouchableOpacity>) :null
         }
         
         <Text style={styles.title}>{this.props.title?this.props.title:''}</Text>
@@ -27,16 +34,16 @@ class Header extends React.Component{
           {
             this.props.showIcon?(
               <Popover 
-                placement="bottom"
+                placement="bottom" 
                 overlay={
-                  <View style={{backgroundColor:'#000'}}>
+                  <View style={ styles.popContainer }>
                     <Popover.Item style={styles.popItem}>
-                      <Icon name="scan" color={config.primaryColor} size={26}></Icon>
-                      <Text>111111</Text>
+                      <Icon style={styles.popIcon} name="scan" color={config.whiteFont} size={26}></Icon>
+                      <Text style={styles.popText}>扫一扫</Text>
                     </Popover.Item>
                     <Popover.Item style={styles.popItem}>
-                      <Icon name="scan" color={config.primaryColor} size={26}></Icon>
-                      <Text>111111</Text>
+                      <Icon style={styles.popIcon} name="user-add" color={config.whiteFont} size={26}></Icon>
+                      <Text style={styles.popText}>添加朋友</Text>
                     </Popover.Item>
                   </View>
                 }>
@@ -58,7 +65,8 @@ class Header extends React.Component{
 Header.defaultProps= {
   title:'',
   showBack:false,
-  showIcon:false,
+  showIcon: false,
+  backFun:null
 }
 
 const styles = StyleSheet.create({
@@ -72,15 +80,39 @@ const styles = StyleSheet.create({
     borderBottomWidth:0.5,
     borderBottomColor:config.defaultColor
   },
+  back: {
+    padding: 10,
+    paddingLeft:0
+  },
   title:{
     fontSize:config.fontSizeLarge,
     fontWeight:'bold'
+  },
+  popContainer:{
+    backgroundColor: "#434343",
+    borderRadius: 4,
+    paddingTop: 10,
+    paddingBottom:10
   },
   popItem:{
     flexDirection:'row',
     justifyContent:"space-between",
     alignItems:'center',
-    width:120
+    width: 120,
+    height:50
+  },
+  popIcon: {
+    marginRight:10
+  },
+  popText: {
+    flex: 1,
+    height:'100%',
+    textAlign: 'left',
+    paddingTop:4,
+    color: config.whiteFont,
+    borderBottomWidth: 0.5,
+    borderColor: config.darkGray,
+    alignItems: 'center',
   }
 })
 

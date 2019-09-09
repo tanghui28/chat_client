@@ -7,7 +7,8 @@ import {
   TouchableOpacity,
   ImageBackground,
   ScrollView,
-  Image
+  Image,
+  FlatList
 } from 'react-native';
 
 import {
@@ -162,36 +163,31 @@ class ChatList extends React.Component {
       < Provider >
         <Header style={{backgroundColor:config.lightGray}} showIcon={true} title="消息"></Header>
         <ScrollView showsVerticalScrollIndicator={false} styl={ {flex:1} }>
-          <List>
-              {
-
-                this.state.list.map((item, key) => {
-
-                  return (
-                    <SwipeAction  autoClose key={key} right={right} left={left} >
-                      <List.Item >     
-                      <TouchableOpacity TouchableOpacity={0.9}>
-                        <View style={styles.item} >
-                          < Image style={ styles.avatar } source={ require('../assets/img/20.jpeg') }></ Image>
-                          <View style={styles.itemRight}>
-                            <View style={styles.title} >
-                              <Text numberOfLines={1} ellipsizeMode="tail">{item.uname}</Text>
-                              <Text>{item.replyTime}</Text>
-                            </View>
-                            <Text style={styles.lastMsg} numberOfLines={1} ellipsizeMode="tail">{item.lastMsg}</Text>
-                          </View>
-                         
+          <FlatList
+            data={this.state.list}
+            renderItem={({ item, index }) => { 
+            return (
+                <SwipeAction  autoClose key={index} right={right} left={left} >
+   
+                <TouchableOpacity activeOpacity={0.85} >
+                    <View style={styles.item} >
+                      < Image style={ styles.avatar } source={ require('../assets/img/20.jpeg') }></ Image>
+                      <View style={styles.itemRight}>
+                        <View style={styles.title} >
+                          <Text numberOfLines={1} ellipsizeMode="tail">{item.uname}</Text>
+                          <Text style={styles.replyTime}>{item.replyTime}</Text>
                         </View>
-                        </TouchableOpacity>
-                      </List.Item>
-                    </SwipeAction>
-                  )
-    
-                })
-                    
-              }
-                
-          </List>
+                        <Text style={styles.lastMsg} numberOfLines={1} ellipsizeMode="tail">{item.lastMsg}</Text>
+                      </View> 
+                    </View>
+                </TouchableOpacity>
+          
+                </SwipeAction>
+              )
+            }}
+          />
+
+
         </ScrollView>
       </ Provider>
     )
@@ -208,21 +204,34 @@ const styles = StyleSheet.create({
     borderRadius:6
   },
   item: {
-    height: 60,
-    flexDirection:'row'
+    height: 80,
+    flexDirection: 'row',
+    backgroundColor: '#fff',
+    paddingLeft: 15,
+    paddingRight: 10,
+    alignItems: 'center'
   },
   itemRight: {
     flex: 1,
     position: 'relative',
-    paddingLeft:10
+    paddingLeft: 10,
+    borderBottomColor: config.lightGray,
+    borderBottomWidth: 0.5,
+    height: '100%',
+    justifyContent:'center'
   },
   title: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    height:'50%'
+    alignItems: 'center',
+    marginBottom:6
+  },
+  replyTime: {
+    color:config.darkGray
   },
   lastMsg: {
-    paddingRight:24
+    paddingRight: 24,
+    color:config.darkGray
   }
 
 })

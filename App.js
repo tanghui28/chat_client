@@ -32,11 +32,15 @@ import Choose from './src/pages/choose'
 import ChatList from './src/pages/chatList'
 import FriendsList from './src/pages/friendsList'
 import Mine from './src/pages/mine'
+import UserDetail from './src/pages/userDetail'
 
 import {  createAppContainer} from 'react-navigation'
 import {  createStackNavigator} from 'react-navigation-stack';
 import {  createBottomTabNavigator} from 'react-navigation-tabs'
 import config from './src/config/config';
+
+// 内置转场动画
+import CardStackStyleInterpolator from 'react-navigation-stack/src/views/StackView/StackViewStyleInterpolator'
 
 
 const bottomTabNavigator = createBottomTabNavigator(
@@ -114,8 +118,21 @@ const RootNavigator = createStackNavigator(
         gesturesEnabled: true,
         header: null
       }
+    },
+    UserDetail: {
+      screen: UserDetail,
+      navigationOptions: {
+        gesturesEnabled: true,
+        header: null
+      }
     }
   
+  },
+  {
+    transitionConfig: () => ({
+      screenInterpolator: CardStackStyleInterpolator.forHorizontal
+      
+    })
   }
 )
 

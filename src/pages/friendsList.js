@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {
   StyleSheet,
   View,
@@ -9,20 +8,22 @@ import {
   SectionList,
   Image
 } from 'react-native';
-
 import {
   Provider,
   Toast
 } from '@ant-design/react-native'
-
 import config from '../config/config'
-
 import Header from '../components/header'
+
 
 class FriendsList extends React.Component { 
   constructor() { 
     super();
+    this.sectionList = React.createRef();
     this.state = {
+      alp: [
+        'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'
+      ],
       list:[
         {
           title:'A',
@@ -30,12 +31,26 @@ class FriendsList extends React.Component {
             {
               uid:1,
               uname: "A小王",
-              avatar:'male.png'
+              avatar: 'male.png',
+              phone:'18161046533'
             },
             {
               uid:2,
               uname: "A小唐",
-              avatar:'male.png'
+              avatar: 'male.png',
+              phone: '18161046533'
+            },
+            {
+              uid:2,
+              uname: "A小唐",
+              avatar: 'male.png',
+              phone: '18161046533'
+            },
+            {
+              uid:2,
+              uname: "A小唐",
+              avatar: 'male.png',
+              phone: '18161046533'
             },
           ]
         },
@@ -45,12 +60,26 @@ class FriendsList extends React.Component {
             {
               uid: 3,
               uname: "B小李",
-              avatar: 'male.png'
+              avatar: 'male.png',
+              phone: '18161046533'
             },
             {
               uid: 4,
               uname: "B小李",
-              avatar: 'male.png'
+              avatar: 'male.png',
+              phone: '18161046533'
+            },
+            {
+              uid: 4,
+              uname: "B小李",
+              avatar: 'male.png',
+              phone: '18161046533'
+            },
+            {
+              uid: 4,
+              uname: "B小李",
+              avatar: 'male.png',
+              phone: '18161046533'
             },
           ]
         },
@@ -59,72 +88,124 @@ class FriendsList extends React.Component {
           data:[
             {
               uid: 5,
-              uname: "陈龙",
-              avatar: 'male.png'
+              uname: "成龙",
+              avatar: 'male.png',
+              phone: '18161046533'
             },
             {
               uid: 6,
               uname: "成龙",
-              avatar: 'male.png'
+              avatar: 'male.png',
+              phone: '18161046533'
             },
             {
               uid: 6,
-              uname: "成龙",
-              avatar: 'male.png'
-            },
-            {
-              uid: 6,
-              uname: "成龙",
-              avatar: 'male.png'
-            },
-            {
-              uid: 6,
-              uname: "成龙",
-              avatar: 'male.png'
-            },
-            {
-              uid: 6,
-              uname: "成龙",
-              avatar: 'male.png'
-            },
-            {
-              uid: 6,
-              uname: "成龙",
-              avatar: 'male.png'
-            },
-            {
-              uid: 6,
-              uname: "成龙",
-              avatar: 'male.png'
-            },
-            {
-              uid: 6,
-              uname: "成龙",
-              avatar: 'male.png'
-            },
-            {
-              uid: 6,
-              uname: "成龙",
-              avatar: 'male.png'
-            },
-            {
-              uid: 6,
-              uname: "成龙",
-              avatar: 'male.png'
+              uname: "车龙",
+              avatar: 'male.png',
+              phone: '18161046533'
             },
           ]
-        }
+        },
+        {
+          title:"D",
+          data:[
+            {
+              uid: 5,
+              uname: "大龙",
+              avatar: 'male.png'
+            },
+            {
+              uid: 6,
+              uname: "大龙",
+              avatar: 'male.png'
+            },
+            {
+              uid: 6,
+              uname: "大龙",
+              avatar: 'male.png'
+            },
+            {
+              uid: 6,
+              uname: "大龙",
+              avatar: 'male.png'
+            },
+            {
+              uid: 6,
+              uname: "大龙",
+              avatar: 'male.png'
+            },
+            {
+              uid: 6,
+              uname: "大龙",
+              avatar: 'male.png'
+            },
+            {
+              uid: 6,
+              uname: "大龙",
+              avatar: 'male.png'
+            },
+            {
+              uid: 6,
+              uname: "大龙",
+              avatar: 'male.png'
+            },
+            {
+              uid: 6,
+              uname: "大龙",
+              avatar: 'male.png'
+            },
+
+          ]
+        },
       ]
     };
   }
+
+  scroll = (item) => { 
+    console.log(item)
+    let itemIndex = null;
+    this.state.list.forEach((val,index) => {
+
+      if ( val.title === item ) { 
+        itemIndex = index;
+      }
+
+    })
+    if (itemIndex === null) { 
+      return;
+    }
+    console.log(itemIndex)
+    this.sectionList.current.scrollToLocation({
+      animated: true,
+      itemIndex: 0,              //滚动到section中的第几个item
+      sectionIndex: itemIndex,   //滚动到sectionlist 中的低结构section
+      // viewOffset:50
+    })
+  };
+
+  toDetail = (item) => {
+
+    this.props.navigation.navigate('UserDetail',item)
+  };
+
+
 
   render() { 
 
     return (
       < Provider >
         <View style={styles.container}>
-        <Header style={{backgroundColor:config.lightGray}} showIcon={true} title="通讯录"></Header>
-          <SectionList initialNumToRender={12} sections={this.state.list} 
+          <Header style={{ backgroundColor: config.lightGray }} showIcon={true} title="通讯录"></Header>
+          < SectionList ref={this.sectionList}
+            stickySectionHeadersEnabled = {
+              true
+            }
+            initialNumToRender = {
+              12
+            }
+            sections = {
+              this.state.list
+            }
             renderSectionHeader={
               ({section})=>{
                 return (
@@ -136,14 +217,13 @@ class FriendsList extends React.Component {
             renderItem={
               ({item,index,section})=>{
                 return (
-                  <TouchableOpacity TouchableOpacity={0.9}>
+                  <TouchableOpacity onPress={() => {  this.toDetail(item) } } TouchableOpacity={0.9}>
                   <View style={styles.item} >
                     <Image style={styles.avatar} source={require('../assets/img/20.jpeg')}></Image>
                     <View style={styles.uname}>
                       <Text numberOfLines={1} ellipsizeMode="tail">{item.uname}</Text>
                     </View>
-
-                    
+ 
                   </View>
                   </TouchableOpacity>
                 )
@@ -153,32 +233,13 @@ class FriendsList extends React.Component {
 
           {/* 右侧A-Z */}
           <View style={styles.rightBar}>
-            <Text style={styles.rightBarText}>A</Text>
-            <Text style={styles.rightBarText}>B</Text>
-            <Text style={styles.rightBarText}>C</Text>
-            <Text style={styles.rightBarText}>D</Text>
-            <Text style={styles.rightBarText}>E</Text>
-            <Text style={styles.rightBarText}>F</Text>
-            <Text style={styles.rightBarText}>G</Text>
-            <Text style={styles.rightBarText}>H</Text>
-            <Text style={styles.rightBarText}>I</Text>
-            <Text style={styles.rightBarText}>J</Text>
-            <Text style={styles.rightBarText}>K</Text>
-            <Text style={styles.rightBarText}>L</Text>
-            <Text style={styles.rightBarText}>M</Text>
-            <Text style={styles.rightBarText}>N</Text>
-            <Text style={styles.rightBarText}>O</Text>
-            <Text style={styles.rightBarText}>P</Text>
-            <Text style={styles.rightBarText}>Q</Text>
-            <Text style={styles.rightBarText}>R</Text>
-            <Text style={styles.rightBarText}>S</Text>
-            <Text style={styles.rightBarText}>T</Text>
-            <Text style={styles.rightBarText}>U</Text>
-            <Text style={styles.rightBarText}>V</Text>
-            <Text style={styles.rightBarText}>W</Text>
-            <Text style={styles.rightBarText}>X</Text>
-            <Text style={styles.rightBarText}>Y</Text>
-            <Text style={styles.rightBarText}>Z</Text>
+            {
+              this.state.alp.map((item,index) => { 
+                return (
+                  <Text onPress={() => { this.scroll(item)} } key={index} style={styles.rightBarText}>{item}</Text>
+                )
+              })
+            }
           </View>
 
         </View>
