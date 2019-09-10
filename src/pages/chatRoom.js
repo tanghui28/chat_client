@@ -117,8 +117,8 @@ class ChatRoom extends React.Component {
         < FlatList
           data={this.state.messages}
           keyExtractor={
-            ({ index}) => { 
-              return index
+            (item,index) => { 
+              return index+''
             }
           }
           renderItem={

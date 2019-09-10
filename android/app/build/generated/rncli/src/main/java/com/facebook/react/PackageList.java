@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import com.chat_client.BuildConfig;
 import com.chat_client.R;
 
+// @react-native-community/async-storage
+import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 // react-native-gesture-handler
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 // react-native-reanimated
@@ -52,6 +54,7 @@ public class PackageList {
   public ArrayList<ReactPackage> getPackages() {
     return new ArrayList<>(Arrays.<ReactPackage>asList(
       new MainReactPackage(),
+      new AsyncStoragePackage(),
       new RNGestureHandlerPackage(),
       new ReanimatedPackage(),
       new VectorIconsPackage()

@@ -14,7 +14,6 @@ import {
 import {
   Provider,
   Toast,
-  List,
   SwipeAction
 } from '@ant-design/react-native'
 
@@ -172,12 +171,12 @@ class ChatList extends React.Component {
             initialNumToRender={10}
             data={this.state.list}
             keyExtractor = {
-              ({index}) => index
+              (item,index) => String(index)
             }
             renderItem={({ item, index }) => { 
               return (
     
-                <TouchableOpacity key={index} onPress={this.toChatRoom} activeOpacity={0.85} >
+                <TouchableOpacity onPress={this.toChatRoom} activeOpacity={0.85} >
                       <View style={styles.item} >
                         < Image style={ styles.avatar } source={ require('../assets/img/20.jpeg') }></ Image>
                         <View style={styles.itemRight}>
