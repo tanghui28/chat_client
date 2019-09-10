@@ -31,6 +31,7 @@ import FriendsList from './src/pages/friendsList'
 import Mine from './src/pages/mine'
 import UserDetail from './src/pages/userDetail'
 import ModifyRemark from './src/pages/modifyRemark'
+import ChatRoom from './src/pages/chatRoom'
 
 import {  createAppContainer} from 'react-navigation'
 import {  createStackNavigator} from 'react-navigation-stack';
@@ -126,6 +127,13 @@ const RootNavigator = createStackNavigator(
     },
     ModifyRemark:{
       screen:ModifyRemark,
+      navigationOptions: {
+        gesturesEnabled: true,
+        header: null
+      }
+    },
+    ChatRoom: {
+      screen: ChatRoom,
       navigationOptions: {
         gesturesEnabled: true,
         header: null

@@ -28,7 +28,6 @@ class UserDetail extends React.Component {
   };
 
   toModify = ()=>{
-    console.log(this.props.navigation)
     this.props.navigation.navigate('ModifyRemark')
   };
 

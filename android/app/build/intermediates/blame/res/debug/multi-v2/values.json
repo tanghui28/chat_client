@@ -1,27 +1,29 @@
 {
     "logs": [
         {
-            "outputFile": "E:\\chat_client\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
+            "outputFile": "D:\\01web\\chat_client\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
             "map": [
                 {
-                    "source": "E:\\chat_client\\android\\app\\src\\main\\res\\values\\strings.xml",
+                    "source": "D:\\01web\\chat_client\\android\\app\\src\\main\\res\\values\\styles.xml",
                     "from": {
-                        "startLines": "1",
+                        "startLines": "3",
                         "startColumns": "4",
-                        "startOffsets": "17",
-                        "endColumns": "48",
-                        "endOffsets": "61"
+                        "startOffsets": "54",
+                        "endLines": "6",
+                        "endColumns": "12",
+                        "endOffsets": "231"
                     },
                     "to": {
-                        "startLines": "271",
+                        "startLines": "330",
                         "startColumns": "4",
-                        "startOffsets": "17826",
-                        "endColumns": "48",
-                        "endOffsets": "17870"
+                        "startOffsets": "23300",
+                        "endLines": "333",
+                        "endColumns": "12",
+                        "endOffsets": "23477"
                     }
                 },
                 {
-                    "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-2\\files-2.1\\3af8316f530f9f5bfdf1a60e584446e8\\res\\values\\values.xml",
+                    "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-2\\files-2.1\\d165ca37e7e0e6b01ad29e3190394ae8\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,65,68,71,74,77,81,85,88,91,94,97,98,99,106,113,116,119,122,128",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -76,22 +78,20 @@
                     }
                 },
                 {
-                    "source": "E:\\chat_client\\android\\app\\src\\main\\res\\values\\styles.xml",
+                    "source": "D:\\01web\\chat_client\\android\\app\\src\\main\\res\\values\\strings.xml",
                     "from": {
-                        "startLines": "3",
+                        "startLines": "1",
                         "startColumns": "4",
-                        "startOffsets": "57",
-                        "endLines": "6",
-                        "endColumns": "12",
-                        "endOffsets": "237"
+                        "startOffsets": "16",
+                        "endColumns": "48",
+                        "endOffsets": "60"
                     },
                     "to": {
-                        "startLines": "330",
+                        "startLines": "271",
                         "startColumns": "4",
-                        "startOffsets": "23300",
-                        "endLines": "333",
-                        "endColumns": "12",
-                        "endOffsets": "23477"
+                        "startOffsets": "17826",
+                        "endColumns": "48",
+                        "endOffsets": "17870"
                     }
                 },
                 {
@@ -133,6 +133,23 @@
                     }
                 },
                 {
+                    "source": "D:\\01web\\chat_client\\android\\app\\build\\generated\\res\\resValues\\debug\\values\\generated.xml",
+                    "from": {
+                        "startLines": "6,7",
+                        "startColumns": "4,4",
+                        "startOffsets": "162,227",
+                        "endColumns": "63,68",
+                        "endOffsets": "221,291"
+                    },
+                    "to": {
+                        "startLines": "228,229",
+                        "startColumns": "4,4",
+                        "startOffsets": "14792,14856",
+                        "endColumns": "63,68",
+                        "endOffsets": "14851,14920"
+                    }
+                },
+                {
                     "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-2\\files-2.1\\aa890377fe0d3e362eb640ae8a13e793\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2,102,3,13",
@@ -149,23 +166,6 @@
                         "endLines": "2,1857,2571,2660",
                         "endColumns": "60,12,24,24",
                         "endOffsets": "206,126186,164592,169803"
-                    }
-                },
-                {
-                    "source": "E:\\chat_client\\android\\app\\build\\generated\\res\\resValues\\debug\\values\\generated.xml",
-                    "from": {
-                        "startLines": "6,7",
-                        "startColumns": "4,4",
-                        "startOffsets": "162,227",
-                        "endColumns": "63,68",
-                        "endOffsets": "221,291"
-                    },
-                    "to": {
-                        "startLines": "228,229",
-                        "startColumns": "4,4",
-                        "startOffsets": "14792,14856",
-                        "endColumns": "63,68",
-                        "endOffsets": "14851,14920"
                     }
                 }
             ]

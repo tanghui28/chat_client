@@ -29,7 +29,7 @@ class Header extends React.Component{
           this.props.showBack ? (<TouchableOpacity onPress={this.goBack} activeOpacity={0.6}><Icon style={styles.back}  name="left"></Icon></TouchableOpacity>) :null
         }
         
-        <Text style={styles.title}>{this.props.title?this.props.title:''}</Text>
+        <Text style={[styles.title,this.props.showBack?null:styles.noBackIcon]}>{this.props.title?this.props.title:''}</Text>
         <TouchableOpacity style={{flex:1,flexDirection:'row',justifyContent:"flex-end"}}>
           {
             this.props.showIcon?(
@@ -75,18 +75,21 @@ const styles = StyleSheet.create({
     justifyContent:'flex-start',
     alignItems:'center',
     height:50,
-    paddingLeft:15,
+    // paddingLeft:15,
     paddingRight:15,
     borderBottomWidth:0.5,
     borderBottomColor:config.defaultColor
   },
   back: {
     padding: 10,
-    paddingLeft:0
+    // paddingLeft:0
   },
   title:{
     fontSize:config.fontSizeLarge,
-    fontWeight:'bold'
+    fontWeight: 'bold',
+  },
+  noBackIcon:{
+    paddingLeft:10
   },
   popContainer:{
     backgroundColor: "#434343",

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "E:\\chat_client\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-hi\\values-hi.xml",
+            "outputFile": "D:\\01web\\chat_client\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-hi\\values-hi.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-2\\files-2.1\\457219354b6bd40f320ab3fafc9e3ff2\\res\\values-hi\\values-hi.xml",

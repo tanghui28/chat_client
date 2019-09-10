@@ -123,6 +123,11 @@ class ChatList extends React.Component {
   componentDidMount() { 
   
   }
+
+  toChatRoom = () => { 
+    this.props.navigation.navigate('ChatRoom');
+  };
+
   render() { 
 
     const left = [{
@@ -162,33 +167,34 @@ class ChatList extends React.Component {
     return (
       < Provider >
         <Header style={{backgroundColor:config.lightGray}} showIcon={true} title="消息"></Header>
-        <ScrollView showsVerticalScrollIndicator={false} styl={ {flex:1} }>
-          <FlatList
+
+        <FlatList
+            initialNumToRender={10}
             data={this.state.list}
+            keyExtractor = {
+              ({index}) => index
+            }
             renderItem={({ item, index }) => { 
-            return (
-                <SwipeAction  autoClose key={index} right={right} left={left} >
-   
-                <TouchableOpacity activeOpacity={0.85} >
-                    <View style={styles.item} >
-                      < Image style={ styles.avatar } source={ require('../assets/img/20.jpeg') }></ Image>
-                      <View style={styles.itemRight}>
-                        <View style={styles.title} >
-                          <Text numberOfLines={1} ellipsizeMode="tail">{item.uname}</Text>
-                          <Text style={styles.replyTime}>{item.replyTime}</Text>
-                        </View>
-                        <Text style={styles.lastMsg} numberOfLines={1} ellipsizeMode="tail">{item.lastMsg}</Text>
-                      </View> 
-                    </View>
+              return (
+    
+                <TouchableOpacity key={index} onPress={this.toChatRoom} activeOpacity={0.85} >
+                      <View style={styles.item} >
+                        < Image style={ styles.avatar } source={ require('../assets/img/20.jpeg') }></ Image>
+                        <View style={styles.itemRight}>
+                          <View style={styles.title} >
+                            <Text numberOfLines={1} ellipsizeMode="tail">{item.uname}</Text>
+                            <Text style={styles.replyTime}>{item.replyTime}</Text>
+                          </View>
+                          <Text style={styles.lastMsg} numberOfLines={1} ellipsizeMode="tail">{item.lastMsg}</Text>
+                        </View> 
+                      </View>
                 </TouchableOpacity>
-          
-                </SwipeAction>
+            
               )
             }}
-          />
+          ></FlatList>
 
 
-        </ScrollView>
       </ Provider>
     )
 
