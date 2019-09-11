@@ -37,6 +37,10 @@ class UserDetail extends React.Component {
     })
   }
 
+  toChatRoom = () => {
+    this.props.navigation.navigate('ChatRoom')
+  };
+
   render() {
     return (
       <View style={styles.container}>
@@ -70,7 +74,7 @@ class UserDetail extends React.Component {
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.sendMessage} activeOpacity={0.8}>
+        <TouchableOpacity onPress={this.toChatRoom} style={styles.sendMessage} activeOpacity={0.8}>
           <Icon color="#fff" size={18} name="message"></Icon>
           <Text style={{ color:config.whiteFont,marginLeft:10}}>发消息</Text>
         </TouchableOpacity>

@@ -41,6 +41,14 @@ import config from './src/config/config';
 // 内置转场动画
 import CardStackStyleInterpolator from 'react-navigation-stack/src/views/StackView/StackViewStyleInterpolator'
 
+import Storage from './src/config/storage'
+Storage.storeData('chatList', [
+  {
+    uname: '尼古拉斯赵四',
+    lastMessage: '我有点忙!',
+    replyTime:'2019-9-11'
+  }
+])
 
 const bottomTabNavigator = createBottomTabNavigator(
   {
