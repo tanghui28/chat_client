@@ -45,8 +45,9 @@ import Storage from './src/config/storage'
 Storage.storeData('chatList', [
   {
     uname: '尼古拉斯赵四',
-    lastMessage: '我有点忙!',
-    replyTime:'2019-9-11'
+    avatar: 'male.png',
+    replyTime: '2019-09-06',
+    lastMsg:'where you from and wher you going'
   }
 ])
 

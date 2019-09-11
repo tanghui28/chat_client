@@ -129,39 +129,6 @@ class ChatList extends React.Component {
 
   render() { 
 
-    const left = [{
-      text: "标为未读",
-       style: {
-         backgroundColor: config.defaultColor,
-         color: config.whiteFont,
-         width:40
-      },
-      onPress: () => { 
-        console.log(111)
-      }
-    }];
-    const right = [
-      {
-        text: '置顶',
-         style: {
-           backgroundColor: "#00CC99",
-           color: config.whiteFont
-        },
-         onPress: () => {
-           console.log(111)
-         }
-      },
-      {
-        text: '删除',
-        style: {
-          backgroundColor: config.dangerColor,
-          color:config.whiteFont
-        },
-        onPress: () => {
-          console.log(111)
-        }
-      }
-    ]
 
     return (
       < Provider >
@@ -178,7 +145,7 @@ class ChatList extends React.Component {
     
                 <TouchableOpacity onPress={this.toChatRoom} activeOpacity={0.85} >
                       <View style={styles.item} >
-                        < Image style={ styles.avatar } source={ require('../assets/img/20.jpeg') }></ Image>
+                        < Image style={ styles.avatar } source={{uri:'http://192.168.1.9:3000/images/male.png'}}></ Image>
                         <View style={styles.itemRight}>
                           <View style={styles.title} >
                             <Text numberOfLines={1} ellipsizeMode="tail">{item.uname}</Text>
