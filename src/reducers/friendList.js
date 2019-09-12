@@ -35,3 +35,5 @@ const friendList = (state=[],action) => {
   }
 
 }
+
+export default friendList;
