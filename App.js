@@ -162,7 +162,6 @@ const AppContainer = createAppContainer(RootNavigator);
 
 
 
-
 const App = () => {
   return (
     < AppContainer />

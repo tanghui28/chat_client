@@ -119,6 +119,10 @@ class ChatList extends React.Component {
     };
   }
 
+  componentWillMount() { 
+    console.log(1)
+  }
+
   componentDidMount() { 
   
   }
@@ -145,7 +149,7 @@ class ChatList extends React.Component {
     
                 <TouchableOpacity onPress={this.toChatRoom} activeOpacity={0.85} >
                       <View style={styles.item} >
-                        < Image style={ styles.avatar } source={{uri:'http://192.168.1.9:3000/images/male.png'}}></ Image>
+                        < Image style={ styles.avatar } source={{uri:'http://192.168.1.21:3000/images/1.jpeg'}}></ Image>
                         <View style={styles.itemRight}>
                           <View style={styles.title} >
                             <Text numberOfLines={1} ellipsizeMode="tail">{item.uname}</Text>
