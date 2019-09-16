@@ -3,7 +3,7 @@ import {
   DELETE_FRIEND,
   SET_FRIEND
 } from './type'
-import { type } from 'os'
+
  
 export const addFriend = payload => {
   

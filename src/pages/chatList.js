@@ -24,7 +24,8 @@ import {
 import config from '../config/config'
 
 import Header from '../components/header'
-
+//引入connect函数
+import { connect } from 'react-redux'
 
 class ChatList extends React.Component { 
   constructor() { 
@@ -120,11 +121,11 @@ class ChatList extends React.Component {
   }
 
   componentWillMount() { 
-    console.log(1)
+
   }
 
   componentDidMount() { 
-  
+
   }
 
   toChatRoom = () => { 
@@ -214,4 +215,9 @@ const styles = StyleSheet.create({
 
 
 
-export default ChatList;
+// export default ChatList;
+
+
+
+
+export default connect()(ChatList)

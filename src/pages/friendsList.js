@@ -15,6 +15,15 @@ import {
 import config from '../config/config'
 import Header from '../components/header'
 
+//引入connect函数
+import { connect } from 'react-redux'
+
+// actions
+import {
+  setFriend,
+  deleteFriend
+} from '../actions/index'
+
 
 class FriendsList extends React.Component { 
   constructor() { 
@@ -24,147 +33,18 @@ class FriendsList extends React.Component {
       alp: [
         'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'
       ],
-      list:[
-        {
-          title:'A',
-          data:[
-            {
-              uid:1,
-              uname: "A小王",
-              avatar: 'male.png',
-              phone:'18161046533'
-            },
-            {
-              uid:2,
-              uname: "A小唐",
-              avatar: 'male.png',
-              phone: '18161046533'
-            },
-            {
-              uid:2,
-              uname: "A小唐",
-              avatar: 'male.png',
-              phone: '18161046533'
-            },
-            {
-              uid:2,
-              uname: "A小唐",
-              avatar: 'male.png',
-              phone: '18161046533'
-            },
-          ]
-        },
-        {
-          title:'B',
-          data:[
-            {
-              uid: 3,
-              uname: "B小李",
-              avatar: 'male.png',
-              phone: '18161046533'
-            },
-            {
-              uid: 4,
-              uname: "B小李",
-              avatar: 'male.png',
-              phone: '18161046533'
-            },
-            {
-              uid: 4,
-              uname: "B小李",
-              avatar: 'male.png',
-              phone: '18161046533'
-            },
-            {
-              uid: 4,
-              uname: "B小李",
-              avatar: 'male.png',
-              phone: '18161046533'
-            },
-          ]
-        },
-        {
-          title:"C",
-          data:[
-            {
-              uid: 5,
-              uname: "成龙",
-              avatar: 'male.png',
-              phone: '18161046533'
-            },
-            {
-              uid: 6,
-              uname: "成龙",
-              avatar: 'male.png',
-              phone: '18161046533'
-            },
-            {
-              uid: 6,
-              uname: "车龙",
-              avatar: 'male.png',
-              phone: '18161046533'
-            },
-          ]
-        },
-        {
-          title:"D",
-          data:[
-            {
-              uid: 5,
-              uname: "大龙",
-              avatar: 'male.png'
-            },
-            {
-              uid: 6,
-              uname: "大龙",
-              avatar: 'male.png'
-            },
-            {
-              uid: 6,
-              uname: "大龙",
-              avatar: 'male.png'
-            },
-            {
-              uid: 6,
-              uname: "大龙",
-              avatar: 'male.png'
-            },
-            {
-              uid: 6,
-              uname: "大龙",
-              avatar: 'male.png'
-            },
-            {
-              uid: 6,
-              uname: "大龙",
-              avatar: 'male.png'
-            },
-            {
-              uid: 6,
-              uname: "大龙",
-              avatar: 'male.png'
-            },
-            {
-              uid: 6,
-              uname: "大龙",
-              avatar: 'male.png'
-            },
-            {
-              uid: 6,
-              uname: "大龙",
-              avatar: 'male.png'
-            },
-
-          ]
-        },
-      ]
     };
   }
 
+  componentDidMount() { 
+
+
+  }
+
   scroll = (item) => { 
-    console.log(item)
+
     let itemIndex = null;
-    this.state.list.forEach((val,index) => {
+    this.props.list.forEach((val,index) => {
 
       if ( val.title === item ) { 
         itemIndex = index;
@@ -174,7 +54,7 @@ class FriendsList extends React.Component {
     if (itemIndex === null) { 
       return;
     }
-    console.log(itemIndex)
+
     this.sectionList.current.scrollToLocation({
       animated: true,
       itemIndex: 0,              //滚动到section中的第几个item
@@ -204,7 +84,7 @@ class FriendsList extends React.Component {
               12
             }
             sections = {
-              this.state.list
+              this.props.list
             }
             renderSectionHeader={
               ({section})=>{
@@ -300,4 +180,23 @@ const styles = StyleSheet.create({
   }
 })
 
-export default FriendsList;
+// export default FriendsList;
+
+
+
+const mapStateToProps = store => {
+  return {
+    list: store.friendList,
+  }
+}
+
+
+const mapDispatchToProps = dispatch => { 
+  return {
+    set: payload => {
+      dispatch(setFriend(payload))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FriendsList)

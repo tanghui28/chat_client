@@ -42,14 +42,58 @@ import config from './src/config/config';
 import CardStackStyleInterpolator from 'react-navigation-stack/src/views/StackView/StackViewStyleInterpolator'
 
 import Storage from './src/config/storage'
-Storage.storeData('chatList', [
-  {
-    uname: '尼古拉斯赵四',
-    avatar: 'male.png',
-    replyTime: '2019-09-06',
-    lastMsg:'where you from and wher you going'
-  }
-])
+// Storage.storeData('chatList', [
+//   {
+//     uname: '尼古拉斯赵四',
+//     avatar: 'male.png',
+//     replyTime: '2019-09-06',
+//     lastMsg:'where you from and wher you going'
+//   }
+// ])
+
+
+
+// redux  reducers
+import reducer from './src/reducers/index'
+// redux
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+// actions 
+import { setFriend } from './src/actions/index'
+
+const store = createStore(reducer);
+store.dispatch(setFriend(
+  [
+    {
+      title: 'B',
+      data: [{
+          uid: 3,
+          uname: "B小李",
+          avatar: 'male.png',
+          phone: '18161046533'
+        },
+        {
+          uid: 4,
+          uname: "B小李",
+          avatar: 'male.png',
+          phone: '18161046533'
+        },
+        {
+          uid: 4,
+          uname: "B小李",
+          avatar: 'male.png',
+          phone: '18161046533'
+        },
+        {
+          uid: 4,
+          uname: "B小李",
+          avatar: 'male.png',
+          phone: '18161046533'
+        },
+      ]
+    }
+  ]
+))
 
 const bottomTabNavigator = createBottomTabNavigator(
   {
@@ -164,7 +208,9 @@ const AppContainer = createAppContainer(RootNavigator);
 
 const App = () => {
   return (
-    < AppContainer />
+    < Provider store={store} >
+      < AppContainer />
+    </ Provider>
   );
 };
 

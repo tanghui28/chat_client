@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Thu Sep 12 09:36:28 CST 2019
+#Mon Sep 16 10:15:41 CST 2019
 60.set=NATIVE_RESOURCE
 52.set=NATIVE_RESOURCE
 53.base=D\:\\01web\\chat_client\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
