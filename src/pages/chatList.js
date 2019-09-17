@@ -11,11 +11,6 @@ import {
   FlatList
 } from 'react-native';
 
-import {
-  Provider,
-  Toast,
-  SwipeAction
-} from '@ant-design/react-native'
 
 import {
   Iconfont
@@ -33,84 +28,98 @@ class ChatList extends React.Component {
     this.state = {
       list: [
         {
+          user_id :0,
           uname: '尼古拉斯赵四',
           avatar: 'male.png',
           replyTime: '2019-09-06',
           lastMsg:'where you from and wher you going'
         },
         {
+          user_id :0,
           uname: '尼古拉斯赵四',
           avatar: 'male.png',
           replyTime: '2019-09-06',
           lastMsg:'where you from and wher you going'
         },
         {
+          user_id :0,
           uname: '尼古拉斯赵四',
           avatar: 'male.png',
           replyTime: '2019-09-06',
           lastMsg:'where you from and wher you going'
         },
         {
+          user_id :0,
           uname: '尼古拉斯赵四',
           avatar: 'male.png',
           replyTime: '2019-09-06',
           lastMsg:'where you from and wher you going'
         },
         {
+          user_id :0,
           uname: '尼古拉斯赵四',
           avatar: 'male.png',
           replyTime: '2019-09-06',
           lastMsg:'where you from and wher you going'
         },
         {
+          user_id :0,
           uname: '尼古拉斯赵四',
           avatar: 'male.png',
           replyTime: '2019-09-06',
           lastMsg:'where you from and wher you going'
         },
         {
+          user_id :0,
           uname: '尼古拉斯赵四',
           avatar: 'male.png',
           replyTime: '2019-09-06',
           lastMsg:'where you from and wher you going'
         },
         {
+          user_id :0,
           uname: '尼古拉斯赵四',
           avatar: 'male.png',
           replyTime: '2019-09-06',
           lastMsg:'where you from and wher you going'
         },
         {
+          user_id :0,
           uname: '尼古拉斯赵四',
           avatar: 'male.png',
           replyTime: '2019-09-06',
           lastMsg:'where you from and wher you going'
         },
         {
+          user_id :0,
           uname: '尼古拉斯赵四',
           avatar: 'male.png',
           replyTime: '2019-09-06',
           lastMsg:'where you from and wher you going'
         },
         {
+          user_id :0,
           uname: '尼古拉斯赵四',
           avatar: '20.jpeg',
           replyTime: '2019-09-06',
           lastMsg:'where you from and wher you going'
         },
         {
+          user_id :0,
           uname: '尼古拉斯赵四',
           avatar: '20.jpeg',
           replyTime: '2019-09-06',
           lastMsg:'where you from and wher you going'
         },
         {
+          user_id :0,
           uname: '尼古拉斯赵四',
           avatar: '20.jpeg',
           replyTime: '2019-09-06',
           lastMsg:'where you from and wher you going'
         },
         {
+          user_id :0,
           uname: '尼古拉斯赵四',
           avatar: '20.jpeg',
           replyTime: '2019-09-06',
@@ -136,12 +145,12 @@ class ChatList extends React.Component {
 
 
     return (
-      < Provider >
+      < View >
         <Header style={{backgroundColor:config.lightGray}} showIcon={true} title="消息"></Header>
 
         <FlatList
             initialNumToRender={10}
-            data={this.state.list}
+            data={this.props.list}
             keyExtractor = {
               (item,index) => String(index)
             }
@@ -166,7 +175,7 @@ class ChatList extends React.Component {
           ></FlatList>
 
 
-      </ Provider>
+      </ View>
     )
 
   }
@@ -215,9 +224,24 @@ const styles = StyleSheet.create({
 
 
 
-// export default ChatList;
+import { addChatFriend,deleteChatFriend } from '../actions/index'
+
+const mmapStateToProps = store=>{
+  return {
+    list:store.chatList,
+  }
+}
+
+const mapDispatchToProps = dispatch => { 
+  return {
+    addChatFriend: payload => {
+      dispatch(addChatFriend(payload))
+    },
+    deleteChatFriend:payload=>{
+      dispatch(deleteChatFriend(payload))
+    }
+  }
+}
 
 
-
-
-export default connect()(ChatList)
+export default connect(mmapStateToProps,mapDispatchToProps)(ChatList)

@@ -8,10 +8,7 @@ import {
   SectionList,
   Image
 } from 'react-native';
-import {
-  Provider,
-  Toast
-} from '@ant-design/react-native'
+
 import config from '../config/config'
 import Header from '../components/header'
 
@@ -73,7 +70,7 @@ class FriendsList extends React.Component {
   render() { 
 
     return (
-      < Provider >
+
         <View style={styles.container}>
           <Header style={{ backgroundColor: config.lightGray }} showIcon={true} title="通讯录"></Header>
           < SectionList ref={this.sectionList}
@@ -123,7 +120,7 @@ class FriendsList extends React.Component {
           </View>
 
         </View>
-      </ Provider>
+
     )
 
   }

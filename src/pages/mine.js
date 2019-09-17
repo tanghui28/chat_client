@@ -24,7 +24,6 @@ import config from '../config/config';
 class Mine extends React.Component { 
   constructor() { 
     super();
-    this.state = {}
   }
 
 

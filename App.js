@@ -42,14 +42,238 @@ import config from './src/config/config';
 import CardStackStyleInterpolator from 'react-navigation-stack/src/views/StackView/StackViewStyleInterpolator'
 
 import Storage from './src/config/storage'
-// Storage.storeData('chatList', [
-//   {
-//     uname: '尼古拉斯赵四',
-//     avatar: 'male.png',
-//     replyTime: '2019-09-06',
-//     lastMsg:'where you from and wher you going'
-//   }
-// ])
+Storage.setData('friendList', JSON.stringify([
+  {
+    title: 'A',
+    data: [{
+        user_id: 1,
+        uname: "A小王",
+        avatar: 'male.png',
+        phone: '18161046533'
+      },
+      {
+        user_id: 2,
+        uname: "A小唐",
+        avatar: 'male.png',
+        phone: '18161046533'
+      },
+      {
+        user_id: 2,
+        uname: "A小唐",
+        avatar: 'male.png',
+        phone: '18161046533'
+      },
+      {
+        user_id: 2,
+        uname: "A小唐",
+        avatar: 'male.png',
+        phone: '18161046533'
+      },
+    ]
+  },
+  {
+    title: 'B',
+    data: [{
+        user_id: 3,
+        uname: "B小李",
+        avatar: 'male.png',
+        phone: '18161046533'
+      },
+      {
+        user_id: 4,
+        uname: "B小李",
+        avatar: 'male.png',
+        phone: '18161046533'
+      },
+      {
+        user_id: 4,
+        uname: "B小李",
+        avatar: 'male.png',
+        phone: '18161046533'
+      },
+      {
+        user_id: 4,
+        uname: "B小李",
+        avatar: 'male.png',
+        phone: '18161046533'
+      },
+    ]
+  },
+  {
+    title: "C",
+    data: [{
+        user_id: 5,
+        uname: "成龙",
+        avatar: 'male.png',
+        phone: '18161046533'
+      },
+      {
+        user_id: 6,
+        uname: "成龙",
+        avatar: 'male.png',
+        phone: '18161046533'
+      },
+      {
+        user_id: 6,
+        uname: "车龙",
+        avatar: 'male.png',
+        phone: '18161046533'
+      },
+    ]
+  },
+  {
+    title: "D",
+    data: [{
+        user_id: 5,
+        uname: "大龙",
+        avatar: 'male.png'
+      },
+      {
+        user_id: 6,
+        uname: "大龙",
+        avatar: 'male.png'
+      },
+      {
+        user_id: 6,
+        uname: "大龙",
+        avatar: 'male.png'
+      },
+      {
+        user_id: 6,
+        uname: "大龙",
+        avatar: 'male.png'
+      },
+      {
+        user_id: 6,
+        uname: "大龙",
+        avatar: 'male.png'
+      },
+      {
+        user_id: 6,
+        uname: "大龙",
+        avatar: 'male.png'
+      },
+      {
+        user_id: 6,
+        uname: "大龙",
+        avatar: 'male.png'
+      },
+      {
+        user_id: 6,
+        uname: "大龙",
+        avatar: 'male.png'
+      },
+      {
+        user_id: 6,
+        uname: "大龙",
+        avatar: 'male.png'
+      },
+
+    ]
+  },
+]))
+
+Storage.setData('chatList', JSON.stringify([
+  {
+    user_id :0,
+    uname: '尼古拉斯赵四',
+    avatar: 'male.png',
+    replyTime: '2019-09-06',
+    lastMsg:'where you from and wher you going'
+  },
+  {
+    user_id :0,
+    uname: '尼古拉斯赵四',
+    avatar: 'male.png',
+    replyTime: '2019-09-06',
+    lastMsg:'where you from and wher you going'
+  },
+  {
+    user_id :0,
+    uname: '尼古拉斯赵四',
+    avatar: 'male.png',
+    replyTime: '2019-09-06',
+    lastMsg:'where you from and wher you going'
+  },
+  {
+    user_id :0,
+    uname: '尼古拉斯赵四',
+    avatar: 'male.png',
+    replyTime: '2019-09-06',
+    lastMsg:'where you from and wher you going'
+  },
+  {
+    user_id :0,
+    uname: '尼古拉斯赵四',
+    avatar: 'male.png',
+    replyTime: '2019-09-06',
+    lastMsg:'where you from and wher you going'
+  },
+  {
+    user_id :0,
+    uname: '尼古拉斯赵四',
+    avatar: 'male.png',
+    replyTime: '2019-09-06',
+    lastMsg:'where you from and wher you going'
+  },
+  {
+    user_id :0,
+    uname: '尼古拉斯赵四',
+    avatar: 'male.png',
+    replyTime: '2019-09-06',
+    lastMsg:'where you from and wher you going'
+  },
+  {
+    user_id :0,
+    uname: '尼古拉斯赵四',
+    avatar: 'male.png',
+    replyTime: '2019-09-06',
+    lastMsg:'where you from and wher you going'
+  },
+  {
+    user_id :0,
+    uname: '尼古拉斯赵四',
+    avatar: 'male.png',
+    replyTime: '2019-09-06',
+    lastMsg:'where you from and wher you going'
+  },
+  {
+    user_id :0,
+    uname: '尼古拉斯赵四',
+    avatar: 'male.png',
+    replyTime: '2019-09-06',
+    lastMsg:'where you from and wher you going'
+  },
+  {
+    user_id :0,
+    uname: '尼古拉斯赵四',
+    avatar: '20.jpeg',
+    replyTime: '2019-09-06',
+    lastMsg:'where you from and wher you going'
+  },
+  {
+    user_id :0,
+    uname: '尼古拉斯赵四',
+    avatar: '20.jpeg',
+    replyTime: '2019-09-06',
+    lastMsg:'where you from and wher you going'
+  },
+  {
+    user_id :0,
+    uname: '尼古拉斯赵四',
+    avatar: '20.jpeg',
+    replyTime: '2019-09-06',
+    lastMsg:'where you from and wher you going'
+  },
+  {
+    user_id :0,
+    uname: '尼古拉斯赵四',
+    avatar: '20.jpeg',
+    replyTime: '2019-09-06',
+    lastMsg:'where you from and wher you going'
+  },
+]))
+
 
 
 
@@ -59,41 +283,27 @@ import reducer from './src/reducers/index'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 // actions 
-import { setFriend } from './src/actions/index'
+import { setFriend,setChatFriend } from './src/actions/index'
 
 const store = createStore(reducer);
-store.dispatch(setFriend(
-  [
-    {
-      title: 'B',
-      data: [{
-          uid: 3,
-          uname: "B小李",
-          avatar: 'male.png',
-          phone: '18161046533'
-        },
-        {
-          uid: 4,
-          uname: "B小李",
-          avatar: 'male.png',
-          phone: '18161046533'
-        },
-        {
-          uid: 4,
-          uname: "B小李",
-          avatar: 'male.png',
-          phone: '18161046533'
-        },
-        {
-          uid: 4,
-          uname: "B小李",
-          avatar: 'male.png',
-          phone: '18161046533'
-        },
-      ]
-    }
-  ]
-))
+
+// 读取好友列表
+Storage.getData('friendList').then(res=>{
+  if( res != null ){
+    store.dispatch(setFriend(
+      JSON.parse(res)
+    ))
+  }
+})
+
+// 读取聊天列表
+Storage.getData('chatList').then(res=>{
+  if( res != null ){
+    store.dispatch(setChatFriend(
+      JSON.parse(res)
+    ))
+  }
+})
 
 const bottomTabNavigator = createBottomTabNavigator(
   {
@@ -143,13 +353,6 @@ const bottomTabNavigator = createBottomTabNavigator(
 
 const RootNavigator = createStackNavigator(
   {
-    bottomTabNavigator: {
-      screen: bottomTabNavigator,
-      navigationOptions: {
-        gesturesEnabled: true,
-        header: null
-      }
-    },
     Choose: {
       screen: Choose,
       navigationOptions: {
@@ -157,6 +360,14 @@ const RootNavigator = createStackNavigator(
         header: null
       }
     },
+    bottomTabNavigator: {
+      screen: bottomTabNavigator,
+      navigationOptions: {
+        gesturesEnabled: true,
+        header: null
+      }
+    },
+    
     Login: {
       screen: Login,
       navigationOptions: {

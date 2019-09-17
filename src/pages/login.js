@@ -10,6 +10,8 @@ import {
   TouchableOpacity
 } from 'react-native';
 
+import { NavigationActions,StackActions } from 'react-navigation'
+
 import config from '../config/config'
 
 import {
@@ -24,17 +26,23 @@ class Login extends React.Component {
     this.state = {
       uname: '',
       password: '',
-      _password:''
     }
   }
 
   login = () => {
-
     Net('/login', {
       uname: this.state.uname,
       password:this.state.password
     }).then(res => { 
       if (res.success) {
+
+        const  resetAction = StackActions.reset({
+                  index: 0,
+                  actions: [
+                      NavigationActions.navigate({routeName:'bottomTabNavigator'})//要跳转到的页面名字
+                  ]
+              });
+        this.props.navigation.dispatch(resetAction);
 
       } else { 
         Toast.fail(res.info)
@@ -62,7 +70,7 @@ class Login extends React.Component {
       <Provider>
         <View style={[styles.viewContainer]}>
         <TextInput onChangeText={ (uname) => { this.setState({uname}) } } value={this.state.uname} style={ styles.input } placeholder="用户名或手机号" />
-        <TextInput  onChangeText={this.passwordChange}  value={this.state.password} style={ styles.input }  placeholder="密码" />
+        <TextInput   onChangeText={this.passwordChange}  value={this.state.password} style={ styles.input } secureTextEntry={true}  placeholder="密码" />
         
            <TouchableOpacity onPress={this.login} style={styles.regBtn}>
             <Text style={{color:config.whiteFont}}>登录</Text>

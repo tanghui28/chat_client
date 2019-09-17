@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 export default class Storage{
 
-  static async storeData(k,v,fun){
+  static async setData(k,v,fun){
 
     try {
       await AsyncStorage.setItem(k,v);
@@ -11,17 +11,15 @@ export default class Storage{
         fun();
       }
     } catch (error) {
-      
+      console.log(error)
     }
 
   }
 
-  static async getData(k,fun){
+  static async getData(k){
     try {
       let val = await  AsyncStorage.getItem(k);
-      if(typeof fun == "function"){
-        fun(val);
-      }
+      return val;
       
     } catch (error) {
       
