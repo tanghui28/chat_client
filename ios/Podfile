@@ -29,7 +29,6 @@ target 'chat_client' do
 
 
 
-  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
   target 'chat_clientTests' do
     inherit! :search_paths
