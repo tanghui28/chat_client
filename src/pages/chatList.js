@@ -19,8 +19,7 @@ import {
 import config from '../config/config'
 
 import Header from '../components/header'
-//引入connect函数
-import { connect } from 'react-redux'
+
 
 class ChatList extends React.Component { 
   constructor() { 
@@ -159,7 +158,7 @@ class ChatList extends React.Component {
     
                 <TouchableOpacity onPress={this.toChatRoom} activeOpacity={0.85} >
                       <View style={styles.item} >
-                        < Image style={ styles.avatar } source={{uri:'http://192.168.1.21:3000/images/1.jpeg'}}></ Image>
+                        < Image style={ styles.avatar } source={{uri:item.avatar}}></ Image>
                         <View style={styles.itemRight}>
                           <View style={styles.title} >
                             <Text numberOfLines={1} ellipsizeMode="tail">{item.uname}</Text>
@@ -223,10 +222,11 @@ const styles = StyleSheet.create({
 })
 
 
-
+//引入connect函数
+import { connect } from 'react-redux'
 import { addChatFriend,deleteChatFriend } from '../actions/index'
 
-const mmapStateToProps = store=>{
+const mapStateToProps = store=>{
   return {
     list:store.chatList,
   }
@@ -244,4 +244,5 @@ const mapDispatchToProps = dispatch => {
 }
 
 
-export default connect(mmapStateToProps,mapDispatchToProps)(ChatList)
+
+export default connect(mapStateToProps,mapDispatchToProps)(ChatList)

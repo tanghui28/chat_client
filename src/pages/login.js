@@ -1,6 +1,4 @@
-import React, {
-  Fragment
-} from 'react';
+import React from 'react';
 
 import {
   StyleSheet,
@@ -13,6 +11,8 @@ import {
 import { NavigationActions,StackActions } from 'react-navigation'
 
 import config from '../config/config'
+
+import Storage from '../config/storage'
 
 import {
   Provider,
@@ -35,7 +35,9 @@ class Login extends React.Component {
       password:this.state.password
     }).then(res => { 
       if (res.success) {
-
+        console.log(res.data);
+        this.getFriendListFromStorage(res.data.user_id);
+        this.props.login(res.data);
         const  resetAction = StackActions.reset({
                   index: 0,
                   actions: [
@@ -54,6 +56,17 @@ class Login extends React.Component {
     })
 
   };
+
+  getFriendListFromStorage(user_id){
+    Storage.getData('friendList'+user_id).then(res=>{
+      if( res != null ){
+        // store.dispatch(setFriend(
+        //   JSON.parse(res)
+        // ))
+        this.props.setFriend(JSON.parse(res))
+      }
+    })
+  }
 
   passwordChange = (val) => {
 
@@ -111,4 +124,21 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Login;
+import {connect } from 'react-redux'
+import {setMINE,setFriend} from '../actions/index'
+
+const mapDispatchToProps = dispatch => { 
+  return {
+   login:payload=>{
+    dispatch(setMINE(payload))
+   },
+   setFriend:payload=>{
+     dispatch(setFriend(payload))
+   }
+  }
+}
+
+
+
+
+export default connect(null,mapDispatchToProps)(Login);

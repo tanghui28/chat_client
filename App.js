@@ -42,12 +42,12 @@ import config from './src/config/config';
 import CardStackStyleInterpolator from 'react-navigation-stack/src/views/StackView/StackViewStyleInterpolator'
 
 import Storage from './src/config/storage'
-Storage.setData('friendList', JSON.stringify([
+Storage.setData('friendList1', JSON.stringify([
   {
     title: 'A',
     data: [{
         user_id: 1,
-        uname: "A小王",
+        uname: "A小王8",
         avatar: 'male.png',
         phone: '18161046533'
       },
@@ -175,100 +175,100 @@ Storage.setData('friendList', JSON.stringify([
 
 Storage.setData('chatList', JSON.stringify([
   {
-    user_id :0,
+    user_id :1,
     uname: '尼古拉斯赵四',
-    avatar: 'male.png',
+    avatar: 'http://192.168.1.5:3000/images/1.jpeg',
     replyTime: '2019-09-06',
     lastMsg:'where you from and wher you going'
   },
   {
-    user_id :0,
+    user_id :2,
     uname: '尼古拉斯赵四',
-    avatar: 'male.png',
+    avatar: 'http://192.168.1.5:3000/images/2.jpg',
     replyTime: '2019-09-06',
     lastMsg:'where you from and wher you going'
   },
   {
-    user_id :0,
+    user_id :3,
     uname: '尼古拉斯赵四',
-    avatar: 'male.png',
+    avatar: 'http://192.168.1.5:3000/images/3.jpeg',
     replyTime: '2019-09-06',
     lastMsg:'where you from and wher you going'
   },
   {
-    user_id :0,
+    user_id :4,
     uname: '尼古拉斯赵四',
-    avatar: 'male.png',
+    avatar: 'http://192.168.1.5:3000/images/1.jpeg',
     replyTime: '2019-09-06',
     lastMsg:'where you from and wher you going'
   },
   {
-    user_id :0,
+    user_id :5,
     uname: '尼古拉斯赵四',
-    avatar: 'male.png',
+    avatar: 'http://192.168.1.5:3000/images/1.jpeg',
     replyTime: '2019-09-06',
     lastMsg:'where you from and wher you going'
   },
   {
-    user_id :0,
+    user_id :6,
     uname: '尼古拉斯赵四',
-    avatar: 'male.png',
+    avatar: 'http://192.168.1.5:3000/images/1.jpeg',
     replyTime: '2019-09-06',
     lastMsg:'where you from and wher you going'
   },
   {
-    user_id :0,
+    user_id :7,
     uname: '尼古拉斯赵四',
-    avatar: 'male.png',
+    avatar: 'http://192.168.1.5:3000/images/1.jpeg',
     replyTime: '2019-09-06',
     lastMsg:'where you from and wher you going'
   },
   {
-    user_id :0,
+    user_id :8,
     uname: '尼古拉斯赵四',
-    avatar: 'male.png',
+    avatar: 'http://192.168.1.5:3000/images/1.jpegmale.png',
     replyTime: '2019-09-06',
     lastMsg:'where you from and wher you going'
   },
   {
-    user_id :0,
+    user_id :9,
     uname: '尼古拉斯赵四',
-    avatar: 'male.png',
+    avatar: 'http://192.168.1.5:3000/images/1.jpeg',
     replyTime: '2019-09-06',
     lastMsg:'where you from and wher you going'
   },
   {
-    user_id :0,
+    user_id :10,
     uname: '尼古拉斯赵四',
-    avatar: 'male.png',
+    avatar: 'http://192.168.1.5:3000/images/1.jpeg',
     replyTime: '2019-09-06',
     lastMsg:'where you from and wher you going'
   },
   {
-    user_id :0,
+    user_id :11,
     uname: '尼古拉斯赵四',
-    avatar: '20.jpeg',
+    avatar: 'http://192.168.1.5:3000/images/1.jpeg',
     replyTime: '2019-09-06',
     lastMsg:'where you from and wher you going'
   },
   {
-    user_id :0,
+    user_id :12,
     uname: '尼古拉斯赵四',
-    avatar: '20.jpeg',
+    avatar: 'http://192.168.1.5:3000/images/1.jpeg',
     replyTime: '2019-09-06',
     lastMsg:'where you from and wher you going'
   },
   {
-    user_id :0,
+    user_id :13,
     uname: '尼古拉斯赵四',
-    avatar: '20.jpeg',
+    avatar: 'http://192.168.1.5:3000/images/1.jpeg',
     replyTime: '2019-09-06',
     lastMsg:'where you from and wher you going'
   },
   {
-    user_id :0,
+    user_id :14,
     uname: '尼古拉斯赵四',
-    avatar: '20.jpeg',
+    avatar: 'http://192.168.1.5:3000/images/1.jpeg',
     replyTime: '2019-09-06',
     lastMsg:'where you from and wher you going'
   },
@@ -288,13 +288,13 @@ import { setFriend,setChatFriend } from './src/actions/index'
 const store = createStore(reducer);
 
 // 读取好友列表
-Storage.getData('friendList').then(res=>{
-  if( res != null ){
-    store.dispatch(setFriend(
-      JSON.parse(res)
-    ))
-  }
-})
+// Storage.getData('friendList').then(res=>{
+//   if( res != null ){
+//     store.dispatch(setFriend(
+//       JSON.parse(res)
+//     ))
+//   }
+// })
 
 // 读取聊天列表
 Storage.getData('chatList').then(res=>{

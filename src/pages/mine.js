@@ -33,10 +33,10 @@ class Mine extends React.Component {
       < Provider >
         <View style={styles.container}>
           <View style={styles.topInfo}>
-            <Image style={styles.avatar} source={require('../assets/img/20.jpeg')}></Image>
+            <Image style={styles.avatar} source={{uri:this.props.userInfo.avatar}}></Image>
             <View style={styles.rightInfo}>
-              <Text style={styles.topName}>尼古拉斯赵四</Text>
-              <Text style={styles.phone}>手机号:18161046533</Text>
+              <Text style={styles.topName}>{this.props.userInfo.uname}</Text>
+              <Text style={styles.phone}>手机号:{this.props.userInfo.phone}</Text>
             </View>
           </View>
 
@@ -160,4 +160,20 @@ const styles = StyleSheet.create({
 })
 
 
-export default Mine;
+import {connect} from 'react-redux'
+import { deleteMINE } from '../actions/index'
+
+const mapStateToProps =(store)=>{
+  return {
+    userInfo:store.mine
+  }
+}
+const mapDispatchToProps = dispatch => { 
+  return {
+   logout:()=>{
+    dispatch(deleteMINE())
+   }
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Mine);

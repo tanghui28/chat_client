@@ -38,3 +38,5 @@ export const SET_CHAT_RECORD = "SET_CHAT_RECORD";
  */
 //设置登陆用户信息
 export const SET_MINE = "SET_MINE";
+// 退出登录
+export const DELETE_MINE = "DELETE_MINE";

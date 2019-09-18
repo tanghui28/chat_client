@@ -11,4 +11,5 @@ export default combineReducers({
   friendList,
   chatList,
   chatRoom,
+  mine,
 })

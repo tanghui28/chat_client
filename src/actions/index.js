@@ -9,6 +9,7 @@ import {
   DELETE_CHAT_RECORD,
   SET_CHAT_RECORD,
   SET_MINE,
+  DELETE_MINE,
 } from './type'
 
 /**
@@ -76,5 +77,9 @@ export const setChatRecord = payload => ({
 export const setMINE = payload => ({
   type: SET_MINE,
   payload
+});
+export const deleteMINE = () => ({
+  type: SET_MINE,
+  payload:null
 });
 
