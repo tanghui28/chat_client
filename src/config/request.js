@@ -31,11 +31,11 @@ instance.interceptors.response.use( (response)=> {
 
 
 
-export const Net = async (api,params) => { 
+export const Net = async (api,params,config) => { 
 
   return new Promise((resolve,reject) => { 
 
-    instance.post(api, params).then(res => { 
+    instance.post(api, params,config).then(res => { 
       resolve(res.data);
     }).catch(err => { 
       reject(err);
