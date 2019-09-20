@@ -35,9 +35,17 @@ class Login extends React.Component {
       password:this.state.password
     }).then(res => { 
       if (res.success) {
-        console.log(res.data);
+        console.log(res);
         this.getFriendListFromStorage(res.data.user_id);
-        this.props.login(res.data);
+        this.props.login({
+          avatar: res.data.avatar,
+          forbidden: res.data.forbidden,
+          gender: res.data.gender,
+          phone: res.data.phone,
+          token: res.data.token,
+          uname: res.data.uname,
+          user_id: res.data.user_id
+        });
         const  resetAction = StackActions.reset({
                   index: 0,
                   actions: [
