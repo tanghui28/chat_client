@@ -177,16 +177,12 @@ const styles = StyleSheet.create({
   }
 })
 
-// export default FriendsList;
-
-
 
 const mapStateToProps = store => {
   return {
     list: store.friendList,
   }
 }
-
 
 const mapDispatchToProps = dispatch => { 
   return {

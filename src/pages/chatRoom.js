@@ -10,7 +10,6 @@ import {
 } from 'react-native'
 import config from '../config/config'
 import Header from '../components/header'
-import { Config } from '@jest/types';
 
 class ChatRoom extends React.Component { 
   constructor() { 

@@ -36,7 +36,8 @@ class Login extends React.Component {
     }).then(res => { 
       if (res.success) {
         console.log(res);
-        this.getFriendListFromStorage(res.data.user_id);
+        // this.getFriendListFromStorage(res.data.user_id);
+        // dispatch 用户信息
         this.props.login({
           avatar: res.data.avatar,
           forbidden: res.data.forbidden,
@@ -46,6 +47,19 @@ class Login extends React.Component {
           uname: res.data.uname,
           user_id: res.data.user_id
         });
+        Storage.setData('userInfo',JSON.stringify({
+          avatar: res.data.avatar,
+          forbidden: res.data.forbidden,
+          gender: res.data.gender,
+          phone: res.data.phone,
+          token: res.data.token,
+          uname: res.data.uname,
+          user_id: res.data.user_id
+        }))
+        // dispatch
+        this.props.setFriend(res.data.friendList);
+        // 存储friendList
+        Storage.setData('friendList'+res.data.user_id,JSON.stringify(res.data.friendList));
         const  resetAction = StackActions.reset({
                   index: 0,
                   actions: [
@@ -69,9 +83,9 @@ class Login extends React.Component {
     Storage.getData('friendList'+user_id).then(res=>{
       if( res != null ){
         // store.dispatch(setFriend(
-        //   JSON.parse(res)
+        //   res
         // ))
-        this.props.setFriend(JSON.parse(res))
+        this.props.setFriend(res)
       }
     })
   }
@@ -134,6 +148,7 @@ const styles = StyleSheet.create({
 
 import {connect } from 'react-redux'
 import {setMINE,setFriend} from '../actions/index'
+import store from '../store/store';
 
 const mapDispatchToProps = dispatch => { 
   return {

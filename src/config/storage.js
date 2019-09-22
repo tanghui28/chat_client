@@ -19,7 +19,12 @@ export default class Storage{
   static async getData(k){
     try {
       let val = await  AsyncStorage.getItem(k);
-      return val;
+      if(val){
+        JSON.parse(val)
+      }else {
+        return null;
+      }
+      
       
     } catch (error) {
       

@@ -32,6 +32,7 @@ import Mine from './src/pages/mine'
 import UserDetail from './src/pages/userDetail'
 import ModifyRemark from './src/pages/modifyRemark'
 import ChatRoom from './src/pages/chatRoom'
+import Wait from './src/pages/wait'
 
 import {  createAppContainer} from 'react-navigation'
 import {  createStackNavigator} from 'react-navigation-stack';
@@ -278,20 +279,21 @@ Storage.setData('chatList', JSON.stringify([
 
 
 // redux  reducers
-import reducer from './src/reducers/index'
-// redux
-import { createStore } from 'redux'
+// import reducer from './src/reducers/index'
+// // redux
+// import { createStore } from 'redux'
 import { Provider } from 'react-redux'
-// actions 
+// // actions 
 import { setFriend,setChatFriend } from './src/actions/index'
 
-const store = createStore(reducer);
+// const store = createStore(reducer);
+import store from './src/store/store'
 
 // 读取好友列表
 // Storage.getData('friendList').then(res=>{
 //   if( res != null ){
 //     store.dispatch(setFriend(
-//       JSON.parse(res)
+//       res
 //     ))
 //   }
 // })
@@ -300,7 +302,7 @@ const store = createStore(reducer);
 Storage.getData('chatList').then(res=>{
   if( res != null ){
     store.dispatch(setChatFriend(
-      JSON.parse(res)
+      res
     ))
   }
 })
@@ -353,6 +355,13 @@ const bottomTabNavigator = createBottomTabNavigator(
 
 const RootNavigator = createStackNavigator(
   {
+    Wait: {
+      screen: Wait,
+      navigationOptions: {
+        gesturesEnabled: true,
+        header: null
+      }
+    },
     Choose: {
       screen: Choose,
       navigationOptions: {
@@ -425,8 +434,6 @@ const App = () => {
   );
 };
 
-const styles = StyleSheet.create({
 
-});
 
 export default App;
