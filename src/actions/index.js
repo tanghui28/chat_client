@@ -10,6 +10,7 @@ import {
   SET_CHAT_RECORD,
   SET_MINE,
   DELETE_MINE,
+  SET_TALK_TO,
 } from './type'
 
 /**
@@ -69,6 +70,13 @@ export const setChatRecord = payload => ({
   type: SET_CHAT_RECORD,
   payload
 });
+
+
+export const setChatTo = payload => ({ 
+  type: SET_TALK_TO,
+  payload
+})
+
 
 
 /**

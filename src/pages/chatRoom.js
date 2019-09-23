@@ -11,6 +11,8 @@ import {
 import config from '../config/config'
 import Header from '../components/header'
 
+import Storage from '../config/storage'
+
 class ChatRoom extends React.Component { 
   constructor() { 
     super();
@@ -108,6 +110,20 @@ class ChatRoom extends React.Component {
   back = () => {
     this.props.navigation.goBack();
   };
+  componentWillMount() { 
+    //读取聊天记录
+    console.log(this.props.talkUserInfo)
+    Storage.getData(this.props.talkUserInfo.user_id + 'chatRoom').then(res => { 
+      this.setState({
+        messages:res
+      })
+    })
+
+
+  }
+  componentDidMount() { 
+
+  }
 
   render() { 
     return (
@@ -262,6 +278,13 @@ const styles = StyleSheet.create({
 })
 
 
+import {connect} from 'react-redux'
+
+const mapStateToProps = store => { 
+  return {
+    talkUserInfo: store.talkUserInfo
+  }
+}
 
 
-export default ChatRoom;
+export default connect(mapStateToProps)(ChatRoom);

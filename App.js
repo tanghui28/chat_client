@@ -43,237 +43,204 @@ import config from './src/config/config';
 import CardStackStyleInterpolator from 'react-navigation-stack/src/views/StackView/StackViewStyleInterpolator'
 
 import Storage from './src/config/storage'
-Storage.setData('friendList1', JSON.stringify([
-  {
-    title: 'A',
-    data: [{
-        user_id: 1,
-        uname: "A小王8",
-        avatar: 'male.png',
-        phone: '18161046533'
-      },
-      {
-        user_id: 2,
-        uname: "A小唐",
-        avatar: 'male.png',
-        phone: '18161046533'
-      },
-      {
-        user_id: 2,
-        uname: "A小唐",
-        avatar: 'male.png',
-        phone: '18161046533'
-      },
-      {
-        user_id: 2,
-        uname: "A小唐",
-        avatar: 'male.png',
-        phone: '18161046533'
-      },
-    ]
-  },
-  {
-    title: 'B',
-    data: [{
-        user_id: 3,
-        uname: "B小李",
-        avatar: 'male.png',
-        phone: '18161046533'
-      },
-      {
-        user_id: 4,
-        uname: "B小李",
-        avatar: 'male.png',
-        phone: '18161046533'
-      },
-      {
-        user_id: 4,
-        uname: "B小李",
-        avatar: 'male.png',
-        phone: '18161046533'
-      },
-      {
-        user_id: 4,
-        uname: "B小李",
-        avatar: 'male.png',
-        phone: '18161046533'
-      },
-    ]
-  },
-  {
-    title: "C",
-    data: [{
-        user_id: 5,
-        uname: "成龙",
-        avatar: 'male.png',
-        phone: '18161046533'
-      },
-      {
-        user_id: 6,
-        uname: "成龙",
-        avatar: 'male.png',
-        phone: '18161046533'
-      },
-      {
-        user_id: 6,
-        uname: "车龙",
-        avatar: 'male.png',
-        phone: '18161046533'
-      },
-    ]
-  },
-  {
-    title: "D",
-    data: [{
-        user_id: 5,
-        uname: "大龙",
-        avatar: 'male.png'
-      },
-      {
-        user_id: 6,
-        uname: "大龙",
-        avatar: 'male.png'
-      },
-      {
-        user_id: 6,
-        uname: "大龙",
-        avatar: 'male.png'
-      },
-      {
-        user_id: 6,
-        uname: "大龙",
-        avatar: 'male.png'
-      },
-      {
-        user_id: 6,
-        uname: "大龙",
-        avatar: 'male.png'
-      },
-      {
-        user_id: 6,
-        uname: "大龙",
-        avatar: 'male.png'
-      },
-      {
-        user_id: 6,
-        uname: "大龙",
-        avatar: 'male.png'
-      },
-      {
-        user_id: 6,
-        uname: "大龙",
-        avatar: 'male.png'
-      },
-      {
-        user_id: 6,
-        uname: "大龙",
-        avatar: 'male.png'
-      },
 
-    ]
-  },
-]))
 
 Storage.setData('chatList', JSON.stringify([
   {
-    user_id :1,
-    uname: '尼古拉斯赵四',
-    avatar: 'http://192.168.1.5:3000/images/1.jpeg',
-    replyTime: '2019-09-06',
-    lastMsg:'where you from and wher you going'
-  },
-  {
     user_id :2,
-    uname: '尼古拉斯赵四',
-    avatar: 'http://192.168.1.5:3000/images/2.jpg',
+    uname: '王呈祥',
+    remark: '王呈祥',
+    avatar: 'http://192.168.1.21:3000/images/1.jpeg',
     replyTime: '2019-09-06',
     lastMsg:'where you from and wher you going'
   },
   {
     user_id :3,
-    uname: '尼古拉斯赵四',
-    avatar: 'http://192.168.1.5:3000/images/3.jpeg',
+    uname: 'RoseTin',
+    remark: 'RoseTin',
+    avatar: 'http://192.168.1.21:3000/images/2.jpg',
     replyTime: '2019-09-06',
     lastMsg:'where you from and wher you going'
   },
   {
     user_id :4,
-    uname: '尼古拉斯赵四',
-    avatar: 'http://192.168.1.5:3000/images/1.jpeg',
+    uname: '王重阳',
+    remark: '王重阳',
+    avatar: 'http://192.168.1.21:3000/images/3.jpeg',
     replyTime: '2019-09-06',
     lastMsg:'where you from and wher you going'
   },
   {
     user_id :5,
-    uname: '尼古拉斯赵四',
-    avatar: 'http://192.168.1.5:3000/images/1.jpeg',
+    uname: 'TimCook',
+    remark: 'TimCook',
+    avatar: 'http://192.168.1.21:3000/images/1.jpeg',
     replyTime: '2019-09-06',
     lastMsg:'where you from and wher you going'
   },
   {
     user_id :6,
-    uname: '尼古拉斯赵四',
-    avatar: 'http://192.168.1.5:3000/images/1.jpeg',
+    uname: 'A小王',
+    remark: 'A小王',
+    avatar: 'http://192.168.1.21:3000/images/1.jpeg',
     replyTime: '2019-09-06',
     lastMsg:'where you from and wher you going'
   },
   {
     user_id :7,
-    uname: '尼古拉斯赵四',
-    avatar: 'http://192.168.1.5:3000/images/1.jpeg',
+    uname: 'A小唐',
+    remark: 'A小唐',
+    avatar: 'http://192.168.1.21:3000/images/1.jpeg',
     replyTime: '2019-09-06',
     lastMsg:'where you from and wher you going'
   },
   {
     user_id :8,
-    uname: '尼古拉斯赵四',
-    avatar: 'http://192.168.1.5:3000/images/1.jpegmale.png',
+    uname: 'A小阳',
+    remark: 'A小阳',
+    avatar: 'http://192.168.1.21:3000/images/1.jpeg',
     replyTime: '2019-09-06',
     lastMsg:'where you from and wher you going'
   },
   {
     user_id :9,
-    uname: '尼古拉斯赵四',
-    avatar: 'http://192.168.1.5:3000/images/1.jpeg',
+    uname: 'A小平',
+    remark: 'A小平',
+    avatar: 'http://192.168.1.21:3000/images/1.jpegmale.png',
     replyTime: '2019-09-06',
     lastMsg:'where you from and wher you going'
   },
   {
     user_id :10,
-    uname: '尼古拉斯赵四',
-    avatar: 'http://192.168.1.5:3000/images/1.jpeg',
+    uname: 'B小一',
+    remark: 'B小一',
+    avatar: 'http://192.168.1.21:3000/images/1.jpeg',
     replyTime: '2019-09-06',
     lastMsg:'where you from and wher you going'
   },
   {
     user_id :11,
-    uname: '尼古拉斯赵四',
-    avatar: 'http://192.168.1.5:3000/images/1.jpeg',
+    uname: 'B小二',
+    remark: 'B小二',
+    avatar: 'http://192.168.1.21:3000/images/1.jpeg',
     replyTime: '2019-09-06',
     lastMsg:'where you from and wher you going'
   },
   {
     user_id :12,
-    uname: '尼古拉斯赵四',
-    avatar: 'http://192.168.1.5:3000/images/1.jpeg',
+    uname: 'B小三',
+    remark: 'B小三',
+    avatar: 'http://192.168.1.21:3000/images/1.jpeg',
     replyTime: '2019-09-06',
     lastMsg:'where you from and wher you going'
   },
   {
     user_id :13,
-    uname: '尼古拉斯赵四',
-    avatar: 'http://192.168.1.5:3000/images/1.jpeg',
+    uname: 'C小四',
+    remark: 'C小四',
+    avatar: 'http://192.168.1.21:3000/images/1.jpeg',
     replyTime: '2019-09-06',
     lastMsg:'where you from and wher you going'
   },
   {
     user_id :14,
-    uname: '尼古拉斯赵四',
-    avatar: 'http://192.168.1.5:3000/images/1.jpeg',
+    uname: 'C小都',
+    remark: 'C小都',
+    avatar: 'http://192.168.1.21:3000/images/1.jpeg',
+    replyTime: '2019-09-06',
+    lastMsg:'where you from and wher you going'
+  },
+  {
+    user_id :15,
+    uname: 'C小哦',
+    remark: 'C小哦',
+    avatar: 'http://192.168.1.21:3000/images/1.jpeg',
     replyTime: '2019-09-06',
     lastMsg:'where you from and wher you going'
   },
 ]))
+
+
+// 示例存储 聊天信息
+Storage.setData('2chatRoom', JSON.stringify(
+  [
+    {
+      text: '你好吗ffffff?',
+      type: 0,
+      time: 1568098926233
+    },
+    {
+      text: '我很好!',
+      type: 1,
+      time: 1568098926234
+    },
+    {
+      text: '你叫什么名字?',
+      type: 0,
+      time: 1568098926235
+    },
+    {
+      text: '尼古拉斯赵四',
+      type: 1,
+      time: 1568098926236
+    },
+    {
+      text: '你是明星吗?',
+      type: 0,
+      time: 1568098926237
+    },
+    {
+      text: '为什么名字那么难听?',
+      type: 0,
+      time: 1568098926238
+    },
+    {
+      text: '怎么不说话了?怎么不说话啊?怎么不说话啊?怎么不说话啊怎么不说话啊怎么不说话啊',
+      type: 0,
+      time: 1568098926238
+    },
+    {
+      text: '说话啊',
+      type: 0,
+      time: 1568098926240
+    },
+    {
+      text: '哦',
+      type: 1,
+      time: 1568098926242
+    },
+    {
+      text: '哦',
+      type: 1,
+      time: 1568098926242
+    },
+    {
+      text: '哦',
+      type: 1,
+      time: 1568098926242
+    },
+    {
+      text: '哦',
+      type: 1,
+      time: 1568098926242
+    },
+    {
+      text: '哦',
+      type: 1,
+      time: 1568098926242
+    },
+    {
+      text: '哦',
+      type: 1,
+      time: 1568098926242
+    },
+    {
+      text: '哦',
+      type: 1,
+      time: 1568098926242
+    },
+  ]
+))
 
 
 

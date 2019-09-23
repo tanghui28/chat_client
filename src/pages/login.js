@@ -59,7 +59,7 @@ class Login extends React.Component {
         // dispatch
         this.props.setFriend(res.data.friendList);
         // 存储friendList
-        Storage.setData('friendList'+res.data.user_id,JSON.stringify(res.data.friendList));
+        Storage.setData('friendList',JSON.stringify(res.data.friendList));
         const  resetAction = StackActions.reset({
                   index: 0,
                   actions: [

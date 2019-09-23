@@ -1,22 +1,25 @@
 import axios from 'axios'
 import Storage from './storage'
- Storage.getData('userInfo');
 
 const instance = axios.create({
-  baseURL: 'http://192.168.1.5:3000',
+  baseURL: 'http://192.168.1.21:3000',
   timeout: 3000,
   headers: {
     'Content-Type':'application/json',
-    'token':Storage.getData('userInfo').then(res=>{
-      return res;
-    })
   }
 })
 
 
 // 请求拦截器
-instance.interceptors.request.use( (config) =>{
+instance.interceptors.request.use( async(config) =>{
 
+  let token = null;
+  await Storage.getData('userInfo').then(res => { 
+    if (res && res.token) { 
+      token = res.token;
+    }
+  });
+  config.headers.token = token;
   return config;
 },  (error)=> {
 
@@ -29,7 +32,7 @@ instance.interceptors.response.use( (response)=> {
   return response;
 
 }, (error) => { 
-
+    console.log(error);
     if(error.message.includes('timeout')){   // 判断请求异常信息中是否含有超时timeout字符串
       console.log("网络超时", error);
       return Promise.reject(error);   

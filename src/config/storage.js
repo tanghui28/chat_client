@@ -18,9 +18,9 @@ export default class Storage{
 
   static async getData(k){
     try {
-      let val = await  AsyncStorage.getItem(k);
+      let val = await AsyncStorage.getItem(k);
       if(val){
-        JSON.parse(val)
+        return JSON.parse(val)
       }else {
         return null;
       }

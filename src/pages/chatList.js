@@ -25,106 +25,7 @@ class ChatList extends React.Component {
   constructor() { 
     super();
     this.state = {
-      list: [
-        {
-          user_id :0,
-          uname: '尼古拉斯赵四',
-          avatar: 'male.png',
-          replyTime: '2019-09-06',
-          lastMsg:'where you from and wher you going'
-        },
-        {
-          user_id :0,
-          uname: '尼古拉斯赵四',
-          avatar: 'male.png',
-          replyTime: '2019-09-06',
-          lastMsg:'where you from and wher you going'
-        },
-        {
-          user_id :0,
-          uname: '尼古拉斯赵四',
-          avatar: 'male.png',
-          replyTime: '2019-09-06',
-          lastMsg:'where you from and wher you going'
-        },
-        {
-          user_id :0,
-          uname: '尼古拉斯赵四',
-          avatar: 'male.png',
-          replyTime: '2019-09-06',
-          lastMsg:'where you from and wher you going'
-        },
-        {
-          user_id :0,
-          uname: '尼古拉斯赵四',
-          avatar: 'male.png',
-          replyTime: '2019-09-06',
-          lastMsg:'where you from and wher you going'
-        },
-        {
-          user_id :0,
-          uname: '尼古拉斯赵四',
-          avatar: 'male.png',
-          replyTime: '2019-09-06',
-          lastMsg:'where you from and wher you going'
-        },
-        {
-          user_id :0,
-          uname: '尼古拉斯赵四',
-          avatar: 'male.png',
-          replyTime: '2019-09-06',
-          lastMsg:'where you from and wher you going'
-        },
-        {
-          user_id :0,
-          uname: '尼古拉斯赵四',
-          avatar: 'male.png',
-          replyTime: '2019-09-06',
-          lastMsg:'where you from and wher you going'
-        },
-        {
-          user_id :0,
-          uname: '尼古拉斯赵四',
-          avatar: 'male.png',
-          replyTime: '2019-09-06',
-          lastMsg:'where you from and wher you going'
-        },
-        {
-          user_id :0,
-          uname: '尼古拉斯赵四',
-          avatar: 'male.png',
-          replyTime: '2019-09-06',
-          lastMsg:'where you from and wher you going'
-        },
-        {
-          user_id :0,
-          uname: '尼古拉斯赵四',
-          avatar: '20.jpeg',
-          replyTime: '2019-09-06',
-          lastMsg:'where you from and wher you going'
-        },
-        {
-          user_id :0,
-          uname: '尼古拉斯赵四',
-          avatar: '20.jpeg',
-          replyTime: '2019-09-06',
-          lastMsg:'where you from and wher you going'
-        },
-        {
-          user_id :0,
-          uname: '尼古拉斯赵四',
-          avatar: '20.jpeg',
-          replyTime: '2019-09-06',
-          lastMsg:'where you from and wher you going'
-        },
-        {
-          user_id :0,
-          uname: '尼古拉斯赵四',
-          avatar: '20.jpeg',
-          replyTime: '2019-09-06',
-          lastMsg:'where you from and wher you going'
-        },
-      ]
+
     };
   }
 
@@ -136,7 +37,12 @@ class ChatList extends React.Component {
 
   }
 
-  toChatRoom = () => { 
+  toChatRoom = (user_id,remark,avatar) => { 
+    this.props.setChatTo({
+      user_id,
+      remark,
+      avatar
+    })
     this.props.navigation.navigate('ChatRoom');
   };
 
@@ -156,12 +62,12 @@ class ChatList extends React.Component {
             renderItem={({ item, index }) => { 
               return (
     
-                <TouchableOpacity onPress={this.toChatRoom} activeOpacity={0.85} >
+                <TouchableOpacity onPress={() => { this.toChatRoom(item.user_id, item.remark, item.avatar) }} activeOpacity={0.85} >
                       <View style={styles.item} >
                         < Image style={ styles.avatar } source={{uri:item.avatar}}></ Image>
                         <View style={styles.itemRight}>
                           <View style={styles.title} >
-                            <Text numberOfLines={1} ellipsizeMode="tail">{item.uname}</Text>
+                            <Text numberOfLines={1} ellipsizeMode="tail">{item.remark}</Text>
                             <Text style={styles.replyTime}>{item.replyTime}</Text>
                           </View>
                           <Text style={styles.lastMsg} numberOfLines={1} ellipsizeMode="tail">{item.lastMsg}</Text>
@@ -224,7 +130,7 @@ const styles = StyleSheet.create({
 
 //引入connect函数
 import { connect } from 'react-redux'
-import { addChatFriend,deleteChatFriend } from '../actions/index'
+import { addChatFriend, deleteChatFriend, setChatTo } from '../actions/index'
 
 const mapStateToProps = store=>{
   return {
@@ -235,10 +141,13 @@ const mapStateToProps = store=>{
 const mapDispatchToProps = dispatch => { 
   return {
     addChatFriend: payload => {
-      dispatch(addChatFriend(payload))
+      dispatch(addChatFriend(payload));
     },
     deleteChatFriend:payload=>{
-      dispatch(deleteChatFriend(payload))
+      dispatch(deleteChatFriend(payload));
+    },
+    setChatTo: payload => { 
+      dispatch(setChatTo(payload));
     }
   }
 }

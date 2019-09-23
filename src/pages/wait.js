@@ -28,21 +28,20 @@ class Wait extends React.Component{
             NavigationActions.navigate({routeName:'bottomTabNavigator'})//要跳转到的页面名字
         ]
     });
-    console.log(111)
+
     Storage.getData('userInfo').then(res=>{
-      console.log(res)
+
       if(res && res.token){
-        console.log(res)
         Net('isLogin',{
           token:res.token
         }).then(data=>{
-          console.log(data);
-          if(data.success){
+          // console.log(data);
+          if (data.success) {
+            this.getFriendList();
             this.props.setMine(res);
-            console.log('已登录');
             this.props.navigation.dispatch(toMain);
           }else{
-            console.log('未登录');
+
             this.props.navigation.dispatch(toChoose);
           }
 
@@ -56,8 +55,17 @@ class Wait extends React.Component{
 
 
     }).catch(err=>{
-      console.log(err);
+
       this.props.navigation.dispatch(toChoose);
+    })
+  }
+
+  // 从服务器获取好友列表
+  getFriendList() { 
+    Net('friendList', {}).then(res => { 
+      if (res.success) { 
+        this.props.setFriend(res.data);
+      }
     })
   }
 
@@ -83,13 +91,16 @@ const styles = StyleSheet.create({
 })
 
 import {connect} from 'react-redux'
-import {setMINE} from '../actions/index'
+import { setMINE, setFriend} from '../actions/index'
 
 const mapDispatchToProps = dispatch =>{
   return {
 
     setMine:payload=>{
       dispatch(setMINE(payload))
+    },
+    setFriend: payload => { 
+      dispatch(setFriend(payload))
     }
 
   }
