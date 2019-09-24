@@ -47,122 +47,43 @@ import Storage from './src/config/storage'
 
 Storage.setData('chatList', JSON.stringify([
   {
-    user_id :2,
-    uname: '王呈祥',
-    remark: '王呈祥',
-    avatar: 'http://192.168.1.21:3000/images/1.jpeg',
-    replyTime: '2019-09-06',
-    lastMsg:'where you from and wher you going'
-  },
-  {
-    user_id :3,
-    uname: 'RoseTin',
-    remark: 'RoseTin',
-    avatar: 'http://192.168.1.21:3000/images/2.jpg',
-    replyTime: '2019-09-06',
-    lastMsg:'where you from and wher you going'
-  },
-  {
-    user_id :4,
-    uname: '王重阳',
-    remark: '王重阳',
-    avatar: 'http://192.168.1.21:3000/images/3.jpeg',
-    replyTime: '2019-09-06',
-    lastMsg:'where you from and wher you going'
-  },
-  {
-    user_id :5,
-    uname: 'TimCook',
-    remark: 'TimCook',
-    avatar: 'http://192.168.1.21:3000/images/1.jpeg',
-    replyTime: '2019-09-06',
-    lastMsg:'where you from and wher you going'
-  },
-  {
     user_id :6,
-    uname: 'A小王',
     remark: 'A小王',
-    avatar: 'http://192.168.1.21:3000/images/1.jpeg',
+    avatar: 'http://192.168.1.21:3000/images/6.jpeg',
     replyTime: '2019-09-06',
-    lastMsg:'where you from and wher you going'
+    lastMsg: '',
+    unread:1
   },
   {
     user_id :7,
-    uname: 'A小唐',
     remark: 'A小唐',
-    avatar: 'http://192.168.1.21:3000/images/1.jpeg',
+    avatar: 'http://192.168.1.21:3000/images/7.jpeg',
     replyTime: '2019-09-06',
-    lastMsg:'where you from and wher you going'
+    lastMsg: '',
+    unread:1
   },
   {
     user_id :8,
-    uname: 'A小阳',
     remark: 'A小阳',
-    avatar: 'http://192.168.1.21:3000/images/1.jpeg',
+    avatar: 'http://192.168.1.21:3000/images/8.jpeg',
     replyTime: '2019-09-06',
-    lastMsg:'where you from and wher you going'
+    lastMsg: '',
+    unread:0
   },
   {
     user_id :9,
-    uname: 'A小平',
     remark: 'A小平',
-    avatar: 'http://192.168.1.21:3000/images/1.jpegmale.png',
+    avatar: 'http://192.168.1.21:3000/images/9.jpeg',
     replyTime: '2019-09-06',
-    lastMsg:'where you from and wher you going'
+    lastMsg: '',
+    unread:0
   },
-  {
-    user_id :10,
-    uname: 'B小一',
-    remark: 'B小一',
-    avatar: 'http://192.168.1.21:3000/images/1.jpeg',
-    replyTime: '2019-09-06',
-    lastMsg:'where you from and wher you going'
-  },
-  {
-    user_id :11,
-    uname: 'B小二',
-    remark: 'B小二',
-    avatar: 'http://192.168.1.21:3000/images/1.jpeg',
-    replyTime: '2019-09-06',
-    lastMsg:'where you from and wher you going'
-  },
-  {
-    user_id :12,
-    uname: 'B小三',
-    remark: 'B小三',
-    avatar: 'http://192.168.1.21:3000/images/1.jpeg',
-    replyTime: '2019-09-06',
-    lastMsg:'where you from and wher you going'
-  },
-  {
-    user_id :13,
-    uname: 'C小四',
-    remark: 'C小四',
-    avatar: 'http://192.168.1.21:3000/images/1.jpeg',
-    replyTime: '2019-09-06',
-    lastMsg:'where you from and wher you going'
-  },
-  {
-    user_id :14,
-    uname: 'C小都',
-    remark: 'C小都',
-    avatar: 'http://192.168.1.21:3000/images/1.jpeg',
-    replyTime: '2019-09-06',
-    lastMsg:'where you from and wher you going'
-  },
-  {
-    user_id :15,
-    uname: 'C小哦',
-    remark: 'C小哦',
-    avatar: 'http://192.168.1.21:3000/images/1.jpeg',
-    replyTime: '2019-09-06',
-    lastMsg:'where you from and wher you going'
-  },
+
 ]))
 
 
-// 示例存储 聊天信息
-Storage.setData('2chatRoom', JSON.stringify(
+// 示例存储 聊天信息  uesr_id+'charRmom'
+Storage.setData('6chatRoom', JSON.stringify(
   [
     {
       text: '你好吗ffffff?',
@@ -312,6 +233,9 @@ const bottomTabNavigator = createBottomTabNavigator(
   },
   {
     tabBarOptions: {
+      style: {
+        height:50
+      },
       activeTintColor: config.primaryColor,
       inactiveTintColor: config.darkGray
     }

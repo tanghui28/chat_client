@@ -62,10 +62,10 @@ const styles = StyleSheet.create({
   bottomView: {
     flexDirection: "row",
     justifyContent: 'space-around',
-    paddingBottom:60
+    paddingBottom:100
   },
   leftBtn: {
-    width: 100,
+    width: 140,
     height: 40,
     backgroundColor: '#1D83A2',
     justifyContent: 'center',
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     color: '#fff'
   },
   rightBtn: {
-    width: 100,
+    width: 140,
     height: 40,
     backgroundColor: config.btnPrimaryColor,
     justifyContent: 'center',

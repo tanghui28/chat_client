@@ -95,13 +95,13 @@ class FriendsList extends React.Component {
               ({item,index,section})=>{
                 return (
                   <TouchableOpacity onPress={() => {  this.toDetail(item) } } TouchableOpacity={0.9}>
-                  <View style={styles.item} >
-                    <Image style={styles.avatar} source={require('../assets/img/20.jpeg')}></Image>
-                    <View style={styles.uname}>
-                      <Text numberOfLines={1} ellipsizeMode="tail">{item.uname}</Text>
+                    <View style={styles.item} >
+                      <Image style={styles.avatar} source={{uri:item.avatar}}></Image>
+                      <View style={styles.uname}>
+                        <Text numberOfLines={1} ellipsizeMode="tail">{item.friend_remark}</Text>
+                      </View>
+  
                     </View>
- 
-                  </View>
                   </TouchableOpacity>
                 )
               }
@@ -142,8 +142,8 @@ const styles = StyleSheet.create({
 
   },
   avatar:{
-    width: 50,
-    height:50,
+    width: 40,
+    height:40,
     borderRadius:6
   },
   item: {
@@ -171,7 +171,8 @@ const styles = StyleSheet.create({
   },
   rightBarText:{
     fontSize:10,
-    paddingRight:6,
+    paddingRight: 6,
+    paddingLeft:6,
     paddingTop:3,
     paddingBottom:3
   }

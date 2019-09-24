@@ -32,12 +32,36 @@ class UserDetail extends React.Component {
   };
 
   componentWillMount() { 
+    console.log(this.props.navigation.state.params)
     this.setState({
       userInfo:this.props.navigation.state.params
     })
   }
 
   toChatRoom = () => {
+    console.log(this.props.chatList);
+    let isChatting = this.props.chatList.some((item,i) => { 
+
+      return item.user_id == this.state.userInfo.friend_id;
+
+    })
+    // 聊天列表中没有改用户 , 则创建聊天缩略信息
+    if (!isChatting) { 
+      this.props.addChatFriend({
+        user_id: this.state.userInfo.friend_id,
+        remark: this.state.userInfo.friend_remark,
+        avatar: this.state.userInfo.avatar,
+        replyTime: '',
+        lastMsg: '',
+        unread: 0
+      })
+    }
+    
+    this.props.setChatTo({
+      user_id: this.state.userInfo.friend_id,
+      remark: this.state.userInfo.friend_remark,
+      avatar: this.state.userInfo.avatar,
+    })
     this.props.navigation.navigate('ChatRoom')
   };
 
@@ -47,7 +71,7 @@ class UserDetail extends React.Component {
 
         <Header style={{ backgroundColor: '#fff' }} backFun={this.back}  showBack={true}  ></Header>
         <View style={styles.topInfo}>
-          <Image style={styles.avatar} source={require('../assets/img/20.jpeg')}></Image>
+          <Image style={styles.avatar} source={{uri:this.state.userInfo.avatar}}></Image>
           <View style={styles.rightInfo}>
             <Text style={styles.topName}>{this.state.userInfo.uname}</Text>
             {
@@ -155,4 +179,26 @@ const styles = StyleSheet.create({
   }
 })
 
-export default UserDetail;
+
+import { connect } from 'react-redux'
+
+import { addChatFriend, setChatTo } from '../actions/index'
+
+const mapStateToProps = store => { 
+  return {
+    chatList:store.chatList
+  }
+}
+
+const mapDispatchTOProps = dispatch => { 
+  return {
+    addChatFriend: payload => { 
+      dispatch(addChatFriend(payload))
+    },
+    setChatTo: payload => {
+      dispatch(setChatTo(payload));
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchTOProps)(UserDetail);

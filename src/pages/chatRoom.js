@@ -6,7 +6,8 @@ import {
   StyleSheet,
   TextInput,
   FlatList,
-  Image
+  Image,
+  Keyboard,
 } from 'react-native'
 import config from '../config/config'
 import Header from '../components/header'
@@ -16,6 +17,8 @@ import Storage from '../config/storage'
 class ChatRoom extends React.Component { 
   constructor() { 
     super();
+    this.flatList = React.createRef();
+
     this.state = {
 
       userInfo: {
@@ -25,7 +28,7 @@ class ChatRoom extends React.Component {
         phone: '18161046533'
       },
       //type 0对方     1自己
-      messages: [
+      /* messages: [
         {
           text: '你好吗?',
           type: 0,
@@ -101,7 +104,9 @@ class ChatRoom extends React.Component {
           type: 1,
           time: 1568098926242
         },
-      ]
+      ], */
+      messages:[],
+      msg:''
 
     };
   }
@@ -112,24 +117,100 @@ class ChatRoom extends React.Component {
   };
   componentWillMount() { 
     //读取聊天记录
-    console.log(this.props.talkUserInfo)
     Storage.getData(this.props.talkUserInfo.user_id + 'chatRoom').then(res => { 
-      this.setState({
-        messages:res
-      })
+
+      if (res) { 
+        this.setState({
+          messages: res
+        }, () => {
+            this.modifyChatList();
+        })
+      }
+      
     })
 
 
   }
   componentDidMount() { 
 
+    this.KeyboardDidShow = Keyboard.addListener('keyboardDidShow', () => { 
+      setTimeout(() => {
+        this.flatList.current.scrollToEnd();
+      }, 0);
+    })
+
+  }
+  componentWillUnmount() { 
+    // 移除键盘监听
+    this.KeyboardDidShow.remove();
+  
+  }
+
+  // 发送消息
+  sendMsg = () => { 
+    if (this.state.msg === "") { 
+      return;
+    }
+    this.setState({
+      messages: [...this.state.messages, {
+        text: this.state.msg,
+        type: 1,
+        time: Date.now()
+      }],
+      msg:''
+    }, () => { 
+        this.saveMessages();
+        this.modifyChatList();
+        setTimeout(() => {
+          this.flatList.current.scrollToEnd();
+        }, 0);
+    })
+    
+  }
+
+  // 存储数据
+  saveMessages(){ 
+
+    Storage.setData(this.props.talkUserInfo.user_id + 'chatRoom', JSON.stringify(this.state.messages))
+
+  }
+
+  // 修改当前聊天对象的聊天缩略信息(chatList显示内容)
+  modifyChatList() { 
+    let user_id = this.props.talkUserInfo.user_id;
+    let index = null;
+    this.props.chatList.forEach((item, i)=> {
+      if (item.user_id == user_id) { 
+        index = i;
+      }
+    });
+
+    if (index === null) {
+      return;
+    }
+    // console.log(user_id)
+    // console.log(this.state.messages)
+
+    this.props.modifyChatFriend({
+      index,
+      detail: {
+        user_id,
+        remark: this.props.talkUserInfo.remark,
+        avatar: this.props.talkUserInfo.avatar,
+        replyTime: this.state.messages && this.state.messages.length > 0 ? this.state.messages[this.state.messages.length-1]['time']:'',
+        lastMsg: this.state.messages && this.state.messages.length > 0 ?  this.state.messages[this.state.messages.length-1]['text'] :'',
+        unread: 0
+      }
+    })
+
   }
 
   render() { 
     return (
       <View style={styles.container}>
-        <Header backFun={this.back} title={this.state.userInfo.uname} showBack={true} showBack={true}></Header>
+        <Header backFun={this.back} title={this.props.talkUserInfo.remark} showBack={true} showBack={true}></Header>
         < FlatList
+          ref={this.flatList}
           data={this.state.messages}
           keyExtractor={
             (item,index) => { 
@@ -140,7 +221,7 @@ class ChatRoom extends React.Component {
             ({ item, index }) => { 
               return (
                 <View style={ item.type == 0 ? styles.leftView :styles.rightView }>
-                  < Image style={styles.avatar} source={require('../assets/img/male.png')} ></ Image>
+                  < Image style={styles.avatar} source={{ uri: item.type == 0 ? this.props.talkUserInfo.avatar :this.props.mine.avatar}} ></ Image>
                   <View style={item.type == 0? styles.leftTextContainer : styles.rightTextContainer}>
                     <Text style={styles.text}> {item.text}</Text>
                     <Text style={ item.type == 0? styles.leftArrow:styles.rightArrow}></Text>
@@ -156,8 +237,8 @@ class ChatRoom extends React.Component {
         
         {/* 下方输入条 */}
         <View style={styles.bottomBar}>
-          <TextInput multiline={true} style={styles.input}></TextInput>
-          <TouchableOpacity style={styles.sendBtn}>
+          <TextInput onChangeText={(msg) => { this.setState({msg:msg.trim()}) } } value={this.state.msg} multiline={true} style={styles.input}></TextInput>
+          <TouchableOpacity onPress={this.sendMsg} style={styles.sendBtn}>
             <Text style={{color:config.whiteFont}}>发送</Text>
           </TouchableOpacity>
         </View>
@@ -214,7 +295,8 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: config.pageBgColor,
     flex: 1,
-    position:'relative'
+    position: 'relative',
+    paddingBottom: 60
   },
   avatar: {
     width: 40,
@@ -229,11 +311,10 @@ const styles = StyleSheet.create({
     padding:10
   },
   rightView: {
-    width: config.screenWidth - 40,
+    width: config.screenWidth - 100,
     flexDirection: 'row-reverse',
     justifyContent: 'flex-start',
     alignSelf: 'flex-end',
-    alignItems: 'center',
     padding: 10
   },
   leftTextContainer: {
@@ -278,13 +359,25 @@ const styles = StyleSheet.create({
 })
 
 
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
+
+import { modifyChatFriend} from '../actions/index'
 
 const mapStateToProps = store => { 
   return {
-    talkUserInfo: store.talkUserInfo
+    talkUserInfo: store.talkUserInfo,
+    chatList: store.chatList,
+    mine:store.mine
+  }
+}
+
+const mapDispatchToProps = dispatch => { 
+  return {
+    modifyChatFriend: payload => { 
+      dispatch(modifyChatFriend(payload))
+    }
   }
 }
 
 
-export default connect(mapStateToProps)(ChatRoom);
+export default connect(mapStateToProps, mapDispatchToProps)(ChatRoom);

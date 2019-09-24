@@ -46,11 +46,57 @@ class ChatList extends React.Component {
     this.props.navigation.navigate('ChatRoom');
   };
 
+  formatReplyTime(time) { 
+    if ( !time ) { 
+      return "";
+    }
+    let now = new Date();
+    let nowDetail = {
+      nowYear: now.getFullYear(),
+      nowMonth: now.getMonth() + 1,
+      nowDay: now.getDate()
+    }
+
+    let target = new Date(time);
+    let targetDetail = {
+      targetYear: target.getFullYear(),
+      targetMonth: target.getMonth() + 1,
+      targetDay: target.getDate(),
+      targetHours: target.getHours(),
+      targetMinutes:target.getMinutes()
+    }
+
+    if (  //今天
+      nowDetail.nowYear == targetDetail.targetYear &&
+      nowDetail.nowMonth == targetDetail.targetMonth &&
+      nowDetail.nowDay == targetDetail.targetDay
+    ) {
+
+      let label = "";
+      label = (targetDetail.targetHours >= 0 && targetDetail.targetHours < 6) ? '凌晨' : (
+        (targetDetail.targetHours >= 6 && targetDetail.targetHours < 9) ? '早上' : (
+          (targetDetail.targetHours >= 9 && targetDetail.targetHours < 12) ? '上午' : (
+            (targetDetail.targetHours >= 12 && targetDetail.targetHours < 19) ? '下午' : (
+              (targetDetail.targetHours >= 19 && targetDetail.targetHours < 24) ? '晚上' : ''
+            )
+          )
+        )
+      );
+      targetDetail.targetMinutes = targetDetail.targetMinutes <= 9 ? '0' + targetDetail.targetMinutes : targetDetail.targetMinutes;
+      return label + targetDetail.targetHours + ':' + targetDetail.targetMinutes;
+      
+    } else { 
+      return targetDetail.targetMonth + '月' + targetDetail.targetDay +'日'
+
+    }
+
+  }
+
   render() { 
 
 
     return (
-      < View >
+      < View style={{paddingBottom:50}} >
         <Header style={{backgroundColor:config.lightGray}} showIcon={true} title="消息"></Header>
 
         <FlatList
@@ -63,16 +109,22 @@ class ChatList extends React.Component {
               return (
     
                 <TouchableOpacity onPress={() => { this.toChatRoom(item.user_id, item.remark, item.avatar) }} activeOpacity={0.85} >
-                      <View style={styles.item} >
-                        < Image style={ styles.avatar } source={{uri:item.avatar}}></ Image>
-                        <View style={styles.itemRight}>
-                          <View style={styles.title} >
-                            <Text numberOfLines={1} ellipsizeMode="tail">{item.remark}</Text>
-                            <Text style={styles.replyTime}>{item.replyTime}</Text>
-                          </View>
-                          <Text style={styles.lastMsg} numberOfLines={1} ellipsizeMode="tail">{item.lastMsg}</Text>
-                        </View> 
+                  <View style={styles.item} >
+                    <View style={styles.avatarview}>
+                      < Image style={styles.avatar} source={{ uri: item.avatar }}></ Image>
+                      {
+                        item.unread > 0 ? (<Text style={styles.unreadCount}>{item.unread}</Text>) :null
+                      }
+                    </View>
+                      
+                    <View style={styles.itemRight}>
+                      <View style={styles.title} >
+                        <Text numberOfLines={1} ellipsizeMode="tail">{item.remark}</Text>
+                        <Text style={styles.replyTime}>{this.formatReplyTime(item.replyTime) }</Text>
                       </View>
+                      <Text style={styles.lastMsg} numberOfLines={1} ellipsizeMode="tail">{item.lastMsg}</Text>
+                    </View> 
+                  </View>
                 </TouchableOpacity>
             
               )
@@ -89,6 +141,23 @@ class ChatList extends React.Component {
 
 
 const styles = StyleSheet.create({
+  avatarview: {
+    width: 50,
+    height: 50,
+    position:'relative'
+  },
+  unreadCount: {
+    position: 'absolute',
+    top: -6,
+    right: -6,
+    borderRadius: 8,
+    backgroundColor: config.dangerColor,
+    color: '#fff',
+    width: 16,
+    height: 16,
+    lineHeight:16,
+    textAlign:'center',
+  },
   avatar: {
     width: 50,
     height:50,
@@ -118,7 +187,8 @@ const styles = StyleSheet.create({
     marginBottom:6
   },
   replyTime: {
-    color:config.darkGray
+    color: config.darkGray,
+    fontSize:config.fontSizeSmaller
   },
   lastMsg: {
     paddingRight: 24,

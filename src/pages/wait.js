@@ -34,11 +34,12 @@ class Wait extends React.Component{
       if(res && res.token){
         Net('isLogin',{
           token:res.token
-        }).then(data=>{
+        }).then(data => {
+          // console.log(res);
           // console.log(data);
           if (data.success) {
             this.getFriendList();
-            this.props.setMine(res);
+            this.props.setMine(data.data);
             this.props.navigation.dispatch(toMain);
           }else{
 
@@ -64,6 +65,7 @@ class Wait extends React.Component{
   getFriendList() { 
     Net('friendList', {}).then(res => { 
       if (res.success) { 
+        console.log(res);
         this.props.setFriend(res.data);
       }
     })

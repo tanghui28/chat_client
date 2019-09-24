@@ -21,6 +21,8 @@ export const ADD_CHAT_FRIEND = "ADD_CHAT_FRIEND";
 export const DELETE_CHAT_FRIEND = "DELETE_CHAT_FRIEND";
 // 设置聊天好友列表
 export const SET_CHAT_FRIEND = "SET_CHAT_FRIEND";
+// 修改单个聊天缩略
+export const MODIFY_CHAT_FRIEND = "MODIFY_CHAT_FRIEND";
 
 /**
  * chatRoom

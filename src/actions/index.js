@@ -8,9 +8,11 @@ import {
   ADD_CHAT_RECORD,
   DELETE_CHAT_RECORD,
   SET_CHAT_RECORD,
+  MODIFY_CHAT_FRIEND,
   SET_MINE,
   DELETE_MINE,
   SET_TALK_TO,
+
 } from './type'
 
 /**
@@ -53,6 +55,11 @@ export const setChatFriend = payload => ({
   type: SET_CHAT_FRIEND,
   payload
 });
+export const modifyChatFriend = payload => ({
+  type: MODIFY_CHAT_FRIEND,
+  payload
+
+})
 
 
 /**
