@@ -166,6 +166,9 @@ Storage.setData('6chatRoom', JSON.stringify(
 
 
 
+
+
+
 // redux  reducers
 // import reducer from './src/reducers/index'
 // // redux
@@ -177,14 +180,36 @@ import { setFriend,setChatFriend } from './src/actions/index'
 // const store = createStore(reducer);
 import store from './src/store/store'
 
-// 读取好友列表
-// Storage.getData('friendList').then(res=>{
-//   if( res != null ){
-//     store.dispatch(setFriend(
-//       res
-//     ))
-//   }
-// })
+
+// socket.io
+import io from 'socket.io-client'
+let socket = null;
+let timer = null;
+
+let connectSocket = ()=>{
+  timer = setInterval(()=>{
+    console.log('请求store')
+    let userInfo = store.getState().mine;
+    if(userInfo.user_id != undefined){
+      console.log('就是现在,连接socket');
+
+      clearInterval(timer);
+      socket = io('http://192.168.1.7:3000',{
+          query:{
+            token:userInfo.token
+          }
+      });
+  
+      socket.on('message',(msg)=>{
+        console.log(msg)
+      })
+      socket.emit('connect',1)
+  
+  
+    }
+  },1000)
+}
+connectSocket();
 
 // 读取聊天列表
 Storage.getData('chatList').then(res=>{

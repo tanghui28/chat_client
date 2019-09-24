@@ -36,7 +36,7 @@ class Wait extends React.Component{
           token:res.token
         }).then(data => {
           // console.log(res);
-          // console.log(data);
+          console.log(data);
           if (data.success) {
             this.getFriendList();
             this.props.setMine(data.data);
@@ -63,7 +63,7 @@ class Wait extends React.Component{
 
   // 从服务器获取好友列表
   getFriendList() { 
-    Net('friendList', {}).then(res => { 
+    Net('friendList').then(res => { 
       if (res.success) { 
         console.log(res);
         this.props.setFriend(res.data);
