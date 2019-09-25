@@ -132,7 +132,7 @@ class ChatRoom extends React.Component {
 
   }
   componentDidMount() { 
-
+    console.log(this.props.navigation);
     this.KeyboardDidShow = Keyboard.addListener('keyboardDidShow', () => { 
       setTimeout(() => {
         this.flatList.current.scrollToEnd();

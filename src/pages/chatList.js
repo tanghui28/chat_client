@@ -8,7 +8,10 @@ import {
   ImageBackground,
   ScrollView,
   Image,
-  FlatList
+  FlatList,
+  BackHandler,
+  Platform,
+  ToastAndroid
 } from 'react-native';
 
 
@@ -27,6 +30,8 @@ class ChatList extends React.Component {
     this.state = {
 
     };
+    this.thisBackPressed = null;
+    this.lastBackPressed = null;
   }
 
   componentWillMount() { 
@@ -35,6 +40,44 @@ class ChatList extends React.Component {
 
   componentDidMount() { 
 
+    if (Platform.OS === 'android') {
+
+        BackHandler.addEventListener('hardwareBackPress', this.onBackAndroid);
+
+    }
+  }
+  componentWillUnmount(){
+    if (Platform.OS === 'android') {
+
+      BackHandler.removeEventListener('hardwareBackPress', this.onBackAndroid);
+
+   }
+  }
+
+  onBackAndroid = () => {
+
+    // const routers = this.props.navigation.state;
+
+    if(this.props.navigation.isFocused()){
+      let time = new Date();
+
+      this.lastBackPressed = this.thisBackPressed;
+
+      this.thisBackPressed = time.getTime();
+
+      if (this.lastBackPressed && this.lastBackPressed + 2000 >= this.thisBackPressed) {
+
+          //最近2秒内按过back键，可以退出应用。
+
+          return false;
+
+      }
+
+      ToastAndroid.show('再按一次退出应用', ToastAndroid.SHORT);
+
+      return true;
+    }
+  
   }
 
   toChatRoom = (user_id,remark,avatar) => { 

@@ -169,6 +169,7 @@ Storage.setData('6chatRoom', JSON.stringify(
 
 
 
+
 // redux  reducers
 // import reducer from './src/reducers/index'
 // // redux
@@ -181,36 +182,6 @@ import { setFriend,setChatFriend } from './src/actions/index'
 import store from './src/store/store'
 
 
-// socket.io
-
-// import io from 'socket.io-client'
-// let socket = null;
-// let timer = null;
-
-// let connectSocket = ()=>{
-//   timer = setInterval(()=>{
-//     console.log('请求store')
-//     let userInfo = store.getState().mine;
-//     if(userInfo.user_id != undefined){
-//       console.log('就是现在,连接socket');
-
-//       clearInterval(timer);
-//       socket = io('http://192.168.1.21:3000',{
-//           query:{
-//             token:userInfo.token
-//           }
-//       });
-  
-//       socket.on('message',(msg)=>{
-//         console.log(msg)
-//       })
-//       socket.emit('connect',1)
-  
-  
-//     }
-//   },1000)
-// }
-// connectSocket();
 // 心跳检测   ws连接成功 , 启动一次性定时器发送消息给服务端 , 
 // 若指定时间内未收到回复则断开ws连接, 
 // 若指定时间内收到消息 则再次一次性定时器发送消息给服务器
@@ -230,7 +201,7 @@ let heartChaeck = {
         let userInfo = store.getState().mine;
         if (userInfo.user_id != undefined) { 
           clearInterval(this.storeTimeObj);
-          global.ws = new WebSocket('ws://192.168.1.21:3000?user_id=' + userInfo.user_id);
+          global.ws = new WebSocket('ws://192.168.1.7:3000?user_id=' + userInfo.user_id);
           this.handlerMessage();
         }
       }, 2000);
@@ -268,7 +239,7 @@ let heartChaeck = {
       this.startHeartCheck();
     }
     global.ws.onmessage = (e) => { 
-      console.log(e);
+      // console.log(e);
       this.startHeartCheck();
       if ( e.data === "ping" ) {
         return;
@@ -287,7 +258,7 @@ let heartChaeck = {
   },
   
 }
-heartChaeck.createWebSocket();
+// heartChaeck.createWebSocket();
 
 
 // 读取聊天列表
@@ -421,13 +392,49 @@ const AppContainer = createAppContainer(RootNavigator);
 
 
 
-const App = () => {
-  return (
-    < Provider store={store} >
-      < AppContainer />
-    </ Provider>
-  );
-};
+// const App = () => {
+//   return (
+//     < Provider store={store} >
+//       < AppContainer />
+//     </ Provider>
+//   );
+// };
+
+// 后台运行
+import BackgroundJob from 'react-native-background-job'
+// const backgroundJob = {
+//   jobKey: "backgroundDownloadTask",
+//   job: () => {
+//     setInterval(()=>{
+//       console.log(1)
+//     },1000)
+//   }
+// };
+
+// BackgroundJob.register(backgroundJob);
+// BackgroundJob.schedule({
+//   jobKey: "backgroundDownloadTask",//后台运行任务的key
+//   period: 500,                     //任务执行周期
+//   exact: true,                     //安排一个作业在提供的时间段内准确执行
+//   allowWhileIdle: true,            //允许计划作业在睡眠模式下执行
+//   allowExecutionInForeground: true,//允许任务在前台执行
+// });
+setInterval(()=>{
+  console.log(1)
+},3000)
+class App extends React.Component{
+  
+  constructor(){
+    super();
+  }
+  render(){
+    return (
+      < Provider store={store} >
+        < AppContainer />
+      </ Provider>
+    );
+  }
+}
 
 
 
