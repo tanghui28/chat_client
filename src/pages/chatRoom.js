@@ -151,6 +151,11 @@ class ChatRoom extends React.Component {
     if (this.state.msg === "") { 
       return;
     }
+    global.ws.send(JSON.stringify({
+      from: this.props.mine.user_id,
+      to: this.props.talkUserInfo.user_id,
+      body:this.state.msg
+    }))
     this.setState({
       messages: [...this.state.messages, {
         text: this.state.msg,
@@ -165,6 +170,9 @@ class ChatRoom extends React.Component {
           this.flatList.current.scrollToEnd();
         }, 0);
     })
+
+    
+
     
   }
 

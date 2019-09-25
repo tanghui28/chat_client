@@ -182,34 +182,113 @@ import store from './src/store/store'
 
 
 // socket.io
-import io from 'socket.io-client'
-let socket = null;
-let timer = null;
 
-let connectSocket = ()=>{
-  timer = setInterval(()=>{
-    console.log('请求store')
-    let userInfo = store.getState().mine;
-    if(userInfo.user_id != undefined){
-      console.log('就是现在,连接socket');
+// import io from 'socket.io-client'
+// let socket = null;
+// let timer = null;
 
-      clearInterval(timer);
-      socket = io('http://192.168.1.7:3000',{
-          query:{
-            token:userInfo.token
-          }
-      });
+// let connectSocket = ()=>{
+//   timer = setInterval(()=>{
+//     console.log('请求store')
+//     let userInfo = store.getState().mine;
+//     if(userInfo.user_id != undefined){
+//       console.log('就是现在,连接socket');
+
+//       clearInterval(timer);
+//       socket = io('http://192.168.1.21:3000',{
+//           query:{
+//             token:userInfo.token
+//           }
+//       });
   
-      socket.on('message',(msg)=>{
-        console.log(msg)
-      })
-      socket.emit('connect',1)
+//       socket.on('message',(msg)=>{
+//         console.log(msg)
+//       })
+//       socket.emit('connect',1)
   
   
+//     }
+//   },1000)
+// }
+// connectSocket();
+// 心跳检测   ws连接成功 , 启动一次性定时器发送消息给服务端 , 
+// 若指定时间内未收到回复则断开ws连接, 
+// 若指定时间内收到消息 则再次一次性定时器发送消息给服务器
+// 
+global.ws = null;                     //websocket 实例
+let heartChaeck = {                     
+  connecting:false,                   //正在连接
+  timeout: 5000,                     //心跳检测间隔
+  timeoutObj: null,                   
+  serverTimeObj: null,
+  storeTimeObj:null,
+  createWebSocket() { 
+
+    try {
+
+      this.storeTimeObj = setInterval(() => {
+        let userInfo = store.getState().mine;
+        if (userInfo.user_id != undefined) { 
+          clearInterval(this.storeTimeObj);
+          global.ws = new WebSocket('ws://192.168.1.21:3000?user_id=' + userInfo.user_id);
+          this.handlerMessage();
+        }
+      }, 2000);
+
+    } catch (error) {
+      this.reconnect();
     }
-  },1000)
+
+  },
+  reconnect() { 
+    if (this.connecting) return;
+    this.connecting = true;
+    setTimeout(() => {
+      this.createWebSocket();
+      this.connecting = false;
+    }, 3000);
+  },
+  startHeartCheck() {
+    this.timeoutObj && clearTimeout(this.timeoutObj);
+    this.serverTimeObj && clearTimeout(this.serverTimeObj);
+
+    this.timeoutObj = setTimeout(() => {
+      global.ws.send('ping');
+      this.serverTimeObj = setTimeout(() => {
+        //指定时间内未收到后端返回心跳 , 关闭ws连接
+        global.ws.close();
+      }, this.timeout);
+    }, this.timeout);
+
+  },
+  handlerMessage() { 
+
+    global.ws.onopen = () => { 
+      console.log('连接成功');
+      this.startHeartCheck();
+    }
+    global.ws.onmessage = (e) => { 
+      console.log(e);
+      this.startHeartCheck();
+      if ( e.data === "ping" ) {
+        return;
+      }
+      let data = JSON.parse(e.data);
+    }
+    global.ws.onerror = () => { 
+      console.log('socket错误');
+      this.reconnect();
+    }
+    global.ws.onclose = () => { 
+      console.log('socket关闭');
+      this.reconnect();
+    }
+
+  },
+  
 }
-connectSocket();
+heartChaeck.createWebSocket();
+
 
 // 读取聊天列表
 Storage.getData('chatList').then(res=>{

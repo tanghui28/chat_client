@@ -72,8 +72,7 @@ class ChatList extends React.Component {
       nowDetail.nowDay == targetDetail.targetDay
     ) {
 
-      let label = "";
-      label = (targetDetail.targetHours >= 0 && targetDetail.targetHours < 6) ? '凌晨' : (
+      let label = (targetDetail.targetHours >= 0 && targetDetail.targetHours < 6) ? '凌晨' : (
         (targetDetail.targetHours >= 6 && targetDetail.targetHours < 9) ? '早上' : (
           (targetDetail.targetHours >= 9 && targetDetail.targetHours < 12) ? '上午' : (
             (targetDetail.targetHours >= 12 && targetDetail.targetHours < 19) ? '下午' : (
@@ -83,6 +82,7 @@ class ChatList extends React.Component {
         )
       );
       targetDetail.targetMinutes = targetDetail.targetMinutes <= 9 ? '0' + targetDetail.targetMinutes : targetDetail.targetMinutes;
+      targetDetail.targetHours = targetDetail.targetHours > 12 ? targetDetail.targetHours - 12 : targetDetail.targetHours;
       return label + targetDetail.targetHours + ':' + targetDetail.targetMinutes;
       
     } else { 
