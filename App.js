@@ -201,7 +201,7 @@ let heartChaeck = {
         let userInfo = store.getState().mine;
         if (userInfo.user_id != undefined) { 
           clearInterval(this.storeTimeObj);
-          global.ws = new WebSocket('ws://192.168.1.21:3000?user_id=' + userInfo.user_id);
+          global.ws = new WebSocket('ws://192.168.1.9:3000?user_id=' + userInfo.user_id);
           this.handlerMessage();
         }
       }, 2000);
@@ -258,7 +258,7 @@ let heartChaeck = {
   },
   
 }
-// heartChaeck.createWebSocket();
+heartChaeck.createWebSocket();
 
 
 // 读取聊天列表
@@ -392,51 +392,27 @@ const AppContainer = createAppContainer(RootNavigator);
 
 
 
-// const App = () => {
-//   return (
-//     < Provider store={store} >
-//       < AppContainer />
-//     </ Provider>
-//   );
-// };
+const App = () => {
+  return (
+    < Provider store={store} >
+      < AppContainer />
+    </ Provider>
+  );
+};
 
-// 后台运行
-import BackgroundJob from 'react-native-background-job'
-// const backgroundJob = {
-//   jobKey: "backgroundDownloadTask",
-//   job: () => {
-//     setInterval(()=>{
-//       console.log(1)
-//     },1000)
-//   }
-// };
-
-// BackgroundJob.register(backgroundJob);
-// BackgroundJob.schedule({
-//   jobKey: "backgroundDownloadTask",//后台运行任务的key
-//   period: 500,                     //任务执行周期
-//   exact: true,                     //安排一个作业在提供的时间段内准确执行
-//   allowWhileIdle: true,            //允许计划作业在睡眠模式下执行
-//   allowExecutionInForeground: true,//允许任务在前台执行
-// });
-
-setInterval(() => {
-  console.log(1);
-}, 3000);
-
-class App extends React.Component{
+// class App extends React.Component{
   
-  constructor(){
-    super();
-  }
-  render(){
-    return (
-      < Provider store={store} >
-        < AppContainer />
-      </ Provider>
-    );
-  }
-}
+//   constructor(){
+//     super();
+//   }
+//   render(){
+//     return (
+//       < Provider store={store} >
+//         < AppContainer />
+//       </ Provider>
+//     );
+//   }
+// }
 
 
 

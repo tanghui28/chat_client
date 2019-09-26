@@ -3,7 +3,7 @@ import Storage from './storage'
 import { ToastAndroid} from 'react-native'
 
 const instance = axios.create({
-  baseURL: 'http://192.168.1.21:3000',
+  baseURL: 'http://192.168.1.9:3000',
   timeout: 3000,
   headers: {
     'Content-Type':'application/json',
@@ -19,7 +19,9 @@ instance.interceptors.request.use( async(config) =>{
     if (res && res.token) { 
       token = res.token;
     }
-  });
+  }).catch(err=>{
+    
+  })
   config.headers.token = token;
   return config;
 },  (error)=> {
