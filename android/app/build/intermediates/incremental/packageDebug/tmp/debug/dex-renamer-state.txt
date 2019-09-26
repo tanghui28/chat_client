@@ -1,4 +1,4 @@
-#Wed Sep 25 19:14:52 CST 2019
-base.0=E\:\\chat_client\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+#Thu Sep 26 17:04:58 CST 2019
+base.0=D\:\\01web\\chat_client\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
 path.0=classes.dex
 renamed.0=classes.dex

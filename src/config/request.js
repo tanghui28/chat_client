@@ -1,8 +1,9 @@
 import axios from 'axios'
 import Storage from './storage'
+import { ToastAndroid} from 'react-native'
 
 const instance = axios.create({
-  baseURL: 'http://192.168.1.7:3000',
+  baseURL: 'http://192.168.1.21:3000',
   timeout: 3000,
   headers: {
     'Content-Type':'application/json',
@@ -34,7 +35,7 @@ instance.interceptors.response.use( (response)=> {
 }, (error) => { 
     console.log(error);
     if(error.message.includes('timeout')){   // 判断请求异常信息中是否含有超时timeout字符串
-      console.log("网络超时", error);
+      ToastAndroid.show('网络超时', ToastAndroid.SHORT);
       return Promise.reject(error);   
     }
     

@@ -201,7 +201,7 @@ let heartChaeck = {
         let userInfo = store.getState().mine;
         if (userInfo.user_id != undefined) { 
           clearInterval(this.storeTimeObj);
-          global.ws = new WebSocket('ws://192.168.1.7:3000?user_id=' + userInfo.user_id);
+          global.ws = new WebSocket('ws://192.168.1.21:3000?user_id=' + userInfo.user_id);
           this.handlerMessage();
         }
       }, 2000);
@@ -419,9 +419,11 @@ import BackgroundJob from 'react-native-background-job'
 //   allowWhileIdle: true,            //允许计划作业在睡眠模式下执行
 //   allowExecutionInForeground: true,//允许任务在前台执行
 // });
-setInterval(()=>{
-  console.log(1)
-},3000)
+
+setInterval(() => {
+  console.log(1);
+}, 3000);
+
 class App extends React.Component{
   
   constructor(){
