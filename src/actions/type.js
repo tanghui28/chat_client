@@ -33,6 +33,7 @@ export const ADD_CHAT_RECORD = "ADD_CHAT_RECORD";
 export const DELETE_CHAT_RECORD = "DELETE_CHAT_RECORD";
 // 设置聊天记录
 export const SET_CHAT_RECORD = "SET_CHAT_RECORD";
+
 //设置当前聊天对象的user_id
 export const SET_TALK_TO = "SET_TALK_TO";
 
@@ -43,3 +44,5 @@ export const SET_TALK_TO = "SET_TALK_TO";
 export const SET_MINE = "SET_MINE";
 // 退出登录
 export const DELETE_MINE = "DELETE_MINE";
+
+

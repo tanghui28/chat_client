@@ -15,13 +15,16 @@ import {
 import {
   Net
 } from './src/config/request'
-
+global.Net = Net;
 // 引入iconfont
 import {
   Iconfont
 } from './font/index'
 
-global.Net = Net;
+// 公共方法
+import utility from './src/config/utility'
+global.utility = utility;
+
 
 import Login from './src/pages/login'
 import Register from './src/pages/register'
@@ -82,8 +85,9 @@ Storage.setData('chatList', JSON.stringify([
 ]))
 
 
-// 示例存储 聊天信息  uesr_id+'charRmom'
-Storage.setData('6chatRoom', JSON.stringify(
+// 示例存储 聊天信息  uesr_id(好友)+'charRmom'+user_id(自己)
+//type 0 对方 1自己
+Storage.setData('6chatRoom1', JSON.stringify(
   [
     {
       text: '你好吗ffffff?',
@@ -163,24 +167,27 @@ Storage.setData('6chatRoom', JSON.stringify(
   ]
 ))
 
-
-
-
-
-
-
-
-// redux  reducers
-// import reducer from './src/reducers/index'
-// // redux
-// import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 // // actions 
-import { setFriend,setChatFriend } from './src/actions/index'
+import { setFriend, setChatFriend, modifyChatFriend, addChatFriend, setChatRecord, addChatRecord } from './src/actions/index'
 
-// const store = createStore(reducer);
 import store from './src/store/store'
 
+// 添加聊天记录存储
+let storeAddRecord = async (from, to,obj) => { 
+  
+  // 存储聊天记录
+  let chatRecord = await Storage.getData(from + 'chatRoom' + to);
+  chatRecord = Array.isArray(chatRecord) ? chatRecord : [];
+  // {
+  //   text: '你好吗ffffff?',
+  //   type: 0,
+  //   time: 1568098926233
+  // }
+  chatRecord.push(obj);
+  Storage.setData(from + 'chatRoom' + to, JSON.stringify(chatRecord));
+
+}
 
 // 心跳检测   ws连接成功 , 启动一次性定时器发送消息给服务端 , 
 // 若指定时间内未收到回复则断开ws连接, 
@@ -201,7 +208,7 @@ let heartChaeck = {
         let userInfo = store.getState().mine;
         if (userInfo.user_id != undefined) { 
           clearInterval(this.storeTimeObj);
-          global.ws = new WebSocket('ws://192.168.1.9:3000?user_id=' + userInfo.user_id);
+          global.ws = new WebSocket('ws://192.168.1.21:3000?user_id=' + userInfo.user_id);
           this.handlerMessage();
         }
       }, 2000);
@@ -238,13 +245,106 @@ let heartChaeck = {
       console.log('连接成功');
       this.startHeartCheck();
     }
-    global.ws.onmessage = (e) => { 
+    global.ws.onmessage = async(e) => { 
       // console.log(e);
       this.startHeartCheck();
       if ( e.data === "ping" ) {
         return;
       }
       let data = JSON.parse(e.data);
+      // {from:1, to:6, body: 'hello'}
+      
+      let state = store.getState();
+      let chatList = state.chatList;
+      let talkTo = state.talkUserInfo;
+      let friendList = state.friendList;
+
+      let now = Date.now();
+
+      // 判断chatList是否已开启与from用户的聊天
+      let hasOpenChatIndex = null,
+          hasOPenChatDetail = null;
+      let hasOpenChat = chatList.some((item, i) => { 
+        if (item.user_id == data.from) { 
+          hasOpenChatIndex = i;
+          hasOPenChatDetail = item;
+        }
+        return item.user_id == data.from;
+      })
+
+
+      if (hasOpenChat) {  //已在chatList页面中存在与该用户的聊天缩略  更改缩略 存储聊天记录 更改store
+
+        // 当前是否正在与该用户聊天 , 更新store聊天内容
+        if (talkTo.user_id == hasOPenChatDetail.user_id) {
+          store.dispatch(addChatRecord({
+            text: data.body,
+            type: 0,
+            time: now
+          }))
+        }
+
+        // 更改store中的chatList缩略信息
+        store.dispatch(modifyChatFriend({
+          index: hasOpenChatIndex,
+          detail: {
+            user_id: hasOPenChatDetail.user_id,
+            remark: hasOPenChatDetail.remark,
+            avatar: hasOPenChatDetail.avatar,
+            replyTime: now,
+            lastMsg: data.body,
+            unread: talkTo.user_id == hasOPenChatDetail.user_id ? 0 : hasOPenChatDetail.unread + 1
+          }
+        }))
+
+        //存储聊天记录
+        storeAddRecord(data.from, data.to, {
+          text: data.body,
+          type: 0,
+          time: now
+        })
+
+        
+
+
+      } else {        //未与当前消息发送方在chatList页面开启聊天缩略  添加缩略并存储聊天记录
+        // {
+        //    user_id: 6,
+        //    remark: 'A小王',
+        //    avatar: 'http://192.168.1.21:3000/images/6.jpeg',
+        //    replyTime: '2019-09-06',
+        //    lastMsg: '',
+        //    unread: 1
+        // }
+        let fromUserInfo = {};
+        this.friendList.forEach(item => { 
+
+          item.forEach(friend => { 
+            if (data.from == friend.friend_id) { 
+              fromUserInfo.user_id = friend.friend_id;
+              fromUserInfo.remark = friend.friend_remark;
+              fromUserInfo.avatar = friend.avatar;
+              fromUserInfo.replyTime = now;
+              fromUserInfo.lastMsg = data.body;
+              fromUserInfo.unread = 1;
+            }
+          })
+
+        })
+        store.dispatch(addChatFriend(fromUserInfo));
+
+
+        storeAddRecord(data.from,data.to,{
+          text: data.body,
+          type: 0,
+          time: now
+        })
+
+
+      }
+
+
+
     }
     global.ws.onerror = () => { 
       console.log('socket错误');
@@ -400,19 +500,6 @@ const App = () => {
   );
 };
 
-// class App extends React.Component{
-  
-//   constructor(){
-//     super();
-//   }
-//   render(){
-//     return (
-//       < Provider store={store} >
-//         < AppContainer />
-//       </ Provider>
-//     );
-//   }
-// }
 
 
 

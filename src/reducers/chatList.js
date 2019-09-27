@@ -5,6 +5,7 @@ import {
   MODIFY_CHAT_FRIEND,
 } from '../actions/type'
 
+import Storage from '../config/storage'
 const initialState = [];
 
 const chatList = (state = initialState, action) => {
@@ -13,10 +14,12 @@ const chatList = (state = initialState, action) => {
   
   switch (type) {
     case ADD_CHAT_FRIEND:
-      return [
+      let newState = [
         payload,
         ...state
-      ];
+      ]
+      Storage.setData(JSON.stringify(newState));
+      return newState;
     
     
     case DELETE_CHAT_FRIEND:

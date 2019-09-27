@@ -117,14 +117,21 @@ class ChatRoom extends React.Component {
   };
   componentWillMount() { 
     //读取聊天记录
-    Storage.getData(this.props.talkUserInfo.user_id + 'chatRoom').then(res => { 
+    Storage.getData(this.props.talkUserInfo.user_id + 'chatRoom'+this.props.mine.user_id).then(res => { 
+
+      // if (res) { 
+      //   this.setState({
+      //     messages: res
+      //   }, () => {
+      //       this.modifyChatList();
+      //   })
+      // }
 
       if (res) { 
-        this.setState({
-          messages: res
-        }, () => {
-            this.modifyChatList();
-        })
+
+        this.props.setChatRecord(res);
+        this.modifyChatList();
+
       }
       
     })
@@ -132,7 +139,7 @@ class ChatRoom extends React.Component {
 
   }
   componentDidMount() { 
-    console.log(this.props.navigation);
+
     this.KeyboardDidShow = Keyboard.addListener('keyboardDidShow', () => { 
       setTimeout(() => {
         this.flatList.current.scrollToEnd();
@@ -143,7 +150,11 @@ class ChatRoom extends React.Component {
   componentWillUnmount() { 
     // 移除键盘监听
     this.KeyboardDidShow.remove();
-  
+    // 清空当前聊天对象信息
+    this.props.setChatTo({});
+    // 清除store 中的聊天记录
+    this.props.setChatRecord([]);
+
   }
 
   // 发送消息
@@ -156,20 +167,33 @@ class ChatRoom extends React.Component {
       to: this.props.talkUserInfo.user_id,
       body:this.state.msg
     }))
-    this.setState({
-      messages: [...this.state.messages, {
-        text: this.state.msg,
-        type: 1,
-        time: Date.now()
-      }],
-      msg:''
-    }, () => { 
-        this.saveMessages();
-        this.modifyChatList();
-        setTimeout(() => {
-          this.flatList.current.scrollToEnd();
-        }, 0);
+    // this.setState({
+    //   messages: [...this.state.messages, {
+    //     text: this.state.msg,
+    //     type: 1,
+    //     time: Date.now()
+    //   }],
+    //   msg:''
+    // }, () => { 
+    //     this.saveMessages();
+    //     this.modifyChatList();
+    //     setTimeout(() => {
+    //       this.flatList.current.scrollToEnd();
+    //     }, 0);
+    // })
+
+
+    this.props.addChatRecord({
+      text: this.state.msg,
+      type: 1,
+      time: Date.now()
     })
+    this.setState({ msg: '' });
+    this.modifyChatList();
+    this.saveMessages();
+    setTimeout(() => {
+      this.flatList.current.scrollToEnd();
+    }, 0);
 
     
 
@@ -177,10 +201,10 @@ class ChatRoom extends React.Component {
   }
 
   // 存储数据
-  saveMessages(){ 
-
-    Storage.setData(this.props.talkUserInfo.user_id + 'chatRoom', JSON.stringify(this.state.messages))
-
+  saveMessages() {
+    setTimeout(() => {
+      Storage.setData(this.props.talkUserInfo.user_id + 'chatRoom' + this.props.mine.user_id, JSON.stringify(this.props.chatRecord))
+    }, 100);
   }
 
   // 修改当前聊天对象的聊天缩略信息(chatList显示内容)
@@ -219,7 +243,7 @@ class ChatRoom extends React.Component {
         <Header backFun={this.back} title={this.props.talkUserInfo.remark} showBack={true} showBack={true}></Header>
         < FlatList
           ref={this.flatList}
-          data={this.state.messages}
+          data={this.props.chatRecord}
           keyExtractor={
             (item,index) => { 
               return index+''
@@ -369,13 +393,14 @@ const styles = StyleSheet.create({
 
 import { connect } from 'react-redux'
 
-import { modifyChatFriend} from '../actions/index'
+import { modifyChatFriend, setChatTo, setChatRecord, addChatRecord} from '../actions/index'
 
 const mapStateToProps = store => { 
   return {
     talkUserInfo: store.talkUserInfo,
     chatList: store.chatList,
-    mine:store.mine
+    mine: store.mine,
+    chatRecord: store.chatRoom
   }
 }
 
@@ -383,6 +408,15 @@ const mapDispatchToProps = dispatch => {
   return {
     modifyChatFriend: payload => { 
       dispatch(modifyChatFriend(payload))
+    },
+    setChatTo: payload => {
+      dispatch(setChatTo(payload));
+    },
+    setChatRecord: payload => { 
+      dispatch(setChatRecord(payload))
+    },
+    addChatRecord: payload => { 
+      dispatch(addChatRecord(payload))
     }
   }
 }

@@ -58,7 +58,7 @@ class ChatList extends React.Component {
 
     // const routers = this.props.navigation.state;
 
-    if(this.props.navigation.isFocused()){
+    if (this.props.navigation.isFocused()) {
       let time = new Date();
 
       this.lastBackPressed = this.thisBackPressed;

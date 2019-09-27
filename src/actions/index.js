@@ -79,6 +79,10 @@ export const setChatRecord = payload => ({
 });
 
 
+/**
+ * 
+ * 设置当前聊天对象
+ */
 export const setChatTo = payload => ({ 
   type: SET_TALK_TO,
   payload
