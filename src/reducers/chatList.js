@@ -18,15 +18,18 @@ const chatList = (state = initialState, action) => {
         payload,
         ...state
       ]
-      Storage.setData(JSON.stringify(newState));
+      Storage.setData('chatList',JSON.stringify(newState));
       return newState;
     
     
     case DELETE_CHAT_FRIEND:
       
-      return state.map((friend, i) => {
+      let newState2 = state.map((friend, i) => {
         return friend.user_id != payload;
       });
+      Storage.setData('chatList',JSON.stringify(newState2));
+      return newState2;
+      
       
     
     
@@ -35,9 +38,10 @@ const chatList = (state = initialState, action) => {
       return payload;
     
     case MODIFY_CHAT_FRIEND:
-      let data = [...state];
-      data[payload.index] = payload.detail;
-      return data;
+      let newState3 = [...state];
+      newState3[payload.index] = payload.detail;
+      Storage.setData('chatList',JSON.stringify(newState3));
+      return newState3;
     
     default: return state;
   

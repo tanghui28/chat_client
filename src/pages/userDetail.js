@@ -39,7 +39,7 @@ class UserDetail extends React.Component {
   }
 
   toChatRoom = () => {
-    console.log(this.props.chatList);
+    // console.log(this.props.chatList);
     let isChatting = this.props.chatList.some((item,i) => { 
 
       return item.user_id == this.state.userInfo.friend_id;
@@ -62,7 +62,7 @@ class UserDetail extends React.Component {
       remark: this.state.userInfo.friend_remark,
       avatar: this.state.userInfo.avatar,
     })
-    this.props.navigation.navigate('ChatRoom')
+    this.props.navigation.navigate('ChatRoom',this.state.userInfo.friend_id)
   };
 
   render() {

@@ -48,124 +48,124 @@ import CardStackStyleInterpolator from 'react-navigation-stack/src/views/StackVi
 import Storage from './src/config/storage'
 
 
-Storage.setData('chatList', JSON.stringify([
-  {
-    user_id :6,
-    remark: 'A小王',
-    avatar: 'http://192.168.1.21:3000/images/6.jpeg',
-    replyTime: '2019-09-06',
-    lastMsg: '',
-    unread:1
-  },
-  {
-    user_id :7,
-    remark: 'A小唐',
-    avatar: 'http://192.168.1.21:3000/images/7.jpeg',
-    replyTime: '2019-09-06',
-    lastMsg: '',
-    unread:1
-  },
-  {
-    user_id :8,
-    remark: 'A小阳',
-    avatar: 'http://192.168.1.21:3000/images/8.jpeg',
-    replyTime: '2019-09-06',
-    lastMsg: '',
-    unread:0
-  },
-  {
-    user_id :9,
-    remark: 'A小平',
-    avatar: 'http://192.168.1.21:3000/images/9.jpeg',
-    replyTime: '2019-09-06',
-    lastMsg: '',
-    unread:0
-  },
+// Storage.setData('chatList', JSON.stringify([
+//   {
+//     user_id :6,
+//     remark: 'A小王',
+//     avatar: 'http://192.168.1.9:3000/images/6.jpeg',
+//     replyTime: '2019-09-06',
+//     lastMsg: '',
+//     unread:1
+//   },
+//   {
+//     user_id :7,
+//     remark: 'A小唐',
+//     avatar: 'http://192.168.1.9:3000/images/7.jpeg',
+//     replyTime: '2019-09-06',
+//     lastMsg: '',
+//     unread:1
+//   },
+//   {
+//     user_id :8,
+//     remark: 'A小阳',
+//     avatar: 'http://192.168.1.9:3000/images/8.jpeg',
+//     replyTime: '2019-09-06',
+//     lastMsg: '',
+//     unread:0
+//   },
+//   {
+//     user_id :9,
+//     remark: 'A小平',
+//     avatar: 'http://192.168.1.9:3000/images/9.jpeg',
+//     replyTime: '2019-09-06',
+//     lastMsg: '',
+//     unread:0
+//   },
 
-]))
+// ]))
 
 
 // 示例存储 聊天信息  uesr_id(好友)+'charRmom'+user_id(自己)
 //type 0 对方 1自己
-Storage.setData('6chatRoom1', JSON.stringify(
-  [
-    {
-      text: '你好吗ffffff?',
-      type: 0,
-      time: 1568098926233
-    },
-    {
-      text: '我很好!',
-      type: 1,
-      time: 1568098926234
-    },
-    {
-      text: '你叫什么名字?',
-      type: 0,
-      time: 1568098926235
-    },
-    {
-      text: '尼古拉斯赵四',
-      type: 1,
-      time: 1568098926236
-    },
-    {
-      text: '你是明星吗?',
-      type: 0,
-      time: 1568098926237
-    },
-    {
-      text: '为什么名字那么难听?',
-      type: 0,
-      time: 1568098926238
-    },
-    {
-      text: '怎么不说话了?怎么不说话啊?怎么不说话啊?怎么不说话啊怎么不说话啊怎么不说话啊',
-      type: 0,
-      time: 1568098926238
-    },
-    {
-      text: '说话啊',
-      type: 0,
-      time: 1568098926240
-    },
-    {
-      text: '哦',
-      type: 1,
-      time: 1568098926242
-    },
-    {
-      text: '哦',
-      type: 1,
-      time: 1568098926242
-    },
-    {
-      text: '哦',
-      type: 1,
-      time: 1568098926242
-    },
-    {
-      text: '哦',
-      type: 1,
-      time: 1568098926242
-    },
-    {
-      text: '哦',
-      type: 1,
-      time: 1568098926242
-    },
-    {
-      text: '哦',
-      type: 1,
-      time: 1568098926242
-    },
-    {
-      text: '哦',
-      type: 1,
-      time: 1568098926242
-    },
-  ]
-))
+// Storage.setData('6chatRoom1', JSON.stringify(
+//   [
+//     {
+//       text: '你好吗ffffff?',
+//       type: 0,
+//       time: 1568098926233
+//     },
+//     {
+//       text: '我很好!',
+//       type: 1,
+//       time: 1568098926234
+//     },
+//     {
+//       text: '你叫什么名字?',
+//       type: 0,
+//       time: 1568098926235
+//     },
+//     {
+//       text: '尼古拉斯赵四',
+//       type: 1,
+//       time: 1568098926236
+//     },
+//     {
+//       text: '你是明星吗?',
+//       type: 0,
+//       time: 1568098926237
+//     },
+//     {
+//       text: '为什么名字那么难听?',
+//       type: 0,
+//       time: 1568098926238
+//     },
+//     {
+//       text: '怎么不说话了?怎么不说话啊?怎么不说话啊?怎么不说话啊怎么不说话啊怎么不说话啊',
+//       type: 0,
+//       time: 1568098926238
+//     },
+//     {
+//       text: '说话啊',
+//       type: 0,
+//       time: 1568098926240
+//     },
+//     {
+//       text: '哦',
+//       type: 1,
+//       time: 1568098926242
+//     },
+//     {
+//       text: '哦',
+//       type: 1,
+//       time: 1568098926242
+//     },
+//     {
+//       text: '哦',
+//       type: 1,
+//       time: 1568098926242
+//     },
+//     {
+//       text: '哦',
+//       type: 1,
+//       time: 1568098926242
+//     },
+//     {
+//       text: '哦',
+//       type: 1,
+//       time: 1568098926242
+//     },
+//     {
+//       text: '哦',
+//       type: 1,
+//       time: 1568098926242
+//     },
+//     {
+//       text: '哦',
+//       type: 1,
+//       time: 1568098926242
+//     },
+//   ]
+// ))
 
 import { Provider } from 'react-redux'
 // // actions 
@@ -208,7 +208,7 @@ let heartChaeck = {
         let userInfo = store.getState().mine;
         if (userInfo.user_id != undefined) { 
           clearInterval(this.storeTimeObj);
-          global.ws = new WebSocket('ws://192.168.1.21:3000?user_id=' + userInfo.user_id);
+          global.ws = new WebSocket('ws://192.168.1.7:3000?user_id=' + userInfo.user_id);
           this.handlerMessage();
         }
       }, 2000);
@@ -258,7 +258,6 @@ let heartChaeck = {
       let chatList = state.chatList;
       let talkTo = state.talkUserInfo;
       let friendList = state.friendList;
-
       let now = Date.now();
 
       // 判断chatList是否已开启与from用户的聊天
@@ -311,15 +310,15 @@ let heartChaeck = {
         // {
         //    user_id: 6,
         //    remark: 'A小王',
-        //    avatar: 'http://192.168.1.21:3000/images/6.jpeg',
+        //    avatar: 'http://192.168.1.9:3000/images/6.jpeg',
         //    replyTime: '2019-09-06',
         //    lastMsg: '',
         //    unread: 1
         // }
         let fromUserInfo = {};
-        this.friendList.forEach(item => { 
+        friendList.forEach(item => { 
 
-          item.forEach(friend => { 
+          item.data.forEach(friend => { 
             if (data.from == friend.friend_id) { 
               fromUserInfo.user_id = friend.friend_id;
               fromUserInfo.remark = friend.friend_remark;

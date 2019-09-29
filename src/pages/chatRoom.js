@@ -117,16 +117,10 @@ class ChatRoom extends React.Component {
   };
   componentWillMount() { 
     //读取聊天记录
-    Storage.getData(this.props.talkUserInfo.user_id + 'chatRoom'+this.props.mine.user_id).then(res => { 
-
-      // if (res) { 
-      //   this.setState({
-      //     messages: res
-      //   }, () => {
-      //       this.modifyChatList();
-      //   })
-      // }
-
+    console.log(this.props.navigation.state,this.props.mine.user_id)
+    console.log(this.props.navigation.state.params)
+    Storage.getData(this.props.navigation.state.params + 'chatRoom'+this.props.mine.user_id).then(res => { 
+      console.log(res);
       if (res) { 
 
         this.props.setChatRecord(res);
@@ -139,11 +133,13 @@ class ChatRoom extends React.Component {
 
   }
   componentDidMount() { 
-
+    setTimeout(() => {
+      this.flatList.current.scrollToEnd();
+    }, 100);
     this.KeyboardDidShow = Keyboard.addListener('keyboardDidShow', () => { 
       setTimeout(() => {
         this.flatList.current.scrollToEnd();
-      }, 0);
+      }, 50);
     })
 
   }
@@ -191,9 +187,7 @@ class ChatRoom extends React.Component {
     this.setState({ msg: '' });
     this.modifyChatList();
     this.saveMessages();
-    setTimeout(() => {
-      this.flatList.current.scrollToEnd();
-    }, 0);
+    this.scroll();
 
     
 
@@ -216,25 +210,33 @@ class ChatRoom extends React.Component {
         index = i;
       }
     });
-
     if (index === null) {
       return;
     }
     // console.log(user_id)
     // console.log(this.state.messages)
+    setTimeout(()=>{
+      this.props.modifyChatFriend({
+        index,
+        detail: {
+          user_id,
+          remark: this.props.talkUserInfo.remark,
+          avatar: this.props.talkUserInfo.avatar,
+          replyTime: this.props.chatRecord.length > 0 ? this.props.chatRecord[this.props.chatRecord.length-1]['time']:'',
+          lastMsg: this.props.chatRecord.length > 0 ?  this.props.chatRecord[this.props.chatRecord.length-1]['text'] :'',
+          unread: 0
+        }
+      })
+    },500)
+    
 
-    this.props.modifyChatFriend({
-      index,
-      detail: {
-        user_id,
-        remark: this.props.talkUserInfo.remark,
-        avatar: this.props.talkUserInfo.avatar,
-        replyTime: this.state.messages && this.state.messages.length > 0 ? this.state.messages[this.state.messages.length-1]['time']:'',
-        lastMsg: this.state.messages && this.state.messages.length > 0 ?  this.state.messages[this.state.messages.length-1]['text'] :'',
-        unread: 0
-      }
-    })
+  }
 
+  // 滚动到最底部
+  scroll(){
+    setTimeout(() => {
+      this.flatList.current.scrollToEnd();
+    }, 50);
   }
 
   render() { 
@@ -347,7 +349,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row-reverse',
     justifyContent: 'flex-start',
     alignSelf: 'flex-end',
-    padding: 10
+    padding: 10,
+    
   },
   leftTextContainer: {
     backgroundColor: config.whiteFont,
@@ -361,7 +364,8 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     position: 'relative',
     padding: 10,
-    marginRight: 15
+    marginRight: 15,
+    backgroundColor:'#98F898',
   },
   text: {
 
@@ -381,10 +385,10 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 15,
     right: -5,
-    backgroundColor: config.whiteFont,
     transform: [{
       rotate: '45deg'
-    }]
+    }],
+    backgroundColor:'#98F898',
   },
   
 

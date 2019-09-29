@@ -86,7 +86,7 @@ class ChatList extends React.Component {
       remark,
       avatar
     })
-    this.props.navigation.navigate('ChatRoom');
+    this.props.navigation.navigate('ChatRoom',user_id);
   };
 
   formatReplyTime(time) { 
@@ -172,6 +172,11 @@ class ChatList extends React.Component {
             
               )
             }}
+            ListEmptyComponent={
+              () =>{
+                return (<Text style={styles.noItem}>没有新的消息!</Text>)
+              }
+            }
           ></FlatList>
 
 
@@ -236,6 +241,11 @@ const styles = StyleSheet.create({
   lastMsg: {
     paddingRight: 24,
     color:config.darkGray
+  },
+  noItem:{
+    fontSize:config.fontSizeLarge,
+    marginTop:20,
+    alignSelf:'center'
   }
 
 })
@@ -248,6 +258,7 @@ import { addChatFriend, deleteChatFriend, setChatTo } from '../actions/index'
 const mapStateToProps = store=>{
   return {
     list:store.chatList,
+    alignSelf:'center'
   }
 }
 
