@@ -8,6 +8,7 @@ import {
   FlatList,
   Image,
   Keyboard,
+  ToastAndroid
 } from 'react-native'
 import config from '../config/config'
 import Header from '../components/header'
@@ -105,8 +106,10 @@ class ChatRoom extends React.Component {
           time: 1568098926242
         },
       ], */
-      messages:[],
-      msg:''
+      messages: [],
+      allMessages:[],
+      msg: '',
+      refreshing:false,
 
     };
   }
@@ -122,8 +125,18 @@ class ChatRoom extends React.Component {
     Storage.getData(this.props.navigation.state.params + 'chatRoom'+this.props.mine.user_id).then(res => { 
       console.log(res);
       if (res) { 
-
-        this.props.setChatRecord(res);
+        
+        // 将读取的聊天记录赋值给state中的messages , 每次下拉赋值8条
+        if (res.length > 0 && res.length <= 8) {
+          this.props.setChatRecord(res);
+        } else if (res.length > 0 && res.length > 8) { 
+          let messages = res.splice(res.length - 8, 8);
+          this.props.setChatRecord(messages);
+        }
+        this.setState({
+          allMessages: res,
+        })
+        // this.props.setChatRecord(res);
         this.modifyChatList();
 
       }
@@ -163,21 +176,6 @@ class ChatRoom extends React.Component {
       to: this.props.talkUserInfo.user_id,
       body:this.state.msg
     }))
-    // this.setState({
-    //   messages: [...this.state.messages, {
-    //     text: this.state.msg,
-    //     type: 1,
-    //     time: Date.now()
-    //   }],
-    //   msg:''
-    // }, () => { 
-    //     this.saveMessages();
-    //     this.modifyChatList();
-    //     setTimeout(() => {
-    //       this.flatList.current.scrollToEnd();
-    //     }, 0);
-    // })
-
 
     this.props.addChatRecord({
       text: this.state.msg,
@@ -239,12 +237,37 @@ class ChatRoom extends React.Component {
     }, 50);
   }
 
+  //下拉加载更多聊天记录
+  pullDown = () => {
+
+    if (this.state.allMessages.length <= 0) { 
+      ToastAndroid.show('已加载全部聊天记录', ToastAndroid.SHORT);
+      return;
+    }
+    let allMessages = this.state.allMessages.slice(0);
+    let add = [];
+    if (allMessages.length > 8) {
+      add = allMessages.splice(allMessages.length - 8, 8);
+    } else { 
+      add = allMessages.splice(0);
+    }
+    this.setState({
+      allMessages
+    })
+
+    this.props.addChatRecordTop(add);
+  
+
+  };
+
   render() { 
     return (
       <View style={styles.container}>
         <Header backFun={this.back} title={this.props.talkUserInfo.remark} showBack={true} showBack={true}></Header>
         < FlatList
           ref={this.flatList}
+          refreshing={this.state.refreshing}
+          onRefresh={this.pullDown}
           data={this.props.chatRecord}
           keyExtractor={
             (item,index) => { 
@@ -289,7 +312,7 @@ class ChatRoom extends React.Component {
 
 
 ChatRoom.defaultProps = {
-
+  chatRecord:[]
 }
 
 const styles = StyleSheet.create({
@@ -397,7 +420,7 @@ const styles = StyleSheet.create({
 
 import { connect } from 'react-redux'
 
-import { modifyChatFriend, setChatTo, setChatRecord, addChatRecord} from '../actions/index'
+import { modifyChatFriend, setChatTo, setChatRecord, addChatRecord, addChatRecordTop} from '../actions/index'
 
 const mapStateToProps = store => { 
   return {
@@ -421,6 +444,9 @@ const mapDispatchToProps = dispatch => {
     },
     addChatRecord: payload => { 
       dispatch(addChatRecord(payload))
+    },
+    addChatRecordTop: payload => { 
+      dispatch(addChatRecordTop(payload))
     }
   }
 }

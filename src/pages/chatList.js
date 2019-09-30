@@ -68,8 +68,8 @@ class ChatList extends React.Component {
       if (this.lastBackPressed && this.lastBackPressed + 2000 >= this.thisBackPressed) {
 
           //最近2秒内按过back键，可以退出应用。
-
-          return false;
+        global.ws.close();
+        return false;
 
       }
 

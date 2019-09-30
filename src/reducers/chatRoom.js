@@ -2,6 +2,7 @@ import {
   ADD_CHAT_RECORD,
   DELETE_CHAT_RECORD,
   SET_CHAT_RECORD,
+  ADD_CHAT_RECORD_TOP,
 } from '../actions/type'
 
 const initialState = [];
@@ -29,6 +30,13 @@ const chatRoom = (state = initialState, action) => {
     case SET_CHAT_RECORD:
 
       return payload;
+    
+    case ADD_CHAT_RECORD_TOP:
+
+      return [
+        ...payload,
+        ...state
+      ]
     
     default: return state;
   

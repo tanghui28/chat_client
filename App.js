@@ -173,21 +173,6 @@ import { setFriend, setChatFriend, modifyChatFriend, addChatFriend, setChatRecor
 
 import store from './src/store/store'
 
-// 添加聊天记录存储
-let storeAddRecord = async (from, to,obj) => { 
-  
-  // 存储聊天记录
-  let chatRecord = await Storage.getData(from + 'chatRoom' + to);
-  chatRecord = Array.isArray(chatRecord) ? chatRecord : [];
-  // {
-  //   text: '你好吗ffffff?',
-  //   type: 0,
-  //   time: 1568098926233
-  // }
-  chatRecord.push(obj);
-  Storage.setData(from + 'chatRoom' + to, JSON.stringify(chatRecord));
-
-}
 
 // 心跳检测   ws连接成功 , 启动一次性定时器发送消息给服务端 , 
 // 若指定时间内未收到回复则断开ws连接, 
@@ -201,14 +186,12 @@ let heartChaeck = {
   serverTimeObj: null,
   storeTimeObj:null,
   createWebSocket() { 
-
     try {
-
       this.storeTimeObj = setInterval(() => {
         let userInfo = store.getState().mine;
         if (userInfo.user_id != undefined) { 
           clearInterval(this.storeTimeObj);
-          global.ws = new WebSocket('ws://192.168.1.7:3000?user_id=' + userInfo.user_id);
+          global.ws = new WebSocket('ws://192.168.1.21:3000?user_id=' + userInfo.user_id);
           this.handlerMessage();
         }
       }, 2000);
@@ -246,7 +229,6 @@ let heartChaeck = {
       this.startHeartCheck();
     }
     global.ws.onmessage = async(e) => { 
-      // console.log(e);
       this.startHeartCheck();
       if ( e.data === "ping" ) {
         return;
@@ -297,7 +279,7 @@ let heartChaeck = {
         }))
 
         //存储聊天记录
-        storeAddRecord(data.from, data.to, {
+        global.utility.storeAddRecord(data.from, data.to, {
           text: data.body,
           type: 0,
           time: now
@@ -332,8 +314,7 @@ let heartChaeck = {
         })
         store.dispatch(addChatFriend(fromUserInfo));
 
-
-        storeAddRecord(data.from,data.to,{
+        global.utility.storeAddRecord(data.from,data.to,{
           text: data.body,
           type: 0,
           time: now
@@ -361,12 +342,16 @@ heartChaeck.createWebSocket();
 
 
 // 读取聊天列表
+global.hasGetChatList = false;
 Storage.getData('chatList').then(res=>{
   if( res != null ){
     store.dispatch(setChatFriend(
       res
     ))
   }
+  setTimeout(() => {
+    global.hasGetChatList = true;
+  }, 1000);
 })
 
 const bottomTabNavigator = createBottomTabNavigator(

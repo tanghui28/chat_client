@@ -3,8 +3,8 @@ import Storage from './storage'
 import { ToastAndroid} from 'react-native'
 
 const instance = axios.create({
-  baseURL: 'http://192.168.1.7:3000',
-  timeout: 3000,
+  baseURL: 'http://192.168.1.21:3000',
+  timeout: 5000,
   headers: {
     'Content-Type':'application/json',
   }

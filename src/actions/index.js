@@ -12,7 +12,7 @@ import {
   SET_MINE,
   DELETE_MINE,
   SET_TALK_TO,
-
+  ADD_CHAT_RECORD_TOP
 } from './type'
 
 /**
@@ -77,6 +77,10 @@ export const setChatRecord = payload => ({
   type: SET_CHAT_RECORD,
   payload
 });
+export const addChatRecordTop = payload => ({
+  type: ADD_CHAT_RECORD_TOP,
+  payload
+})
 
 
 /**

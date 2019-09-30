@@ -14,11 +14,13 @@ const chatList = (state = initialState, action) => {
   
   switch (type) {
     case ADD_CHAT_FRIEND:
+      // console.log(payload)
       let newState = [
         payload,
         ...state
       ]
-      Storage.setData('chatList',JSON.stringify(newState));
+      Storage.setData('chatList', JSON.stringify(newState));
+      // console.log(newState);
       return newState;
     
     

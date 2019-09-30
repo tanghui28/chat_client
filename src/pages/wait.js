@@ -12,6 +12,9 @@ import { NavigationActions,StackActions } from 'react-navigation'
 class Wait extends React.Component{
   constructor(){
     super();
+    this.state = {
+      mine: {}
+    }
   }
 
   componentWillMount(){
@@ -38,6 +41,9 @@ class Wait extends React.Component{
           // console.log(res);
           console.log(data);
           if (data.success) {
+            this.setState({
+              mine:data.data
+            })
             this.getFriendList();
             this.props.setMine(data.data);
             this.props.navigation.dispatch(toMain);
@@ -67,6 +73,94 @@ class Wait extends React.Component{
       if (res.success) { 
         console.log(res);
         this.props.setFriend(res.data);
+        // 遍历好友列表,寻找未接受的消息friend_message
+        let timer = setInterval(() => {
+          if (global.hasGetChatList) { 
+            clearInterval(timer);
+            console.log(this.props.chatList)
+            res.data.forEach(item => { 
+              item.data.forEach(friend => { 
+                friend.friend_message = friend.friend_message.trim();
+                let messages = [];
+                if (friend.friend_message) {  //有未接收消息
+                  messages = friend.friend_message.split(',');
+                }
+                if ( messages.length > 0 ) { 
+
+                  // 是否已与消息发送方在chatList开启聊天
+                  let hasOpenChatIndex = null,
+                    hasOPenChatDetail = null,
+                    now = Date.now();
+                  let hasOpenChat = this.props.chatList.some((chat,i) => { 
+                    if (chat.user_id == friend.friend_id) { 
+                      hasOpenChatIndex = i;
+                      hasOPenChatDetail = chat;
+                    }
+                    return chat.user_id == friend.friend_id;
+                  })
+                   
+                  if (hasOpenChat) {  //已开启聊天缩略 , 修改缩略
+                    // 更改store中的chatList缩略信息
+                    // console.log('已开启' + friend.friend_id, '下标' + hasOpenChatIndex)
+                    this.props.modifyChatFriend({
+                      index: hasOpenChatIndex,
+                      detail: {
+                        user_id: hasOPenChatDetail.user_id,
+                        remark: hasOPenChatDetail.remark,
+                        avatar: hasOPenChatDetail.avatar,
+                        replyTime: now,
+                        lastMsg: messages[messages.length - 1],
+                        unread: hasOPenChatDetail.unread + messages.length
+                      }
+                    })
+
+                  } else {          //未开启聊天缩略  , 开启缩略
+                    // console.log('未开启' + friend.friend_id, friend.avatar);
+                    let obj = {
+                      user_id: friend.friend_id,
+                      remark: friend.friend_remark,
+                      avatar: friend.avatar,
+                      replyTime: now,
+                      lastMsg: messages[messages.length - 1],
+                      unread: messages.length
+                    }
+                    // console.log(obj);
+                    this.props.addChatFriend(obj);
+
+
+                  }
+
+                  // {
+                  //   text: '你好吗ffffff?',
+                  //   type: 0,
+                  //   time: 1568098926233
+                  // }
+                  //存储聊天记录
+                  let newRecordArr = [];
+                  for (let msg of messages) { 
+                    newRecordArr.push({
+                      text: msg,
+                      type: 0,
+                      time: now
+                    })
+                  }
+                  global.utility.storeAddRecordLarge(friend.friend_id, this.state.mine.user_id, newRecordArr)
+
+               
+                  
+                  
+
+                }
+
+              })
+
+            })
+
+
+
+          }
+        }, 1000);
+
       }
     })
   }
@@ -93,20 +187,31 @@ const styles = StyleSheet.create({
 })
 
 import {connect} from 'react-redux'
-import { setMINE, setFriend} from '../actions/index'
+import { setMINE, setFriend, modifyChatFriend, addChatFriend} from '../actions/index'
+
+const mapStateToProps = store => { 
+  return {
+    chatList:store.chatList
+  }
+}
 
 const mapDispatchToProps = dispatch =>{
   return {
-
-    setMine:payload=>{
+    setMine: payload => {
       dispatch(setMINE(payload))
     },
-    setFriend: payload => { 
+    setFriend: payload => {
       dispatch(setFriend(payload))
+    },
+    modifyChatFriend: payload => { 
+      dispatch(modifyChatFriend(payload))
+    },
+    addChatFriend: payload => { 
+      dispatch(addChatFriend(payload))
     }
 
   }
 }
 
-export default connect(null,mapDispatchToProps)(Wait);
+export default connect(mapStateToProps,mapDispatchToProps)(Wait);
 
