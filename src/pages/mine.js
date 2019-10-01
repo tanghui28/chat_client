@@ -4,10 +4,9 @@ import {
   StyleSheet,
   View,
   Text,
-  TextInput,
   TouchableOpacity,
   Image,
-  
+  Modal
 } from 'react-native'
 import {
   Iconfont
@@ -15,22 +14,49 @@ import {
 
 import {
   Provider,
-  Toast,
   Icon,
-  List 
 } from '@ant-design/react-native'
+import QRCode from 'react-native-qrcode-svg';
+import Storage from '../config/storage'
+import { NavigationActions,StackActions } from 'react-navigation'
 import config from '../config/config';
 
 class Mine extends React.Component { 
   constructor() { 
     super();
+    this.state = {
+      modalVisible:false
+    }
   }
 
+  logout = ()=>{
+    Storage.removeData('userInfo');
+    Storage.removeData('chatList');
+    this.props.logout();
+    this.props.deleteChatList();
+    global.ws.close();
+    const toChoose = StackActions.reset({
+      index: 0,
+      actions: [
+          NavigationActions.navigate({routeName:'Choose'})//要跳转到的页面名字
+      ]
+    });
+    this.props.navigation.dispatch(toChoose);
+  };  
 
+  closeModal=()=>{
+    this.setState({
+      modalVisible:false
+    })
+  };
+
+  componentDidMount(){
+    console.log(this.props.userInfo)
+  }
   render() { 
 
     return (
-      < Provider >
+
         <View style={styles.container}>
           <View style={styles.topInfo}>
             <Image style={styles.avatar} source={{uri:this.props.userInfo.avatar}}></Image>
@@ -62,7 +88,7 @@ class Mine extends React.Component {
           </View>
           </TouchableOpacity>
 
-          <TouchableOpacity activeOpacity={0.6}>
+          <TouchableOpacity onPress={()=>{this.setState({modalVisible:true})}} activeOpacity={0.6}>
           <View style={styles.set}>
             <Icon name="qrcode" color="#1E90FF" size={26}></Icon>
             <View style={styles.setRight}>
@@ -83,8 +109,33 @@ class Mine extends React.Component {
           </View>
           </TouchableOpacity>
 
+
+          <TouchableOpacity onPress={this.logout} activeOpacity={0.6} style={styles.logout}>
+            <Text style={{color:'#fff'}}>退出登录</Text>
+          </TouchableOpacity>
+          <Modal  
+            onRequestClose={()=>{this.setState({modalVisible:false})}}
+            transparent={true}
+            visible={this.state.modalVisible}
+            animationType="slide"
+            animated={true}
+          >
+            <TouchableOpacity activeOpacity={0} onPress={this.closeModal} style={styles.modal}>
+              <View style={styles.qr}>
+                <QRCode 
+                  onPress={()=>{console.log(22)}}
+                  value={this.props.userInfo.user_id.toString()}
+                  logo={this.props.userInfo.avatar}
+                  logoSize={30}
+                  size={200}
+                />
+              </View>
+               
+            </TouchableOpacity>
+             
+          </Modal>
         </View>
-      </ Provider>
+
     )
 
   }
@@ -156,12 +207,37 @@ const styles = StyleSheet.create({
     alignItems:"center",
     paddingRight:10,
     marginLeft:10
+  },
+  logout:{
+    backgroundColor:config.dangerColor,
+    alignItems:'center',
+    justifyContent:'center',
+    height:44,
+    borderRadius:20,
+    marginTop:20,
+    width:config.screenWidth - 40,
+    alignSelf:'center'
+  },
+  modal:{
+    flex:1,
+    display:'flex',
+    justifyContent:'center',
+    alignItems:'center',
+    backgroundColor:'rgba(0,0,0,0.5)'
+  },
+  qr:{
+    width:220,
+    height:220,
+    backgroundColor:'#fff',
+    justifyContent:'center',
+    alignItems:'center',
+    borderRadius:10
   }
 })
 
 
 import {connect} from 'react-redux'
-import { deleteMINE } from '../actions/index'
+import { deleteMINE,setChatFriend } from '../actions/index'
 
 const mapStateToProps =(store)=>{
   return {
@@ -172,6 +248,9 @@ const mapDispatchToProps = dispatch => {
   return {
    logout:()=>{
     dispatch(deleteMINE())
+   },
+   deleteChatList:()=>{
+     dispatch(setChatFriend([]))
    }
   }
 }

@@ -27,5 +27,6 @@ export default {
     fontSizeTitle: 18,
     btnPrimaryColor: '#2f9833',
     btnDefaultColor: '#ddd',
-    inputBackground:'#fff'
+    inputBackground:'#fff',
+    url:'192.168.1.7:3000'
 }

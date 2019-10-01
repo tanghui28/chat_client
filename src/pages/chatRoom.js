@@ -120,10 +120,10 @@ class ChatRoom extends React.Component {
   };
   componentWillMount() { 
     //读取聊天记录
-    console.log(this.props.navigation.state,this.props.mine.user_id)
-    console.log(this.props.navigation.state.params)
+    // console.log(this.props.navigation.state,this.props.mine.user_id)
+    // console.log(this.props.navigation.state.params)
     Storage.getData(this.props.navigation.state.params + 'chatRoom'+this.props.mine.user_id).then(res => { 
-      console.log(res);
+      // console.log(res);
       if (res) { 
         
         // 将读取的聊天记录赋值给state中的messages , 每次下拉赋值8条
@@ -165,6 +165,18 @@ class ChatRoom extends React.Component {
     this.props.setChatRecord([]);
 
   }
+  componentWillReceiveProps(next){
+    // console.log(this.props.chatRecord)
+    let prevText = this.props.chatRecord.length > 0 ? this.props.chatRecord[this.props.chatRecord.length -1]['text']:'';
+    let nowText = next.chatRecord.length > 0 ?next.chatRecord[next.chatRecord.length-1]['text']:'';
+    console.log(prevText)
+    console.log(nowText)
+    if(prevText != nowText){
+      this.scroll();
+    }
+    // console.log(now.chatRecord[now.chatRecord.length - 1].text)
+    // console.log(now.chatRecord[now.chatRecord.length - 1].text,next.chatRecord[next.chatRecord.length - 1].text)
+  }
 
   // 发送消息
   sendMsg = () => { 
@@ -185,7 +197,7 @@ class ChatRoom extends React.Component {
     this.setState({ msg: '' });
     this.modifyChatList();
     this.saveMessages();
-    this.scroll();
+    // this.scroll();
 
     
 

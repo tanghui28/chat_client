@@ -21,6 +21,8 @@ import com.pilloxa.backgroundjob.BackgroundJobPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 // react-native-reanimated
 import com.swmansion.reanimated.ReanimatedPackage;
+// react-native-svg
+import com.horcrux.svg.SvgPackage;
 // react-native-vector-icons
 import com.oblador.vectoricons.VectorIconsPackage;
 
@@ -60,6 +62,7 @@ public class PackageList {
       new BackgroundJobPackage(),
       new RNGestureHandlerPackage(),
       new ReanimatedPackage(),
+      new SvgPackage(),
       new VectorIconsPackage()
     ));
   }

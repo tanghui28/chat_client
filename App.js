@@ -57,30 +57,6 @@ import Storage from './src/config/storage'
 //     lastMsg: '',
 //     unread:1
 //   },
-//   {
-//     user_id :7,
-//     remark: 'A小唐',
-//     avatar: 'http://192.168.1.9:3000/images/7.jpeg',
-//     replyTime: '2019-09-06',
-//     lastMsg: '',
-//     unread:1
-//   },
-//   {
-//     user_id :8,
-//     remark: 'A小阳',
-//     avatar: 'http://192.168.1.9:3000/images/8.jpeg',
-//     replyTime: '2019-09-06',
-//     lastMsg: '',
-//     unread:0
-//   },
-//   {
-//     user_id :9,
-//     remark: 'A小平',
-//     avatar: 'http://192.168.1.9:3000/images/9.jpeg',
-//     replyTime: '2019-09-06',
-//     lastMsg: '',
-//     unread:0
-//   },
 
 // ]))
 
@@ -89,21 +65,6 @@ import Storage from './src/config/storage'
 //type 0 对方 1自己
 // Storage.setData('6chatRoom1', JSON.stringify(
 //   [
-//     {
-//       text: '你好吗ffffff?',
-//       type: 0,
-//       time: 1568098926233
-//     },
-//     {
-//       text: '我很好!',
-//       type: 1,
-//       time: 1568098926234
-//     },
-//     {
-//       text: '你叫什么名字?',
-//       type: 0,
-//       time: 1568098926235
-//     },
 //     {
 //       text: '尼古拉斯赵四',
 //       type: 1,
@@ -114,56 +75,7 @@ import Storage from './src/config/storage'
 //       type: 0,
 //       time: 1568098926237
 //     },
-//     {
-//       text: '为什么名字那么难听?',
-//       type: 0,
-//       time: 1568098926238
-//     },
-//     {
-//       text: '怎么不说话了?怎么不说话啊?怎么不说话啊?怎么不说话啊怎么不说话啊怎么不说话啊',
-//       type: 0,
-//       time: 1568098926238
-//     },
-//     {
-//       text: '说话啊',
-//       type: 0,
-//       time: 1568098926240
-//     },
-//     {
-//       text: '哦',
-//       type: 1,
-//       time: 1568098926242
-//     },
-//     {
-//       text: '哦',
-//       type: 1,
-//       time: 1568098926242
-//     },
-//     {
-//       text: '哦',
-//       type: 1,
-//       time: 1568098926242
-//     },
-//     {
-//       text: '哦',
-//       type: 1,
-//       time: 1568098926242
-//     },
-//     {
-//       text: '哦',
-//       type: 1,
-//       time: 1568098926242
-//     },
-//     {
-//       text: '哦',
-//       type: 1,
-//       time: 1568098926242
-//     },
-//     {
-//       text: '哦',
-//       type: 1,
-//       time: 1568098926242
-//     },
+
 //   ]
 // ))
 
@@ -189,9 +101,9 @@ let heartChaeck = {
     try {
       this.storeTimeObj = setInterval(() => {
         let userInfo = store.getState().mine;
-        if (userInfo.user_id != undefined) { 
+        if (userInfo && userInfo.user_id != undefined) { 
           clearInterval(this.storeTimeObj);
-          global.ws = new WebSocket('ws://192.168.1.21:3000?user_id=' + userInfo.user_id);
+          global.ws = new WebSocket('ws://'+config.url+'?user_id=' + userInfo.user_id);
           this.handlerMessage();
         }
       }, 2000);

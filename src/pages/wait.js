@@ -77,7 +77,7 @@ class Wait extends React.Component{
         let timer = setInterval(() => {
           if (global.hasGetChatList) { 
             clearInterval(timer);
-            console.log(this.props.chatList)
+            // console.log(this.props.chatList)
             res.data.forEach(item => { 
               item.data.forEach(friend => { 
                 friend.friend_message = friend.friend_message.trim();
