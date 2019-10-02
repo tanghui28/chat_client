@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Wed Oct 02 17:29:17 CST 2019
+#Wed Oct 02 19:54:39 CST 2019
 56.path=lib/arm64-v8a/libnative-filters.so
 5.base=E\:\\chat_client\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\release\\0
 42.base=E\:\\chat_client\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\release\\0

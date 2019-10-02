@@ -28,5 +28,5 @@ export default {
     btnPrimaryColor: '#2f9833',
     btnDefaultColor: '#ddd',
     inputBackground:'#fff',
-    url:'47.111.1.1:3000'
+    url:'192.168.1.7:3000'
 }

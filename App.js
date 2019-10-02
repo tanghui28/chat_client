@@ -11,6 +11,7 @@ import {
   StyleSheet,
   View,
   Text,
+  Vibration,
 } from 'react-native';
 import {
   Net
@@ -336,8 +337,7 @@ let heartChaeck = {
 
 
       }
-
-
+      Vibration.vibrate(400);
 
     }
     global.ws.onerror = () => { 
