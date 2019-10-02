@@ -1,7 +1,8 @@
 import React from 'react'
 import {
   View,
-  ToastAndroid
+  ToastAndroid,
+  PermissionsAndroid,
 } from 'react-native'
 
 import Barcode from 'react-native-smart-barcode'
@@ -15,7 +16,31 @@ class Scan extends React.Component{
       timer:null
     }
   }
-
+  async requestCameraPermission() {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.CAMERA,
+        {
+          title: '申请摄像头权限',
+          message:'老子要调用摄像头',
+          buttonNeutral: '等会再问我',
+          buttonNegative: '不行',
+          buttonPositive: '好吧',
+        },
+      );
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        // console.log('现在你获得摄像头权限了');
+      } else {
+        ToastAndroid.show('无法获得摄像头权限,扫码功能无法使用');
+        // console.log('用户并不屌你');
+      }
+    } catch (err) {
+      // console.warn(err);
+    }
+  }
+  componentDidMount(){
+    this.requestCameraPermission();
+  }
   componentWillUnmount(){
     this.state.timer && clearTimeout(this.state.timer)
   }

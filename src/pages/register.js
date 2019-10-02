@@ -56,7 +56,7 @@ class Register extends React.Component {
 
       }
     }).catch(err => { 
-
+      ToastAndroid.show('网络错误',ToastAndroid.SHORT)
     })
 
   };
