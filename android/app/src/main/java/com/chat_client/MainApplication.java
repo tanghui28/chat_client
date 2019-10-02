@@ -14,10 +14,11 @@ import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
 
 import java.util.List;
+import com.reactnativecomponent.barcode.RCTCapturePackage;
 
 public class MainApplication extends Application implements ReactApplication {
-
-  private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
+  private ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
+  // private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
     @Override
     public boolean getUseDeveloperSupport() {
       return BuildConfig.DEBUG;
@@ -27,9 +28,15 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       @SuppressWarnings("UnnecessaryLocalVariable")
       List<ReactPackage> packages = new PackageList(this).getPackages();
+      // packages.add(new RCTCapturePackage());
       // Packages that cannot be autolinked yet can be added manually here, for example:
       // packages.add(new MyReactNativePackage());
       return packages;
+      // return Arrays.<ReactPackage>asList(
+      //     new MainReactPackage(),
+      //     //添加以下代码
+      //     new RCTCapturePackage()
+      // );
     }
 
     @Override
@@ -37,6 +44,11 @@ public class MainApplication extends Application implements ReactApplication {
       return "index";
     }
   };
+  
+  public void setReactNativeHost(ReactNativeHost reactNativeHost) {
+    mReactNativeHost = reactNativeHost;
+  }
+ 
 
   @Override
   public ReactNativeHost getReactNativeHost() {

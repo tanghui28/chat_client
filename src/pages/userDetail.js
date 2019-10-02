@@ -5,6 +5,7 @@ import {
   Text,
   TouchableOpacity,
   Image,
+  ToastAndroid
 } from 'react-native';
 import {
   Icon,
@@ -28,11 +29,11 @@ class UserDetail extends React.Component {
   };
 
   toModify = ()=>{
-    this.props.navigation.navigate('ModifyRemark')
+    ToastAndroid.show('动态暂未开放',ToastAndroid.LONG)
+    //this.props.navigation.navigate('ModifyRemark')
   };
 
   componentWillMount() { 
-    console.log(this.props.navigation.state.params)
     this.setState({
       userInfo:this.props.navigation.state.params
     })
@@ -65,6 +66,10 @@ class UserDetail extends React.Component {
     this.props.navigation.navigate('ChatRoom',this.state.userInfo.friend_id)
   };
 
+  toNews =()=>{
+    ToastAndroid.show('动态暂未开放',ToastAndroid.LONG)
+  };
+
   render() {
     return (
       <View style={styles.container}>
@@ -89,7 +94,7 @@ class UserDetail extends React.Component {
 
           </View>
         </TouchableOpacity>
-        <TouchableOpacity activeOpacity={0.6}>
+        <TouchableOpacity onPress={this.toNews} activeOpacity={0.6}>
           <View style={styles.set}>
       
             <Text style={{fontSize:config.fontSizeLarge}}>ta的动态</Text>

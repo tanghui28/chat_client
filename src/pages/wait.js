@@ -38,8 +38,6 @@ class Wait extends React.Component{
         Net('isLogin',{
           token:res.token
         }).then(data => {
-          // console.log(res);
-          console.log(data);
           if (data.success) {
             this.setState({
               mine:data.data
@@ -71,7 +69,6 @@ class Wait extends React.Component{
   getFriendList() { 
     Net('friendList').then(res => { 
       if (res.success) { 
-        console.log(res);
         this.props.setFriend(res.data);
         // 遍历好友列表,寻找未接受的消息friend_message
         let timer = setInterval(() => {
@@ -101,7 +98,6 @@ class Wait extends React.Component{
                    
                   if (hasOpenChat) {  //已开启聊天缩略 , 修改缩略
                     // 更改store中的chatList缩略信息
-                    // console.log('已开启' + friend.friend_id, '下标' + hasOpenChatIndex)
                     this.props.modifyChatFriend({
                       index: hasOpenChatIndex,
                       detail: {
@@ -115,7 +111,6 @@ class Wait extends React.Component{
                     })
 
                   } else {          //未开启聊天缩略  , 开启缩略
-                    // console.log('未开启' + friend.friend_id, friend.avatar);
                     let obj = {
                       user_id: friend.friend_id,
                       remark: friend.friend_remark,
@@ -124,9 +119,7 @@ class Wait extends React.Component{
                       lastMsg: messages[messages.length - 1],
                       unread: messages.length
                     }
-                    // console.log(obj);
                     this.props.addChatFriend(obj);
-
 
                   }
 
@@ -145,10 +138,6 @@ class Wait extends React.Component{
                     })
                   }
                   global.utility.storeAddRecordLarge(friend.friend_id, this.state.mine.user_id, newRecordArr)
-
-               
-                  
-                  
 
                 }
 

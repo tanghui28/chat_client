@@ -135,12 +135,16 @@ class ChatList extends React.Component {
 
   }
 
+  toScan=()=>{
+    this.props.navigation.navigate('Scan');
+  }
+
   render() { 
 
 
     return (
       < View style={{paddingBottom:50}} >
-        <Header style={{backgroundColor:config.lightGray}} showIcon={true} title="消息"></Header>
+        <Header scanFun={this.toScan} style={{backgroundColor:config.lightGray}} showIcon={true} title="消息"></Header>
 
         <FlatList
             initialNumToRender={10}
@@ -178,7 +182,6 @@ class ChatList extends React.Component {
               }
             }
           ></FlatList>
-
 
       </ View>
     )

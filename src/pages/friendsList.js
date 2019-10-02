@@ -21,7 +21,6 @@ import {
   deleteFriend
 } from '../actions/index'
 
-
 class FriendsList extends React.Component { 
   constructor() { 
     super();
@@ -32,10 +31,7 @@ class FriendsList extends React.Component {
       ],
     };
   }
-
   componentDidMount() { 
-
-    console.log(this.props.list )
     
   }
 
@@ -62,18 +58,17 @@ class FriendsList extends React.Component {
   };
 
   toDetail = (item) => {
-
     this.props.navigation.navigate('UserDetail',item)
   };
 
-
+  toScan=()=>{
+    this.props.navigation.navigate('Scan');
+  }
 
   render() { 
-
     return (
-
         <View style={styles.container}>
-          <Header style={{ backgroundColor: config.lightGray }} showIcon={true} title="通讯录"></Header>
+          <Header scanFun={this.toScan} style={{ backgroundColor: config.lightGray }} showIcon={true} title="通讯录"></Header>
           < SectionList ref={this.sectionList}
             stickySectionHeadersEnabled = {
               true
@@ -105,6 +100,11 @@ class FriendsList extends React.Component {
                     </View>
                   </TouchableOpacity>
                 )
+              }
+            }
+            ListEmptyComponent={
+              () =>{
+                return (<Text style={styles.noItem}>快去添加好友吧!</Text>)
               }
             }
           ></SectionList>
@@ -176,6 +176,11 @@ const styles = StyleSheet.create({
     paddingLeft:6,
     paddingTop:3,
     paddingBottom:3
+  },
+  noItem:{
+    fontSize:config.fontSizeLarge,
+    marginTop:20,
+    alignSelf:'center'
   }
 })
 

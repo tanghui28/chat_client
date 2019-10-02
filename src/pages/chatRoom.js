@@ -169,15 +169,12 @@ class ChatRoom extends React.Component {
     // console.log(this.props.chatRecord)
     let prevText = this.props.chatRecord.length > 0 ? this.props.chatRecord[this.props.chatRecord.length -1]['text']:'';
     let nowText = next.chatRecord.length > 0 ?next.chatRecord[next.chatRecord.length-1]['text']:'';
-    console.log(prevText)
-    console.log(nowText)
     if(prevText != nowText){
       this.scroll();
     }
     // console.log(now.chatRecord[now.chatRecord.length - 1].text)
     // console.log(now.chatRecord[now.chatRecord.length - 1].text,next.chatRecord[next.chatRecord.length - 1].text)
   }
-
   // 发送消息
   sendMsg = () => { 
     if (this.state.msg === "") { 
@@ -203,14 +200,12 @@ class ChatRoom extends React.Component {
 
     
   }
-
   // 存储数据
   saveMessages() {
     setTimeout(() => {
       Storage.setData(this.props.talkUserInfo.user_id + 'chatRoom' + this.props.mine.user_id, JSON.stringify(this.props.chatRecord))
     }, 100);
   }
-
   // 修改当前聊天对象的聊天缩略信息(chatList显示内容)
   modifyChatList() { 
     let user_id = this.props.talkUserInfo.user_id;
@@ -241,14 +236,12 @@ class ChatRoom extends React.Component {
     
 
   }
-
   // 滚动到最底部
   scroll(){
     setTimeout(() => {
       this.flatList.current.scrollToEnd();
     }, 50);
   }
-
   //下拉加载更多聊天记录
   pullDown = () => {
 
@@ -271,7 +264,6 @@ class ChatRoom extends React.Component {
   
 
   };
-
   render() { 
     return (
       <View style={styles.container}>
@@ -321,8 +313,6 @@ class ChatRoom extends React.Component {
   }
 
 }
-
-
 ChatRoom.defaultProps = {
   chatRecord:[]
 }

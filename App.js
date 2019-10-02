@@ -36,6 +36,7 @@ import UserDetail from './src/pages/userDetail'
 import ModifyRemark from './src/pages/modifyRemark'
 import ChatRoom from './src/pages/chatRoom'
 import Wait from './src/pages/wait'
+import Scan from './src/pages/scan'
 
 import {  createAppContainer} from 'react-navigation'
 import {  createStackNavigator} from 'react-navigation-stack';
@@ -137,7 +138,6 @@ let heartChaeck = {
   handlerMessage() { 
 
     global.ws.onopen = () => { 
-      console.log('连接成功');
       this.startHeartCheck();
     }
     global.ws.onmessage = async(e) => { 
@@ -145,9 +145,111 @@ let heartChaeck = {
       if ( e.data === "ping" ) {
         return;
       }
+      // 更新好友
+      if(e.data === "updateFriend"){
+        Net('friendList').then(res => { 
+          if (res.success) { 
+            store.dispatch(setFriend(res.data))
+            // 遍历好友列表,寻找未接受的消息friend_message
+            let timer = setInterval(() => {
+              if (global.hasGetChatList) { 
+                clearInterval(timer);
+                let chatList = store.getState().chatList;
+                res.data.forEach(item => { 
+                  item.data.forEach(friend => { 
+                    friend.friend_message = friend.friend_message.trim();
+                    let messages = [];
+                    if (friend.friend_message) {  //有未接收消息
+                      messages = friend.friend_message.split(',');
+                    }
+                    if ( messages.length > 0 ) { 
+    
+                      // 是否已与消息发送方在chatList开启聊天
+                      let hasOpenChatIndex = null,
+                        hasOPenChatDetail = null,
+                        now = Date.now();
+                      let hasOpenChat = chatList.some((chat,i) => { 
+                        if (chat.user_id == friend.friend_id) { 
+                          hasOpenChatIndex = i;
+                          hasOPenChatDetail = chat;
+                        }
+                        return chat.user_id == friend.friend_id;
+                      })
+                       
+                      if (hasOpenChat) {  //已开启聊天缩略 , 修改缩略
+                        // 更改store中的chatList缩略信息
+                        // console.log('已开启' + friend.friend_id, '下标' + hasOpenChatIndex)
+                        store.dispatch(modifyChatFriend({
+                          index: hasOpenChatIndex,
+                          detail: {
+                            user_id: hasOPenChatDetail.user_id,
+                            remark: hasOPenChatDetail.remark,
+                            avatar: hasOPenChatDetail.avatar,
+                            replyTime: now,
+                            lastMsg: messages[messages.length - 1],
+                            unread: hasOPenChatDetail.unread + messages.length
+                          }
+                        }))
+                        // this.props.modifyChatFriend({
+                        //   index: hasOpenChatIndex,
+                        //   detail: {
+                        //     user_id: hasOPenChatDetail.user_id,
+                        //     remark: hasOPenChatDetail.remark,
+                        //     avatar: hasOPenChatDetail.avatar,
+                        //     replyTime: now,
+                        //     lastMsg: messages[messages.length - 1],
+                        //     unread: hasOPenChatDetail.unread + messages.length
+                        //   }
+                        // })
+    
+                      } else {          //未开启聊天缩略  , 开启缩略
+                        let obj = {
+                          user_id: friend.friend_id,
+                          remark: friend.friend_remark,
+                          avatar: friend.avatar,
+                          replyTime: now,
+                          lastMsg: messages[messages.length - 1],
+                          unread: messages.length
+                        }
+                        store.dispatch(addChatFriend(obj))
+
+                      }
+    
+                      // {
+                      //   text: '你好吗ffffff?',
+                      //   type: 0,
+                      //   time: 1568098926233
+                      // }
+                      //存储聊天记录
+                      let newRecordArr = [];
+                      for (let msg of messages) { 
+                        newRecordArr.push({
+                          text: msg,
+                          type: 0,
+                          time: now
+                        })
+                      }
+                      global.utility.storeAddRecordLarge(friend.friend_id, this.state.mine.user_id, newRecordArr)
+
+                    }
+    
+                  })
+    
+                })
+    
+    
+    
+              }
+            }, 1000);
+    
+          }
+        })
+        return;
+      }
+
+      // 消息处理
       let data = JSON.parse(e.data);
       // {from:1, to:6, body: 'hello'}
-      
       let state = store.getState();
       let chatList = state.chatList;
       let talkTo = state.talkUserInfo;
@@ -314,7 +416,6 @@ const bottomTabNavigator = createBottomTabNavigator(
   }
 )
 
-
 const RootNavigator = createStackNavigator(
   {
     Wait: {
@@ -373,6 +474,13 @@ const RootNavigator = createStackNavigator(
         gesturesEnabled: true,
         header: null
       }
+    },
+    Scan: {
+      screen: Scan,
+      navigationOptions: {
+        gesturesEnabled: true,
+        header: null
+      }
     }
   
   },
@@ -385,8 +493,6 @@ const RootNavigator = createStackNavigator(
 )
 
 const AppContainer = createAppContainer(RootNavigator);
-
-
 
 const App = () => {
   return (

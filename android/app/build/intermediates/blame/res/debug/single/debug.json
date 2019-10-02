@@ -1,5 +1,9 @@
 [
     {
+        "merged": "E:\\chat_client\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_seekbar_horizontal.xml.flat",
+        "source": "E:\\chat_client\\node_modules\\react-native-smart-barcode\\android\\build\\intermediates\\packaged_res\\debug\\drawable\\seekbar_horizontal.xml"
+    },
+    {
         "merged": "E:\\chat_client\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_textfield_search_activated_mtrl_alpha.9.png.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-2\\files-2.1\\787811a269ce86e2b7537a93c385e1c1\\res\\drawable-mdpi-v4\\abc_textfield_search_activated_mtrl_alpha.9.png"
     },
@@ -120,6 +124,10 @@
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-2\\files-2.1\\787811a269ce86e2b7537a93c385e1c1\\res\\layout\\abc_list_menu_item_layout.xml"
     },
     {
+        "merged": "E:\\chat_client\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_seekbar_thumb_normal.png.flat",
+        "source": "E:\\chat_client\\node_modules\\react-native-smart-barcode\\android\\build\\intermediates\\packaged_res\\debug\\drawable\\seekbar_thumb_normal.png"
+    },
+    {
         "merged": "E:\\chat_client\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout_abc_screen_simple.xml.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-2\\files-2.1\\787811a269ce86e2b7537a93c385e1c1\\res\\layout\\abc_screen_simple.xml"
     },
@@ -236,6 +244,10 @@
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-2\\files-2.1\\787811a269ce86e2b7537a93c385e1c1\\res\\layout\\abc_popup_menu_header_item_layout.xml"
     },
     {
+        "merged": "E:\\chat_client\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_seekbar_thumb.xml.flat",
+        "source": "E:\\chat_client\\node_modules\\react-native-smart-barcode\\android\\build\\intermediates\\packaged_res\\debug\\drawable\\seekbar_thumb.xml"
+    },
+    {
         "merged": "E:\\chat_client\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4_abc_btn_radio_to_on_mtrl_015.png.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-2\\files-2.1\\787811a269ce86e2b7537a93c385e1c1\\res\\drawable-xxxhdpi-v4\\abc_btn_radio_to_on_mtrl_015.png"
     },
@@ -318,6 +330,10 @@
     {
         "merged": "E:\\chat_client\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_btn_switch_to_on_mtrl_00012.9.png.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-2\\files-2.1\\787811a269ce86e2b7537a93c385e1c1\\res\\drawable-hdpi-v4\\abc_btn_switch_to_on_mtrl_00012.9.png"
+    },
+    {
+        "merged": "E:\\chat_client\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_seek_thumb.png.flat",
+        "source": "E:\\chat_client\\node_modules\\react-native-smart-barcode\\android\\build\\intermediates\\packaged_res\\debug\\drawable\\seek_thumb.png"
     },
     {
         "merged": "E:\\chat_client\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_abc_menu_hardkey_panel_mtrl_mult.9.png.flat",
@@ -528,6 +544,10 @@
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-2\\files-2.1\\787811a269ce86e2b7537a93c385e1c1\\res\\drawable\\abc_edit_text_material.xml"
     },
     {
+        "merged": "E:\\chat_client\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout_seekbar_layout.xml.flat",
+        "source": "E:\\chat_client\\node_modules\\react-native-smart-barcode\\android\\build\\intermediates\\packaged_res\\debug\\layout\\seekbar_layout.xml"
+    },
+    {
         "merged": "E:\\chat_client\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_ic_star_half_black_48dp.png.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-2\\files-2.1\\787811a269ce86e2b7537a93c385e1c1\\res\\drawable-hdpi-v4\\abc_ic_star_half_black_48dp.png"
     },
@@ -582,6 +602,10 @@
     {
         "merged": "E:\\chat_client\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_ic_menu_paste_mtrl_am_alpha.png.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-2\\files-2.1\\787811a269ce86e2b7537a93c385e1c1\\res\\drawable-hdpi-v4\\abc_ic_menu_paste_mtrl_am_alpha.png"
+    },
+    {
+        "merged": "E:\\chat_client\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_seek_bkg.9.png.flat",
+        "source": "E:\\chat_client\\node_modules\\react-native-smart-barcode\\android\\build\\intermediates\\packaged_res\\debug\\drawable\\seek_bkg.9.png"
     },
     {
         "merged": "E:\\chat_client\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_notification_bg.xml.flat",
@@ -848,8 +872,16 @@
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-2\\files-2.1\\787811a269ce86e2b7537a93c385e1c1\\res\\color\\abc_secondary_text_material_light.xml"
     },
     {
+        "merged": "E:\\chat_client\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_seekbar_thumb_pressed.png.flat",
+        "source": "E:\\chat_client\\node_modules\\react-native-smart-barcode\\android\\build\\intermediates\\packaged_res\\debug\\drawable\\seekbar_thumb_pressed.png"
+    },
+    {
         "merged": "E:\\chat_client\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout_notification_action.xml.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-2\\files-2.1\\457219354b6bd40f320ab3fafc9e3ff2\\res\\layout\\notification_action.xml"
+    },
+    {
+        "merged": "E:\\chat_client\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_seek.9.png.flat",
+        "source": "E:\\chat_client\\node_modules\\react-native-smart-barcode\\android\\build\\intermediates\\packaged_res\\debug\\drawable\\seek.9.png"
     },
     {
         "merged": "E:\\chat_client\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_list_longpressed_holo.9.png.flat",
@@ -1068,12 +1100,12 @@
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-2\\files-2.1\\787811a269ce86e2b7537a93c385e1c1\\res\\drawable-mdpi-v4\\abc_scrubber_control_to_pressed_mtrl_005.png"
     },
     {
-        "merged": "E:\\chat_client\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldrtl-mdpi-v17_abc_ic_menu_cut_mtrl_alpha.png.flat",
-        "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-2\\files-2.1\\787811a269ce86e2b7537a93c385e1c1\\res\\drawable-ldrtl-mdpi-v17\\abc_ic_menu_cut_mtrl_alpha.png"
-    },
-    {
         "merged": "E:\\chat_client\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim_catalyst_push_up_out.xml.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-2\\files-2.1\\3af8316f530f9f5bfdf1a60e584446e8\\res\\anim\\catalyst_push_up_out.xml"
+    },
+    {
+        "merged": "E:\\chat_client\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldrtl-mdpi-v17_abc_ic_menu_cut_mtrl_alpha.png.flat",
+        "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-2\\files-2.1\\787811a269ce86e2b7537a93c385e1c1\\res\\drawable-ldrtl-mdpi-v17\\abc_ic_menu_cut_mtrl_alpha.png"
     },
     {
         "merged": "E:\\chat_client\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout_abc_action_menu_item_layout.xml.flat",
@@ -1226,6 +1258,10 @@
     {
         "merged": "E:\\chat_client\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_abc_scrubber_track_mtrl_alpha.9.png.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-2\\files-2.1\\787811a269ce86e2b7537a93c385e1c1\\res\\drawable-xxhdpi-v4\\abc_scrubber_track_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "E:\\chat_client\\android\\app\\build\\intermediates\\res\\merged\\debug\\raw_beep.wav.flat",
+        "source": "E:\\chat_client\\node_modules\\react-native-smart-barcode\\android\\build\\intermediates\\packaged_res\\debug\\raw\\beep.wav"
     },
     {
         "merged": "E:\\chat_client\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_btn_check_to_on_mtrl_015.png.flat",
@@ -1518,6 +1554,10 @@
     {
         "merged": "E:\\chat_client\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_textfield_activated_mtrl_alpha.9.png.flat",
         "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-2\\files-2.1\\787811a269ce86e2b7537a93c385e1c1\\res\\drawable-hdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "E:\\chat_client\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_po_seekbar.xml.flat",
+        "source": "E:\\chat_client\\node_modules\\react-native-smart-barcode\\android\\build\\intermediates\\packaged_res\\debug\\drawable\\po_seekbar.xml"
     },
     {
         "merged": "E:\\chat_client\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21_notification_action_tombstone.xml.flat",

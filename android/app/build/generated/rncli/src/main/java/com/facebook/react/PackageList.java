@@ -21,6 +21,8 @@ import com.pilloxa.backgroundjob.BackgroundJobPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 // react-native-reanimated
 import com.swmansion.reanimated.ReanimatedPackage;
+// react-native-smart-barcode
+import com.reactnativecomponent.barcode.RCTCapturePackage;
 // react-native-svg
 import com.horcrux.svg.SvgPackage;
 // react-native-vector-icons
@@ -62,6 +64,7 @@ public class PackageList {
       new BackgroundJobPackage(),
       new RNGestureHandlerPackage(),
       new ReanimatedPackage(),
+      new RCTCapturePackage(),
       new SvgPackage(),
       new VectorIconsPackage()
     ));

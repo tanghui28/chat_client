@@ -6,14 +6,14 @@ import {
   Text,
   TouchableOpacity,
   Image,
-  Modal
+  Modal,
+  ToastAndroid
 } from 'react-native'
 import {
   Iconfont
 } from '../../font/index'
 
 import {
-  Provider,
   Icon,
 } from '@ant-design/react-native'
 import QRCode from 'react-native-qrcode-svg';
@@ -50,9 +50,16 @@ class Mine extends React.Component {
     })
   };
 
-  componentDidMount(){
-    console.log(this.props.userInfo)
-  }
+  toScan=()=>{
+    this.props.navigation.navigate('Scan');
+  };
+
+  toNews=()=>{
+    ToastAndroid.show('动态暂未开放',ToastAndroid.LONG)
+  };
+  about=()=>{
+    ToastAndroid.show('github.com/tanghui28/chat_client',ToastAndroid.LONG)
+  };
   render() { 
 
     return (
@@ -67,7 +74,7 @@ class Mine extends React.Component {
           </View>
 
           {/* 动态 */}
-          <TouchableOpacity activeOpacity={0.6}>
+          <TouchableOpacity onPress={this.toNews} activeOpacity={0.6}>
           <View style={styles.dongtai}>
             <Iconfont color="#CC99FF" name="icon-zhifeiji" size={26}></Iconfont>
             <View style={styles.dongtaiRight}>
@@ -78,7 +85,7 @@ class Mine extends React.Component {
           </View>
           </TouchableOpacity>
           {/* 其他功能 */}
-          <TouchableOpacity activeOpacity={0.6}>
+          <TouchableOpacity onPress={this.toScan} activeOpacity={0.6}>
           <View style={styles.set}>
             <Icon name="scan" color={config.primaryColor} size={26}></Icon>
             <View style={styles.setRight}>
@@ -98,7 +105,7 @@ class Mine extends React.Component {
           </View>
           </TouchableOpacity>
 
-          <TouchableOpacity activeOpacity={0.6}>
+          <TouchableOpacity onPress={this.about} activeOpacity={0.6}>
           <View style={styles.set}>
             <Icon name="alert" color="#CC6666" size={26}></Icon>
             <View style={styles.setRight}>
@@ -123,8 +130,7 @@ class Mine extends React.Component {
             <TouchableOpacity activeOpacity={0} onPress={this.closeModal} style={styles.modal}>
               <View style={styles.qr}>
                 <QRCode 
-                  onPress={()=>{console.log(22)}}
-                  value={this.props.userInfo.user_id.toString()}
+                  value={'friend'+this.props.userInfo.user_id}
                   logo={this.props.userInfo.avatar}
                   logoSize={30}
                   size={200}

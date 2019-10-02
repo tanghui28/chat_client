@@ -17,13 +17,14 @@ class ModifyRemark extends React.Component{
 
     }
   }
-
+  componentDidMount(){
+    console.log(this.props.mine)
+  }
   back = () => {
     this.props.navigation.goBack();
   };
 
   render (){
-
     return (
       <View style={styles.container}>
         <Header backFun={this.back} showBack={true} title="设置备注"></Header>
@@ -59,4 +60,10 @@ const styles = StyleSheet.create({
   }
 })
 
-export default ModifyRemark;
+import {connect } from 'react-redux'
+const mapStateToProps = store=>{
+  return {
+    mine:store.mine
+  }
+}
+export default connect(mapStateToProps)(ModifyRemark);

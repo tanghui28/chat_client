@@ -20,6 +20,11 @@ class Header extends React.Component{
     }
     
   };
+  toScan=()=>{
+    if(this.props.scanFun){
+      this.props.scanFun()
+    }
+  };
 
   render(){
 
@@ -30,31 +35,35 @@ class Header extends React.Component{
         }
         
         <Text style={[styles.title,this.props.showBack?null:styles.noBackIcon]}>{this.props.title?this.props.title:''}</Text>
-        <TouchableOpacity style={{flex:1,flexDirection:'row',justifyContent:"flex-end"}}>
-          {
-            this.props.showIcon?(
-              <Popover 
-                placement="bottom" 
-                overlay={
-                  <View style={ styles.popContainer }>
-                    <Popover.Item style={styles.popItem}>
-                      <Icon style={styles.popIcon} name="scan" color={config.whiteFont} size={26}></Icon>
-                      <Text style={styles.popText}>扫一扫</Text>
-                    </Popover.Item>
-                    <Popover.Item style={styles.popItem}>
-                      <Icon style={styles.popIcon} name="user-add" color={config.whiteFont} size={26}></Icon>
-                      <Text style={styles.popText}>添加朋友</Text>
-                    </Popover.Item>
-                  </View>
-                }>
-                <Icon style={{padding:10}} color={config.lightBlack} name="plus-circle"></Icon>
-                
-              </Popover>
-            
-            
-            ):null
-          }
-        </TouchableOpacity>
+        <View style={{flex:1,flexDirection:'row',justifyContent:"flex-end"}}>
+          <TouchableOpacity onPress={this.toScan} >
+            {
+              this.props.showIcon?(
+                <Icon style={{padding:10}} color={config.lightBlack} name="scan"></Icon>
+                // <Popover 
+                //   placement="bottom" 
+                //   overlay={
+                //     <View style={ styles.popContainer }>
+                //       <Popover.Item style={styles.popItem}>
+                //         <Icon style={styles.popIcon} name="scan" color={config.whiteFont} size={26}></Icon>
+                //         <Text style={styles.popText}>扫一扫</Text>
+                //       </Popover.Item>
+                //       <Popover.Item style={styles.popItem}>
+                //         <Icon style={styles.popIcon} name="user-add" color={config.whiteFont} size={26}></Icon>
+                //         <Text style={styles.popText}>添加朋友</Text>
+                //       </Popover.Item>
+                //     </View>
+                //   }>
+                //   <Icon style={{padding:10}} color={config.lightBlack} name="scan"></Icon>
+                  
+                // </Popover>
+              
+              
+              ):null
+            }
+          </TouchableOpacity>
+        </View>
+      
       </View>
     )
 
@@ -66,7 +75,8 @@ Header.defaultProps= {
   title:'',
   showBack:false,
   showIcon: false,
-  backFun:null
+  backFun:null,
+  scanFun:null,
 }
 
 const styles = StyleSheet.create({

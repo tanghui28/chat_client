@@ -6,6 +6,7 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  ToastAndroid,
 } from 'react-native';
 import config from '../config/config';
 
@@ -47,6 +48,7 @@ class Register extends React.Component {
     }).then(res => { 
 
       if (res.success) {
+        ToastAndroid.show('注册成功!',ToastAndroid.LONG)
         this.props.navigation.navigate('Login')
       } else { 
 
